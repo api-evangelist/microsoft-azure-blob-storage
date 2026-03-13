@@ -1,0 +1,1694 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST API
+  description: >-
+    The Azure Blob Storage REST API provides programmatic access to
+    unstructured data storage in Azure. It supports operations on the Blob
+    service, containers, and blobs, including block blobs, append blobs, and
+    page blobs. Blobs can store any type of text or binary data such as
+    documents, media files, and application installers. Blob Storage is
+    optimized for storing massive amounts of unstructured data accessible
+    via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+servers:
+  - url: https://{accountName}.blob.core.windows.net
+    description: Azure Blob Storage endpoint
+    variables:
+      accountName:
+        description: The name of the Azure Storage account
+        default: mystorageaccount
+tags:
+  - name: Service
+    description: Operations on the Blob Storage service level
+  - name: Containers
+    description: Operations on blob containers
+  - name: Blobs
+    description: Operations on blobs including get, put, delete, and metadata
+  - name: Block Blobs
+    description: Operations specific to block blobs including put block and put block list
+  - name: Page Blobs
+    description: Operations specific to page blobs including put page and get page ranges
+  - name: Append Blobs
+    description: Operations specific to append blobs including append block
+security:
+  - sharedKey: []
+  - bearerAuth: []
+  - sharedAccessSignature: []
+paths:
+  /:
+    get:
+      operationId: listContainers
+      summary: List containers
+      description: >-
+        Returns a list of containers under the specified storage account.
+        Results can be filtered by prefix and paginated using marker and
+        maxresults parameters.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: comp
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - list
+        - name: prefix
+          in: query
+          description: >-
+            Filters results to return only containers whose names begin with
+            the specified prefix.
+          schema:
+            type: string
+        - name: marker
+          in: query
+          description: >-
+            Continuation token for retrieving the next page of results.
+            Returned in the NextMarker element of a previous response.
+          schema:
+            type: string
+        - name: maxresults
+          in: query
+          description: >-
+            Maximum number of containers to return in a single response.
+            Defaults to 5000 if not specified.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+        - name: include
+          in: query
+          description: >-
+            Specifies additional datasets to include in the response such as
+            metadata, deleted containers, or system containers.
+          schema:
+            type: string
+            enum:
+              - metadata
+              - deleted
+              - system
+      responses:
+        '200':
+          description: Successfully listed containers
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContainerList'
+        '403':
+          description: Forbidden - authentication or authorization failure
+  /?restype=service&comp=properties:
+    get:
+      operationId: getBlobServiceProperties
+      summary: Get Blob service properties
+      description: >-
+        Retrieves the properties of the Blob service, including logging,
+        metrics, CORS rules, the default service version, and soft delete
+        settings.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob service properties returned successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StorageServiceProperties'
+    put:
+      operationId: setBlobServiceProperties
+      summary: Set Blob service properties
+      description: >-
+        Sets the properties of the Blob service, including logging, metrics,
+        CORS rules, the default service version, and soft delete settings.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StorageServiceProperties'
+      responses:
+        '202':
+          description: Properties accepted and being applied
+  /?restype=service&comp=stats:
+    get:
+      operationId: getBlobServiceStats
+      summary: Get Blob service stats
+      description: >-
+        Retrieves statistics related to replication for Blob Storage. This
+        operation is only available on the secondary location endpoint when
+        read-access geo-redundant replication is enabled for the storage
+        account.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Replication statistics returned
+  /?restype=service&comp=userdelegationkey:
+    post:
+      operationId: getUserDelegationKey
+      summary: Get user delegation key
+      description: >-
+        Obtains a key that can be used to sign a user delegation shared
+        access signature (SAS), granting access to blob resources using
+        Microsoft Entra ID credentials. The key is valid for the specified
+        time range.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                Start:
+                  type: string
+                  format: date-time
+                  description: The start time for the user delegation key validity
+                Expiry:
+                  type: string
+                  format: date-time
+                  description: The expiry time for the user delegation key validity
+      responses:
+        '200':
+          description: User delegation key returned
+  /?restype=service&comp=batch:
+    post:
+      operationId: submitBlobBatch
+      summary: Submit blob batch
+      description: >-
+        Submits a batch request containing multiple subrequests. The batch
+        request body is a multipart MIME message containing individual
+        subrequests. Currently supports batch delete blob and batch set blob
+        tier operations.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '202':
+          description: Batch request accepted and processed
+  /?comp=blobs:
+    get:
+      operationId: findBlobsByTags
+      summary: Find blobs by tags
+      description: >-
+        Finds blobs in the storage account whose tags match a given search
+        expression. The search expression uses a SQL-like syntax against
+        blob index tags.
+      tags:
+        - Service
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: where
+          in: query
+          required: true
+          description: >-
+            SQL-like filter expression for blob index tags, for example
+            "tagkey"='tagvalue'.
+          schema:
+            type: string
+        - name: marker
+          in: query
+          description: Continuation token for pagination.
+          schema:
+            type: string
+        - name: maxresults
+          in: query
+          description: Maximum number of blobs to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+      responses:
+        '200':
+          description: Blobs matching the tag filter expression returned
+  /{container}:
+    put:
+      operationId: createContainer
+      summary: Create container
+      description: >-
+        Creates a new container under the specified storage account. The
+        container name must be a valid DNS name and conform to Azure Storage
+        naming rules.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: restype
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - container
+        - name: x-ms-blob-public-access
+          in: header
+          description: >-
+            Specifies whether data in the container may be accessed publicly
+            and the level of access.
+          schema:
+            type: string
+            enum:
+              - container
+              - blob
+        - name: x-ms-default-encryption-scope
+          in: header
+          description: The default encryption scope for the container.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Container created successfully
+        '409':
+          description: Container already exists
+    get:
+      operationId: getContainerProperties
+      summary: Get container properties
+      description: >-
+        Returns all user-defined metadata and system properties of the
+        specified container. The container metadata is returned as
+        x-ms-meta- response headers.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: restype
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - container
+      responses:
+        '200':
+          description: Container properties returned in response headers
+        '404':
+          description: Container not found
+    delete:
+      operationId: deleteContainer
+      summary: Delete container
+      description: >-
+        Marks the specified container for deletion. The container and any
+        blobs it contains are later deleted during garbage collection. If
+        soft delete is enabled, the container can be restored within the
+        retention period.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: restype
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - container
+      responses:
+        '202':
+          description: Container marked for deletion
+        '404':
+          description: Container not found
+  /{container}?restype=container&comp=list:
+    get:
+      operationId: listBlobs
+      summary: List blobs
+      description: >-
+        Returns a list of blobs in the specified container. Results can be
+        filtered by prefix, segmented using a delimiter for virtual directory
+        hierarchy, and paginated using marker and maxresults.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: prefix
+          in: query
+          description: >-
+            Filters results to return only blobs whose names begin with the
+            specified prefix.
+          schema:
+            type: string
+        - name: delimiter
+          in: query
+          description: >-
+            Delimiter character used to traverse a virtual hierarchy of blobs
+            as though it were a file system.
+          schema:
+            type: string
+        - name: marker
+          in: query
+          description: Continuation token for pagination.
+          schema:
+            type: string
+        - name: maxresults
+          in: query
+          description: Maximum number of blobs to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+        - name: include
+          in: query
+          description: >-
+            Specifies additional datasets to include such as snapshots,
+            metadata, uncommitted blobs, copy, deleted, tags, versions,
+            deletedwithversions, immutabilitypolicy, legalhold, and
+            permissions.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blobs listed successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BlobList'
+  /{container}?restype=container&comp=metadata:
+    get:
+      operationId: getContainerMetadata
+      summary: Get container metadata
+      description: >-
+        Returns only user-defined metadata for the specified container as
+        x-ms-meta- response headers.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container metadata returned in response headers
+    put:
+      operationId: setContainerMetadata
+      summary: Set container metadata
+      description: >-
+        Sets one or more user-defined name-value pairs for the specified
+        container. Existing metadata is replaced entirely with the new set.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container metadata set successfully
+  /{container}?restype=container&comp=acl:
+    get:
+      operationId: getContainerACL
+      summary: Get container ACL
+      description: >-
+        Returns the public access policy and stored access policies for the
+        specified container.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container ACL and stored access policies returned
+    put:
+      operationId: setContainerACL
+      summary: Set container ACL
+      description: >-
+        Sets the public access policy and stored access policies for the
+        specified container. Stored access policies can be used to create
+        service-level shared access signatures.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container ACL and stored access policies set
+  /{container}?restype=container&comp=lease:
+    put:
+      operationId: leaseContainer
+      summary: Lease container
+      description: >-
+        Establishes and manages a lock on a container for delete operations.
+        The lock duration can be infinite or between 15 and 60 seconds.
+        Lease actions include acquire, renew, change, release, and break.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-lease-action
+          in: header
+          required: true
+          description: The lease action to perform.
+          schema:
+            type: string
+            enum:
+              - acquire
+              - renew
+              - change
+              - release
+              - break
+        - name: x-ms-lease-duration
+          in: header
+          description: >-
+            Duration of the lease in seconds. Set to -1 for an infinite
+            lease, or between 15 and 60 seconds for a fixed-duration lease.
+          schema:
+            type: integer
+        - name: x-ms-proposed-lease-id
+          in: header
+          description: Proposed lease ID in GUID format.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Lease operation completed
+        '201':
+          description: Lease acquired
+  /{container}?restype=container&comp=undelete:
+    put:
+      operationId: restoreContainer
+      summary: Restore container
+      description: >-
+        Restores a soft-deleted container. This operation is only available
+        when container soft delete is enabled for the storage account and
+        the retention period has not expired.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-deleted-container-name
+          in: header
+          required: true
+          description: The name of the deleted container to restore.
+          schema:
+            type: string
+        - name: x-ms-deleted-container-version
+          in: header
+          required: true
+          description: The version of the deleted container to restore.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Container restored successfully
+  /{container}/{blob}:
+    put:
+      operationId: putBlob
+      summary: Put blob
+      description: >-
+        Creates a new blob or replaces an existing blob within a container.
+        The type of blob to create is specified in the x-ms-blob-type header.
+        For block blobs up to 5000 MiB, the entire content can be uploaded
+        in a single request.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-blob-type
+          in: header
+          required: true
+          description: The type of blob to create.
+          schema:
+            type: string
+            enum:
+              - BlockBlob
+              - PageBlob
+              - AppendBlob
+        - name: Content-Length
+          in: header
+          description: >-
+            The length of the request body in bytes. Required for page blobs
+            (set to 0 with x-ms-blob-content-length for the actual size).
+          schema:
+            type: integer
+        - name: Content-Type
+          in: header
+          description: The MIME content type of the blob.
+          schema:
+            type: string
+        - name: x-ms-blob-content-type
+          in: header
+          description: The content type to set for the blob.
+          schema:
+            type: string
+        - name: x-ms-access-tier
+          in: header
+          description: The tier to set on the blob.
+          schema:
+            type: string
+            enum:
+              - Hot
+              - Cool
+              - Cold
+              - Archive
+        - name: x-ms-blob-content-length
+          in: header
+          description: >-
+            Required for page blobs. Specifies the maximum size for the page
+            blob, up to 8 TiB. Must be aligned to a 512-byte boundary.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: >-
+          The blob content. Not applicable for page blobs where content is
+          uploaded through Put Page operations.
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Blob created or replaced successfully
+        '409':
+          description: Conflict - blob exists and has an active lease
+    get:
+      operationId: getBlob
+      summary: Get blob
+      description: >-
+        Reads or downloads a blob from Blob Storage, including its
+        user-defined metadata and system properties. A range of bytes can be
+        requested using the Range header.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: Range
+          in: header
+          description: >-
+            Return only the bytes of the blob in the specified range, for
+            example bytes=0-1023.
+          schema:
+            type: string
+        - name: snapshot
+          in: query
+          description: >-
+            The snapshot identifier. When specified, the operation returns
+            the snapshot of the blob.
+          schema:
+            type: string
+        - name: versionid
+          in: query
+          description: >-
+            The version ID. When specified, the operation returns the
+            specified version of the blob.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blob content returned
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '206':
+          description: Partial blob content returned for range request
+        '404':
+          description: Blob not found
+    head:
+      operationId: getBlobProperties
+      summary: Get blob properties
+      description: >-
+        Returns all system properties and user-defined metadata on the blob.
+        Does not return the blob content. Properties are returned as
+        response headers.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob properties returned in response headers
+        '404':
+          description: Blob not found
+    delete:
+      operationId: deleteBlob
+      summary: Delete blob
+      description: >-
+        Marks the specified blob or snapshot for deletion. The blob is later
+        deleted during garbage collection. If soft delete is enabled, the
+        blob can be restored within the retention period.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-delete-snapshots
+          in: header
+          description: >-
+            Required if the blob has associated snapshots. Specifies whether
+            to delete the blob and all snapshots (include) or only the
+            snapshots (only).
+          schema:
+            type: string
+            enum:
+              - include
+              - only
+        - name: snapshot
+          in: query
+          description: >-
+            The snapshot identifier. When specified, only the snapshot is
+            deleted.
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Blob marked for deletion
+        '404':
+          description: Blob not found
+  /{container}/{blob}?comp=metadata:
+    get:
+      operationId: getBlobMetadata
+      summary: Get blob metadata
+      description: >-
+        Retrieves all user-defined metadata of an existing blob or snapshot.
+        Metadata is returned as x-ms-meta- response headers.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob metadata returned in response headers
+    put:
+      operationId: setBlobMetadata
+      summary: Set blob metadata
+      description: >-
+        Sets user-defined metadata for the specified blob as one or more
+        name-value pairs. Existing metadata is replaced entirely.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob metadata set successfully
+  /{container}/{blob}?comp=properties:
+    put:
+      operationId: setBlobHTTPHeaders
+      summary: Set blob HTTP headers
+      description: >-
+        Sets system properties defined for an existing blob such as content
+        type, content encoding, content language, content disposition, and
+        cache control.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-blob-content-type
+          in: header
+          description: The MIME content type of the blob.
+          schema:
+            type: string
+        - name: x-ms-blob-content-encoding
+          in: header
+          description: The content encoding of the blob.
+          schema:
+            type: string
+        - name: x-ms-blob-content-language
+          in: header
+          description: The content language of the blob.
+          schema:
+            type: string
+        - name: x-ms-blob-cache-control
+          in: header
+          description: The cache control directive for the blob.
+          schema:
+            type: string
+        - name: x-ms-blob-content-disposition
+          in: header
+          description: The content disposition of the blob.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blob HTTP headers set successfully
+  /{container}/{blob}?comp=tags:
+    get:
+      operationId: getBlobTags
+      summary: Get blob tags
+      description: >-
+        Retrieves user-defined blob index tags. Tags form a secondary index
+        that can be queried using the Find Blobs by Tags operation.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob tags returned
+    put:
+      operationId: setBlobTags
+      summary: Set blob tags
+      description: >-
+        Sets user-defined blob index tags on an existing blob. Tags are
+        key-value pairs that form a secondary index, enabling efficient
+        querying across all blobs in a storage account.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '204':
+          description: Blob tags set successfully
+  /{container}/{blob}?comp=lease:
+    put:
+      operationId: leaseBlob
+      summary: Lease blob
+      description: >-
+        Establishes and manages a lock on write and delete operations for a
+        blob. The lock can be infinite or between 15 and 60 seconds.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-lease-action
+          in: header
+          required: true
+          description: The lease action to perform.
+          schema:
+            type: string
+            enum:
+              - acquire
+              - renew
+              - change
+              - release
+              - break
+      responses:
+        '200':
+          description: Lease operation completed
+        '201':
+          description: Lease acquired
+  /{container}/{blob}?comp=snapshot:
+    put:
+      operationId: snapshotBlob
+      summary: Snapshot blob
+      description: >-
+        Creates a read-only snapshot of a blob. A snapshot is a version of a
+        blob that is captured at a point in time. Snapshots share the same
+        blob name and are distinguished by the snapshot query parameter.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '201':
+          description: Snapshot created
+  /{container}/{blob}?comp=copy:
+    put:
+      operationId: copyBlob
+      summary: Copy blob
+      description: >-
+        Copies a source blob to a destination blob within the same storage
+        account or across storage accounts. The copy operation is
+        asynchronous and the status can be checked using Get Blob Properties.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-copy-source
+          in: header
+          required: true
+          description: URL of the source blob, up to 2 KiB in length.
+          schema:
+            type: string
+            format: uri
+        - name: x-ms-access-tier
+          in: header
+          description: The tier to set on the destination blob.
+          schema:
+            type: string
+            enum:
+              - Hot
+              - Cool
+              - Cold
+              - Archive
+      responses:
+        '202':
+          description: Copy operation initiated
+  /{container}/{blob}?comp=copy&copyid={copyId}:
+    put:
+      operationId: abortCopyBlob
+      summary: Abort copy blob
+      description: >-
+        Aborts a pending Copy Blob operation and leaves the destination
+        blob with zero length and full metadata. The copy must be in a
+        pending state.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: copyId
+          in: query
+          required: true
+          description: The copy operation identifier returned by the Copy Blob response.
+          schema:
+            type: string
+        - name: x-ms-copy-action
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - abort
+      responses:
+        '204':
+          description: Copy operation aborted
+  /{container}/{blob}?comp=undelete:
+    put:
+      operationId: undeleteBlob
+      summary: Undelete blob
+      description: >-
+        Restores the contents and metadata of a soft-deleted blob and any
+        associated soft-deleted snapshots. This is only available when soft
+        delete is enabled and the retention period has not expired.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob undeleted successfully
+  /{container}/{blob}?comp=tier:
+    put:
+      operationId: setBlobTier
+      summary: Set blob tier
+      description: >-
+        Sets the access tier of a block blob or page blob. For block blobs,
+        supported tiers are Hot, Cool, Cold, and Archive. Moving a blob from
+        Archive tier requires rehydration, which can take hours.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-access-tier
+          in: header
+          required: true
+          description: The access tier to set for the blob.
+          schema:
+            type: string
+            enum:
+              - Hot
+              - Cool
+              - Cold
+              - Archive
+        - name: x-ms-rehydrate-priority
+          in: header
+          description: >-
+            Priority of rehydration when moving a blob out of the Archive
+            tier. Standard priority may take up to 15 hours, High priority
+            within 1 hour at a higher cost.
+          schema:
+            type: string
+            enum:
+              - High
+              - Standard
+      responses:
+        '200':
+          description: Blob tier set successfully
+        '202':
+          description: Tier change accepted with rehydration pending
+  /{container}/{blob}?comp=immutabilityPolicies:
+    put:
+      operationId: setBlobImmutabilityPolicy
+      summary: Set blob immutability policy
+      description: >-
+        Sets the immutability policy on a blob. Immutability policies
+        prevent blob modification and deletion for a specified retention
+        period. Supports unlocked and locked policy modes.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-immutability-policy-until-date
+          in: header
+          required: true
+          description: The date until which the immutability policy is in effect.
+          schema:
+            type: string
+            format: date-time
+        - name: x-ms-immutability-policy-mode
+          in: header
+          required: true
+          description: The mode of the immutability policy.
+          schema:
+            type: string
+            enum:
+              - Unlocked
+              - Locked
+              - Mutable
+      responses:
+        '200':
+          description: Immutability policy set successfully
+    delete:
+      operationId: deleteBlobImmutabilityPolicy
+      summary: Delete blob immutability policy
+      description: >-
+        Deletes the immutability policy on a blob. The policy must be in
+        Unlocked mode to be deleted.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Immutability policy deleted
+  /{container}/{blob}?comp=legalhold:
+    put:
+      operationId: setBlobLegalHold
+      summary: Set blob legal hold
+      description: >-
+        Sets or clears a legal hold on a blob. A legal hold prevents the
+        blob from being modified or deleted regardless of the immutability
+        policy.
+      tags:
+        - Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-legal-hold
+          in: header
+          required: true
+          description: Whether to set or clear the legal hold.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Legal hold set or cleared
+  /{container}/{blob}?comp=block:
+    put:
+      operationId: putBlock
+      summary: Put block
+      description: >-
+        Uploads a block to be committed as part of a block blob. Each block
+        can be up to 4000 MiB in size. The block is identified by a
+        base64-encoded block ID. Blocks must be committed using Put Block
+        List to form the final blob.
+      tags:
+        - Block Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: blockid
+          in: query
+          required: true
+          description: >-
+            A base64-encoded block ID that identifies the block. All block
+            IDs for a given blob must be the same length.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Block uploaded successfully
+  /{container}/{blob}?comp=blocklist:
+    put:
+      operationId: putBlockList
+      summary: Put block list
+      description: >-
+        Commits a blob by specifying the set of block IDs that comprise the
+        block blob. Blocks can be from the latest uncommitted block list,
+        the committed block list, or both.
+      tags:
+        - Block Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                Latest:
+                  type: array
+                  description: Block IDs from the latest uncommitted blocks
+                  items:
+                    type: string
+                Committed:
+                  type: array
+                  description: Block IDs from the committed block list
+                  items:
+                    type: string
+                Uncommitted:
+                  type: array
+                  description: Block IDs from the uncommitted block list
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Block list committed and blob created
+    get:
+      operationId: getBlockList
+      summary: Get block list
+      description: >-
+        Retrieves the list of blocks that have been uploaded as part of a
+        block blob. Returns committed, uncommitted, or all blocks.
+      tags:
+        - Block Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: blocklisttype
+          in: query
+          description: Specifies which type of block list to retrieve.
+          schema:
+            type: string
+            enum:
+              - committed
+              - uncommitted
+              - all
+      responses:
+        '200':
+          description: Block list returned
+  /{container}/{blob}?comp=block&fromURL:
+    put:
+      operationId: putBlockFromURL
+      summary: Put block from URL
+      description: >-
+        Creates a new block to be committed as part of a block blob where
+        the contents are read from a URL. This avoids the need to upload
+        the content through the client.
+      tags:
+        - Block Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: blockid
+          in: query
+          required: true
+          description: A base64-encoded block ID that identifies the block.
+          schema:
+            type: string
+        - name: x-ms-copy-source
+          in: header
+          required: true
+          description: URL of the source data.
+          schema:
+            type: string
+            format: uri
+      responses:
+        '201':
+          description: Block created from URL
+  /{container}/{blob}?comp=page:
+    put:
+      operationId: putPage
+      summary: Put page
+      description: >-
+        Writes a range of pages to a page blob. Pages must be aligned to
+        512-byte boundaries. The update action writes data to the blob, and
+        the clear action deallocates the specified pages.
+      tags:
+        - Page Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-page-write
+          in: header
+          required: true
+          description: The page write operation type.
+          schema:
+            type: string
+            enum:
+              - update
+              - clear
+        - name: x-ms-range
+          in: header
+          required: true
+          description: >-
+            The byte range for the page write operation. Must be aligned to
+            512-byte boundaries. Format is bytes=startByte-endByte.
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Page written successfully
+  /{container}/{blob}?comp=pagelist:
+    get:
+      operationId: getPageRanges
+      summary: Get page ranges
+      description: >-
+        Returns a list of valid page ranges for a page blob or a snapshot
+        of a page blob.
+      tags:
+        - Page Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-range
+          in: header
+          description: Return only page ranges within the specified byte range.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Page ranges returned
+  /{container}/{blob}?comp=pagelist&diff:
+    get:
+      operationId: getPageRangesDiff
+      summary: Get page ranges diff
+      description: >-
+        Returns the list of page ranges that differ between a previous
+        snapshot and the current blob or between two snapshots. Useful for
+        incremental backup scenarios.
+      tags:
+        - Page Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: prevsnapshot
+          in: query
+          required: true
+          description: The snapshot identifier for the previous snapshot.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Differential page ranges returned
+  /{container}/{blob}?comp=incrementalcopy:
+    put:
+      operationId: incrementalCopyBlob
+      summary: Incremental copy blob
+      description: >-
+        Copies a snapshot of a source page blob to a destination page blob.
+        Only the differential changes between the previously copied snapshot
+        and the new snapshot are transferred to the destination.
+      tags:
+        - Page Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-copy-source
+          in: header
+          required: true
+          description: URL of the source page blob snapshot.
+          schema:
+            type: string
+            format: uri
+      responses:
+        '202':
+          description: Incremental copy operation initiated
+  /{container}/{blob}?comp=appendblock:
+    put:
+      operationId: appendBlock
+      summary: Append block
+      description: >-
+        Commits a new block of data to the end of an existing append blob.
+        Each block can be up to 4 MiB in size. An append blob can contain
+        up to 50,000 blocks.
+      tags:
+        - Append Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Block appended successfully
+  /{container}/{blob}?comp=appendblock&fromURL:
+    put:
+      operationId: appendBlockFromURL
+      summary: Append block from URL
+      description: >-
+        Commits a new block of data to the end of an append blob where the
+        contents are read from a source URL.
+      tags:
+        - Append Blobs
+      parameters:
+        - $ref: '#/components/parameters/ContainerName'
+        - $ref: '#/components/parameters/BlobName'
+        - $ref: '#/components/parameters/ApiVersion'
+        - name: x-ms-copy-source
+          in: header
+          required: true
+          description: URL of the source data to append.
+          schema:
+            type: string
+            format: uri
+      responses:
+        '201':
+          description: Block appended from URL
+components:
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Azure Storage shared key authorization using the storage account
+        access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Microsoft Entra ID OAuth 2.0 bearer token for accessing blob
+        resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: >-
+        Shared access signature (SAS) token granting delegated access to
+        blob resources.
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: >-
+        Specifies the version of the Azure Storage REST API to use for
+        the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: >-
+        The container name. Must be a valid DNS name, 3 to 63 characters,
+        starting with a letter or number, and containing only lowercase
+        letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: '^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$'
+    BlobName:
+      name: blob
+      in: path
+      required: true
+      description: >-
+        The blob name. Can contain any combination of characters and may
+        include path separators (/) for organizing blobs in a virtual
+        directory hierarchy.
+      schema:
+        type: string
+  schemas:
+    ContainerList:
+      type: object
+      description: The list of containers returned by the List Containers operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Containers:
+          type: array
+          description: The list of containers
+          items:
+            $ref: '#/components/schemas/Container'
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
+    Container:
+      type: object
+      description: A blob container in Azure Storage.
+      properties:
+        Name:
+          type: string
+          description: The container name
+        Properties:
+          type: object
+          description: System properties of the container
+          properties:
+            Last-Modified:
+              type: string
+              format: date-time
+              description: Last modification timestamp
+            Etag:
+              type: string
+              description: The ETag value for conditional operations
+            LeaseStatus:
+              type: string
+              enum:
+                - locked
+                - unlocked
+              description: The lease status of the container
+            LeaseState:
+              type: string
+              enum:
+                - available
+                - leased
+                - expired
+                - breaking
+                - broken
+              description: The lease state of the container
+            LeaseDuration:
+              type: string
+              enum:
+                - infinite
+                - fixed
+              description: The duration type of the lease
+            PublicAccess:
+              type: string
+              enum:
+                - container
+                - blob
+              description: The public access level
+            HasImmutabilityPolicy:
+              type: boolean
+              description: Whether an immutability policy exists on the container
+            HasLegalHold:
+              type: boolean
+              description: Whether a legal hold is in effect
+            DefaultEncryptionScope:
+              type: string
+              description: The default encryption scope for the container
+            DenyEncryptionScopeOverride:
+              type: boolean
+              description: Whether blob-level encryption scope override is denied
+            ImmutableStorageWithVersioningEnabled:
+              type: boolean
+              description: Whether version-level immutability is enabled
+        Metadata:
+          type: object
+          description: User-defined key-value metadata pairs
+          additionalProperties:
+            type: string
+    BlobList:
+      type: object
+      description: The list of blobs returned by the List Blobs operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        ContainerName:
+          type: string
+          description: The container name
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Delimiter:
+          type: string
+          description: The delimiter used for virtual directory hierarchy
+        Blobs:
+          type: array
+          description: The list of blobs
+          items:
+            $ref: '#/components/schemas/Blob'
+        BlobPrefixes:
+          type: array
+          description: Virtual directory prefixes when using a delimiter
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
+    Blob:
+      type: object
+      description: A blob in Azure Storage.
+      properties:
+        Name:
+          type: string
+          description: The blob name
+        Properties:
+          type: object
+          description: System properties of the blob
+          properties:
+            Last-Modified:
+              type: string
+              format: date-time
+              description: Last modification timestamp
+            Etag:
+              type: string
+              description: The ETag value for conditional operations
+            Content-Length:
+              type: integer
+              format: int64
+              description: The size of the blob in bytes
+            Content-Type:
+              type: string
+              description: The MIME content type of the blob
+            Content-Encoding:
+              type: string
+              description: The content encoding of the blob
+            Content-Language:
+              type: string
+              description: The content language of the blob
+            Content-MD5:
+              type: string
+              description: The MD5 hash of the blob content
+            Cache-Control:
+              type: string
+              description: The cache control directive
+            BlobType:
+              type: string
+              enum:
+                - BlockBlob
+                - PageBlob
+                - AppendBlob
+              description: The type of blob
+            LeaseStatus:
+              type: string
+              enum:
+                - locked
+                - unlocked
+              description: The lease status of the blob
+            LeaseState:
+              type: string
+              enum:
+                - available
+                - leased
+                - expired
+                - breaking
+                - broken
+              description: The lease state of the blob
+            AccessTier:
+              type: string
+              enum:
+                - Hot
+                - Cool
+                - Cold
+                - Archive
+              description: The access tier of the blob
+            AccessTierInferred:
+              type: boolean
+              description: Whether the access tier was inferred from the account default
+            ArchiveStatus:
+              type: string
+              enum:
+                - rehydrate-pending-to-hot
+                - rehydrate-pending-to-cool
+                - rehydrate-pending-to-cold
+              description: Rehydration status when moving from Archive tier
+            ServerEncrypted:
+              type: boolean
+              description: Whether the blob data is encrypted at rest
+            CreationTime:
+              type: string
+              format: date-time
+              description: The date and time the blob was created
+        Metadata:
+          type: object
+          description: User-defined key-value metadata pairs
+          additionalProperties:
+            type: string
+        Tags:
+          type: object
+          description: User-defined blob index tags
+          additionalProperties:
+            type: string
+    StorageServiceProperties:
+      type: object
+      description: Properties of the Blob service.
+      properties:
+        Logging:
+          type: object
+          description: Azure Analytics logging settings
+          properties:
+            Version:
+              type: string
+              description: The version of analytics logging
+            Read:
+              type: boolean
+              description: Whether read requests are logged
+            Write:
+              type: boolean
+              description: Whether write requests are logged
+            Delete:
+              type: boolean
+              description: Whether delete requests are logged
+            RetentionPolicy:
+              $ref: '#/components/schemas/RetentionPolicy'
+        HourMetrics:
+          $ref: '#/components/schemas/Metrics'
+        MinuteMetrics:
+          $ref: '#/components/schemas/Metrics'
+        Cors:
+          type: array
+          description: CORS rules for the Blob service
+          items:
+            $ref: '#/components/schemas/CorsRule'
+        DefaultServiceVersion:
+          type: string
+          description: The default REST API version for requests without a version
+        DeleteRetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+        StaticWebsite:
+          type: object
+          description: Static website configuration
+          properties:
+            Enabled:
+              type: boolean
+              description: Whether static website hosting is enabled
+            IndexDocument:
+              type: string
+              description: The default index document path
+            ErrorDocument404Path:
+              type: string
+              description: The path to the 404 error document
+    Metrics:
+      type: object
+      description: Azure Analytics metrics settings.
+      properties:
+        Version:
+          type: string
+          description: The version of metrics
+        Enabled:
+          type: boolean
+          description: Whether metrics are enabled
+        IncludeAPIs:
+          type: boolean
+          description: Whether to include API-level metrics
+        RetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+    RetentionPolicy:
+      type: object
+      description: The retention policy configuration.
+      properties:
+        Enabled:
+          type: boolean
+          description: Whether the retention policy is enabled
+        Days:
+          type: integer
+          minimum: 1
+          maximum: 365
+          description: Number of days data is retained
+    CorsRule:
+      type: object
+      description: A CORS rule for the Blob service.
+      properties:
+        AllowedOrigins:
+          type: string
+          description: >-
+            Comma-separated list of allowed origin domains, or * for all
+        AllowedMethods:
+          type: string
+          description: >-
+            Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
+        AllowedHeaders:
+          type: string
+          description: >-
+            Comma-separated list of allowed request headers
+        ExposedHeaders:
+          type: string
+          description: >-
+            Comma-separated list of response headers exposed to the client
+        MaxAgeInSeconds:
+          type: integer
+          description: >-
+            Maximum number of seconds the browser should cache the
+            preflight response

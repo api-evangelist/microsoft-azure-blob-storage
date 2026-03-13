@@ -9,7 +9,7 @@ tags:
 - Azure
 - Microsoft
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
 url: https://azure.microsoft.com/en-us/services/storage/blobs/
 apis:
 - name: Azure Blob Storage REST API
@@ -38,6 +38,56 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
   - type: Code Samples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: Change Log
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: Quotas
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+- name: Azure Data Lake Storage Gen2 REST API
+  description: The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file system interface. They enable creation and management of file systems, directories, and files on storage accounts with hierarchical namespace enabled, supporting big data analytics workloads.
+  image: https://azure.microsoft.com/svghandler/storage-blobs/
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
+  baseURL: https://{accountName}.dfs.core.windows.net
+  tags:
+  - Data Lake
+  - File System
+  - Big Data
+  - Hierarchical Namespace
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Getting Started
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+- name: Azure Storage Resource Provider REST API
+  description: The Azure Storage Resource Provider REST API enables programmatic management of storage accounts and related resources through Azure Resource Manager. It supports operations such as creating, updating, listing, and deleting storage accounts, managing access keys, and configuring storage account properties.
+  image: https://azure.microsoft.com/svghandler/storage-blobs/
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  baseURL: https://management.azure.com
+  tags:
+  - Management
+  - Resource Provider
+  - Storage Accounts
+  - Administration
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/resource-manager/Microsoft.Storage/stable/2023-05-01/storage.json
 common:
 - type: Portal
   url: https://portal.azure.com/
@@ -54,8 +104,31 @@ common:
 - type: Getting Started
   url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
 - type: Change Log
-  url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/previous-azure-storage-service-versions
+- type: Documentation
+  url: https://learn.microsoft.com/en-us/azure/storage/blobs/
+- type: Authentication
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+- type: Quotas
+  url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+- type: Website
+  url: https://azure.microsoft.com/en-us/products/storage/blobs/
+- type: Sign Up
+  url: https://azure.microsoft.com/en-us/free/
+- type: Console
+  url: https://portal.azure.com/
+- type: SDKs
+  url: https://learn.microsoft.com/en-us/azure/storage/common/storage-srp-overview
+- type: Stack Overflow
+  url: https://stackoverflow.com/questions/tagged/azure-blob-storage
+- type: GitHub Organization
+  url: https://github.com/Azure
+- type: Developer Tools
+  url: https://azure.microsoft.com/en-us/products/storage/storage-explorer
+- type: Security
+  url: https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/storage-security-baseline
+- type: Pricing
+  url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
 maintainers:
-- name: Microsoft Azure
-  email: azurestoragefeedback@microsoft.com
-  url: https://azure.microsoft.com/
+- name: Kin Lane
+  email: kin@apievangelist.com
