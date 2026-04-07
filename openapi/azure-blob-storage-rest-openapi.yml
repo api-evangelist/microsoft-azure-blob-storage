@@ -25,18 +25,16 @@ servers:
         description: The name of the Azure Storage account
         default: mystorageaccount
 tags:
-  - name: Service
-    description: Operations on the Blob Storage service level
-  - name: Containers
-    description: Operations on blob containers
+  - name: Append Blobs
+    description: Operations specific to append blobs including append block
   - name: Blobs
     description: Operations on blobs including get, put, delete, and metadata
   - name: Block Blobs
     description: Operations specific to block blobs including put block and put block list
+  - name: Containers
+    description: Operations on blob containers
   - name: Page Blobs
     description: Operations specific to page blobs including put page and get page ranges
-  - name: Append Blobs
-    description: Operations specific to append blobs including append block
 security:
   - sharedKey: []
   - bearerAuth: []
@@ -50,8 +48,7 @@ paths:
         Returns a list of containers under the specified storage account.
         Results can be filtered by prefix and paginated using marker and
         maxresults parameters.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
         - name: comp
@@ -112,8 +109,7 @@ paths:
         Retrieves the properties of the Blob service, including logging,
         metrics, CORS rules, the default service version, and soft delete
         settings.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
       responses:
@@ -129,8 +125,7 @@ paths:
       description: >-
         Sets the properties of the Blob service, including logging, metrics,
         CORS rules, the default service version, and soft delete settings.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -151,8 +146,7 @@ paths:
         operation is only available on the secondary location endpoint when
         read-access geo-redundant replication is enabled for the storage
         account.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
       responses:
@@ -167,8 +161,7 @@ paths:
         access signature (SAS), granting access to blob resources using
         Microsoft Entra ID credentials. The key is valid for the specified
         time range.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -198,8 +191,7 @@ paths:
         request body is a multipart MIME message containing individual
         subrequests. Currently supports batch delete blob and batch set blob
         tier operations.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -220,8 +212,7 @@ paths:
         Finds blobs in the storage account whose tags match a given search
         expression. The search expression uses a SQL-like syntax against
         blob index tags.
-      tags:
-        - Service
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ApiVersion'
         - name: where
