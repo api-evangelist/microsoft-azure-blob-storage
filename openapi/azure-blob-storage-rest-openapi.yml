@@ -45,7 +45,7 @@ paths:
   /:
     get:
       operationId: listContainers
-      summary: List containers
+      summary: Azure Blob Storage List containers
       description: >-
         Returns a list of containers under the specified storage account.
         Results can be filtered by prefix and paginated using marker and
@@ -107,7 +107,7 @@ paths:
   /?restype=service&comp=properties:
     get:
       operationId: getBlobServiceProperties
-      summary: Get Blob service properties
+      summary: Azure Blob Storage Get Blob service properties
       description: >-
         Retrieves the properties of the Blob service, including logging,
         metrics, CORS rules, the default service version, and soft delete
@@ -125,7 +125,7 @@ paths:
                 $ref: '#/components/schemas/StorageServiceProperties'
     put:
       operationId: setBlobServiceProperties
-      summary: Set Blob service properties
+      summary: Azure Blob Storage Set Blob service properties
       description: >-
         Sets the properties of the Blob service, including logging, metrics,
         CORS rules, the default service version, and soft delete settings.
@@ -145,7 +145,7 @@ paths:
   /?restype=service&comp=stats:
     get:
       operationId: getBlobServiceStats
-      summary: Get Blob service stats
+      summary: Azure Blob Storage Get Blob service stats
       description: >-
         Retrieves statistics related to replication for Blob Storage. This
         operation is only available on the secondary location endpoint when
@@ -161,7 +161,7 @@ paths:
   /?restype=service&comp=userdelegationkey:
     post:
       operationId: getUserDelegationKey
-      summary: Get user delegation key
+      summary: Azure Blob Storage Get user delegation key
       description: >-
         Obtains a key that can be used to sign a user delegation shared
         access signature (SAS), granting access to blob resources using
@@ -192,7 +192,7 @@ paths:
   /?restype=service&comp=batch:
     post:
       operationId: submitBlobBatch
-      summary: Submit blob batch
+      summary: Azure Blob Storage Submit blob batch
       description: >-
         Submits a batch request containing multiple subrequests. The batch
         request body is a multipart MIME message containing individual
@@ -215,7 +215,7 @@ paths:
   /?comp=blobs:
     get:
       operationId: findBlobsByTags
-      summary: Find blobs by tags
+      summary: Azure Blob Storage Find blobs by tags
       description: >-
         Finds blobs in the storage account whose tags match a given search
         expression. The search expression uses a SQL-like syntax against
@@ -250,7 +250,7 @@ paths:
   /{container}:
     put:
       operationId: createContainer
-      summary: Create container
+      summary: Azure Blob Storage Create container
       description: >-
         Creates a new container under the specified storage account. The
         container name must be a valid DNS name and conform to Azure Storage
@@ -289,7 +289,7 @@ paths:
           description: Container already exists
     get:
       operationId: getContainerProperties
-      summary: Get container properties
+      summary: Azure Blob Storage Get container properties
       description: >-
         Returns all user-defined metadata and system properties of the
         specified container. The container metadata is returned as
@@ -313,7 +313,7 @@ paths:
           description: Container not found
     delete:
       operationId: deleteContainer
-      summary: Delete container
+      summary: Azure Blob Storage Delete container
       description: >-
         Marks the specified container for deletion. The container and any
         blobs it contains are later deleted during garbage collection. If
@@ -339,7 +339,7 @@ paths:
   /{container}?restype=container&comp=list:
     get:
       operationId: listBlobs
-      summary: List blobs
+      summary: Azure Blob Storage List blobs
       description: >-
         Returns a list of blobs in the specified container. Results can be
         filtered by prefix, segmented using a delimiter for virtual directory
@@ -394,7 +394,7 @@ paths:
   /{container}?restype=container&comp=metadata:
     get:
       operationId: getContainerMetadata
-      summary: Get container metadata
+      summary: Azure Blob Storage Get container metadata
       description: >-
         Returns only user-defined metadata for the specified container as
         x-ms-meta- response headers.
@@ -408,7 +408,7 @@ paths:
           description: Container metadata returned in response headers
     put:
       operationId: setContainerMetadata
-      summary: Set container metadata
+      summary: Azure Blob Storage Set container metadata
       description: >-
         Sets one or more user-defined name-value pairs for the specified
         container. Existing metadata is replaced entirely with the new set.
@@ -423,7 +423,7 @@ paths:
   /{container}?restype=container&comp=acl:
     get:
       operationId: getContainerACL
-      summary: Get container ACL
+      summary: Azure Blob Storage Get container ACL
       description: >-
         Returns the public access policy and stored access policies for the
         specified container.
@@ -437,7 +437,7 @@ paths:
           description: Container ACL and stored access policies returned
     put:
       operationId: setContainerACL
-      summary: Set container ACL
+      summary: Azure Blob Storage Set container ACL
       description: >-
         Sets the public access policy and stored access policies for the
         specified container. Stored access policies can be used to create
@@ -453,7 +453,7 @@ paths:
   /{container}?restype=container&comp=lease:
     put:
       operationId: leaseContainer
-      summary: Lease container
+      summary: Azure Blob Storage Lease container
       description: >-
         Establishes and manages a lock on a container for delete operations.
         The lock duration can be infinite or between 15 and 60 seconds.
@@ -496,7 +496,7 @@ paths:
   /{container}?restype=container&comp=undelete:
     put:
       operationId: restoreContainer
-      summary: Restore container
+      summary: Azure Blob Storage Restore container
       description: >-
         Restores a soft-deleted container. This operation is only available
         when container soft delete is enabled for the storage account and
@@ -524,7 +524,7 @@ paths:
   /{container}/{blob}:
     put:
       operationId: putBlob
-      summary: Put blob
+      summary: Azure Blob Storage Put blob
       description: >-
         Creates a new blob or replaces an existing blob within a container.
         The type of blob to create is specified in the x-ms-blob-type header.
@@ -597,7 +597,7 @@ paths:
           description: Conflict - blob exists and has an active lease
     get:
       operationId: getBlob
-      summary: Get blob
+      summary: Azure Blob Storage Get blob
       description: >-
         Reads or downloads a blob from Blob Storage, including its
         user-defined metadata and system properties. A range of bytes can be
@@ -643,7 +643,7 @@ paths:
           description: Blob not found
     head:
       operationId: getBlobProperties
-      summary: Get blob properties
+      summary: Azure Blob Storage Get blob properties
       description: >-
         Returns all system properties and user-defined metadata on the blob.
         Does not return the blob content. Properties are returned as
@@ -661,7 +661,7 @@ paths:
           description: Blob not found
     delete:
       operationId: deleteBlob
-      summary: Delete blob
+      summary: Azure Blob Storage Delete blob
       description: >-
         Marks the specified blob or snapshot for deletion. The blob is later
         deleted during garbage collection. If soft delete is enabled, the
@@ -698,7 +698,7 @@ paths:
   /{container}/{blob}?comp=metadata:
     get:
       operationId: getBlobMetadata
-      summary: Get blob metadata
+      summary: Azure Blob Storage Get blob metadata
       description: >-
         Retrieves all user-defined metadata of an existing blob or snapshot.
         Metadata is returned as x-ms-meta- response headers.
@@ -713,7 +713,7 @@ paths:
           description: Blob metadata returned in response headers
     put:
       operationId: setBlobMetadata
-      summary: Set blob metadata
+      summary: Azure Blob Storage Set blob metadata
       description: >-
         Sets user-defined metadata for the specified blob as one or more
         name-value pairs. Existing metadata is replaced entirely.
@@ -729,7 +729,7 @@ paths:
   /{container}/{blob}?comp=properties:
     put:
       operationId: setBlobHTTPHeaders
-      summary: Set blob HTTP headers
+      summary: Azure Blob Storage Set blob HTTP headers
       description: >-
         Sets system properties defined for an existing blob such as content
         type, content encoding, content language, content disposition, and
@@ -771,7 +771,7 @@ paths:
   /{container}/{blob}?comp=tags:
     get:
       operationId: getBlobTags
-      summary: Get blob tags
+      summary: Azure Blob Storage Get blob tags
       description: >-
         Retrieves user-defined blob index tags. Tags form a secondary index
         that can be queried using the Find Blobs by Tags operation.
@@ -786,7 +786,7 @@ paths:
           description: Blob tags returned
     put:
       operationId: setBlobTags
-      summary: Set blob tags
+      summary: Azure Blob Storage Set blob tags
       description: >-
         Sets user-defined blob index tags on an existing blob. Tags are
         key-value pairs that form a secondary index, enabling efficient
@@ -803,7 +803,7 @@ paths:
   /{container}/{blob}?comp=lease:
     put:
       operationId: leaseBlob
-      summary: Lease blob
+      summary: Azure Blob Storage Lease blob
       description: >-
         Establishes and manages a lock on write and delete operations for a
         blob. The lock can be infinite or between 15 and 60 seconds.
@@ -833,7 +833,7 @@ paths:
   /{container}/{blob}?comp=snapshot:
     put:
       operationId: snapshotBlob
-      summary: Snapshot blob
+      summary: Azure Blob Storage Snapshot blob
       description: >-
         Creates a read-only snapshot of a blob. A snapshot is a version of a
         blob that is captured at a point in time. Snapshots share the same
@@ -850,7 +850,7 @@ paths:
   /{container}/{blob}?comp=copy:
     put:
       operationId: copyBlob
-      summary: Copy blob
+      summary: Azure Blob Storage Copy blob
       description: >-
         Copies a source blob to a destination blob within the same storage
         account or across storage accounts. The copy operation is
@@ -884,7 +884,7 @@ paths:
   /{container}/{blob}?comp=copy&copyid={copyId}:
     put:
       operationId: abortCopyBlob
-      summary: Abort copy blob
+      summary: Azure Blob Storage Abort copy blob
       description: >-
         Aborts a pending Copy Blob operation and leaves the destination
         blob with zero length and full metadata. The copy must be in a
@@ -914,7 +914,7 @@ paths:
   /{container}/{blob}?comp=undelete:
     put:
       operationId: undeleteBlob
-      summary: Undelete blob
+      summary: Azure Blob Storage Undelete blob
       description: >-
         Restores the contents and metadata of a soft-deleted blob and any
         associated soft-deleted snapshots. This is only available when soft
@@ -931,7 +931,7 @@ paths:
   /{container}/{blob}?comp=tier:
     put:
       operationId: setBlobTier
-      summary: Set blob tier
+      summary: Azure Blob Storage Set blob tier
       description: >-
         Sets the access tier of a block blob or page blob. For block blobs,
         supported tiers are Hot, Cool, Cold, and Archive. Moving a blob from
@@ -972,7 +972,7 @@ paths:
   /{container}/{blob}?comp=immutabilityPolicies:
     put:
       operationId: setBlobImmutabilityPolicy
-      summary: Set blob immutability policy
+      summary: Azure Blob Storage Set blob immutability policy
       description: >-
         Sets the immutability policy on a blob. Immutability policies
         prevent blob modification and deletion for a specified retention
@@ -1005,7 +1005,7 @@ paths:
           description: Immutability policy set successfully
     delete:
       operationId: deleteBlobImmutabilityPolicy
-      summary: Delete blob immutability policy
+      summary: Azure Blob Storage Delete blob immutability policy
       description: >-
         Deletes the immutability policy on a blob. The policy must be in
         Unlocked mode to be deleted.
@@ -1021,7 +1021,7 @@ paths:
   /{container}/{blob}?comp=legalhold:
     put:
       operationId: setBlobLegalHold
-      summary: Set blob legal hold
+      summary: Azure Blob Storage Set blob legal hold
       description: >-
         Sets or clears a legal hold on a blob. A legal hold prevents the
         blob from being modified or deleted regardless of the immutability
@@ -1044,7 +1044,7 @@ paths:
   /{container}/{blob}?comp=block:
     put:
       operationId: putBlock
-      summary: Put block
+      summary: Azure Blob Storage Put block
       description: >-
         Uploads a block to be committed as part of a block blob. Each block
         can be up to 4000 MiB in size. The block is identified by a
@@ -1076,7 +1076,7 @@ paths:
   /{container}/{blob}?comp=blocklist:
     put:
       operationId: putBlockList
-      summary: Put block list
+      summary: Azure Blob Storage Put block list
       description: >-
         Commits a blob by specifying the set of block IDs that comprise the
         block blob. Blocks can be from the latest uncommitted block list,
@@ -1114,7 +1114,7 @@ paths:
           description: Block list committed and blob created
     get:
       operationId: getBlockList
-      summary: Get block list
+      summary: Azure Blob Storage Get block list
       description: >-
         Retrieves the list of blocks that have been uploaded as part of a
         block blob. Returns committed, uncommitted, or all blocks.
@@ -1139,7 +1139,7 @@ paths:
   /{container}/{blob}?comp=block&fromURL:
     put:
       operationId: putBlockFromURL
-      summary: Put block from URL
+      summary: Azure Blob Storage Put block from URL
       description: >-
         Creates a new block to be committed as part of a block blob where
         the contents are read from a URL. This avoids the need to upload
@@ -1169,7 +1169,7 @@ paths:
   /{container}/{blob}?comp=page:
     put:
       operationId: putPage
-      summary: Put page
+      summary: Azure Blob Storage Put page
       description: >-
         Writes a range of pages to a page blob. Pages must be aligned to
         512-byte boundaries. The update action writes data to the blob, and
@@ -1209,7 +1209,7 @@ paths:
   /{container}/{blob}?comp=pagelist:
     get:
       operationId: getPageRanges
-      summary: Get page ranges
+      summary: Azure Blob Storage Get page ranges
       description: >-
         Returns a list of valid page ranges for a page blob or a snapshot
         of a page blob.
@@ -1230,7 +1230,7 @@ paths:
   /{container}/{blob}?comp=pagelist&diff:
     get:
       operationId: getPageRangesDiff
-      summary: Get page ranges diff
+      summary: Azure Blob Storage Get page ranges diff
       description: >-
         Returns the list of page ranges that differ between a previous
         snapshot and the current blob or between two snapshots. Useful for
@@ -1253,7 +1253,7 @@ paths:
   /{container}/{blob}?comp=incrementalcopy:
     put:
       operationId: incrementalCopyBlob
-      summary: Incremental copy blob
+      summary: Azure Blob Storage Incremental copy blob
       description: >-
         Copies a snapshot of a source page blob to a destination page blob.
         Only the differential changes between the previously copied snapshot
@@ -1277,7 +1277,7 @@ paths:
   /{container}/{blob}?comp=appendblock:
     put:
       operationId: appendBlock
-      summary: Append block
+      summary: Azure Blob Storage Append block
       description: >-
         Commits a new block of data to the end of an existing append blob.
         Each block can be up to 4 MiB in size. An append blob can contain
@@ -1300,7 +1300,7 @@ paths:
   /{container}/{blob}?comp=appendblock&fromURL:
     put:
       operationId: appendBlockFromURL
-      summary: Append block from URL
+      summary: Azure Blob Storage Append block from URL
       description: >-
         Commits a new block of data to the end of an append blob where the
         contents are read from a source URL.
