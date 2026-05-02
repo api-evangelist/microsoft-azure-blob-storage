@@ -9,7 +9,7 @@ tags:
   - Object Storage
   - Storage
 created: '2024'
-modified: '2026-03-16'
+modified: '2026-04-28'
 url: https://azure.microsoft.com/en-us/services/storage/blobs/
 apis:
   - name: Azure Blob Storage REST API
