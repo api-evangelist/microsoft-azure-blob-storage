@@ -1,0 +1,1800 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Blob Storage REST API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports
+    operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can
+    store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized
+    for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  tags:
+  - Microsoft
+  - Azure
+  - Blob
+  - Storage
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-azure-blob-storage
+    baseUri: https://mystorageaccount.blob.core.windows.net
+    description: Azure Blob Storage REST API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{MICROSOFT_AZURE_BLOB_STORAGE_TOKEN}}'
+    resources:
+    - name: resource
+      path: /
+      operations:
+      - name: listcontainers
+        method: GET
+        description: Azure Blob Storage List containers
+        inputParameters:
+        - name: comp
+          in: query
+          type: string
+          required: true
+        - name: prefix
+          in: query
+          type: string
+          description: Filters results to return only containers whose names begin with the specified prefix.
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for retrieving the next page of results. Returned in the NextMarker element of a
+            previous response.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of containers to return in a single response. Defaults to 5000 if not specified.
+        - name: include
+          in: query
+          type: string
+          description: Specifies additional datasets to include in the response such as metadata, deleted containers, or system
+            containers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restype-service-comp-properties
+      path: /?restype=service&comp=properties
+      operations:
+      - name: getblobserviceproperties
+        method: GET
+        description: Azure Blob Storage Get Blob service properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setblobserviceproperties
+        method: PUT
+        description: Azure Blob Storage Set Blob service properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restype-service-comp-stats
+      path: /?restype=service&comp=stats
+      operations:
+      - name: getblobservicestats
+        method: GET
+        description: Azure Blob Storage Get Blob service stats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restype-service-comp-userdelegationkey
+      path: /?restype=service&comp=userdelegationkey
+      operations:
+      - name: getuserdelegationkey
+        method: POST
+        description: Azure Blob Storage Get user delegation key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restype-service-comp-batch
+      path: /?restype=service&comp=batch
+      operations:
+      - name: submitblobbatch
+        method: POST
+        description: Azure Blob Storage Submit blob batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: comp-blobs
+      path: /?comp=blobs
+      operations:
+      - name: findblobsbytags
+        method: GET
+        description: Azure Blob Storage Find blobs by tags
+        inputParameters:
+        - name: where
+          in: query
+          type: string
+          required: true
+          description: SQL-like filter expression for blob index tags, for example "tagkey"='tagvalue'.
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for pagination.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of blobs to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container
+      path: /{container}
+      operations:
+      - name: createcontainer
+        method: PUT
+        description: Azure Blob Storage Create container
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+        - name: x-ms-blob-public-access
+          in: header
+          type: string
+          description: Specifies whether data in the container may be accessed publicly and the level of access.
+        - name: x-ms-default-encryption-scope
+          in: header
+          type: string
+          description: The default encryption scope for the container.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getcontainerproperties
+        method: GET
+        description: Azure Blob Storage Get container properties
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletecontainer
+        method: DELETE
+        description: Azure Blob Storage Delete container
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-restype-container-comp-list
+      path: /{container}?restype=container&comp=list
+      operations:
+      - name: listblobs
+        method: GET
+        description: Azure Blob Storage List blobs
+        inputParameters:
+        - name: prefix
+          in: query
+          type: string
+          description: Filters results to return only blobs whose names begin with the specified prefix.
+        - name: delimiter
+          in: query
+          type: string
+          description: Delimiter character used to traverse a virtual hierarchy of blobs as though it were a file system.
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for pagination.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of blobs to return.
+        - name: include
+          in: query
+          type: string
+          description: Specifies additional datasets to include such as snapshots, metadata, uncommitted blobs, copy, deleted,
+            tags, versions, deletedwithversions, immutabilitypolicy,
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-restype-container-comp-metadata
+      path: /{container}?restype=container&comp=metadata
+      operations:
+      - name: getcontainermetadata
+        method: GET
+        description: Azure Blob Storage Get container metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setcontainermetadata
+        method: PUT
+        description: Azure Blob Storage Set container metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-restype-container-comp-acl
+      path: /{container}?restype=container&comp=acl
+      operations:
+      - name: getcontaineracl
+        method: GET
+        description: Azure Blob Storage Get container ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setcontaineracl
+        method: PUT
+        description: Azure Blob Storage Set container ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-restype-container-comp-lease
+      path: /{container}?restype=container&comp=lease
+      operations:
+      - name: leasecontainer
+        method: PUT
+        description: Azure Blob Storage Lease container
+        inputParameters:
+        - name: x-ms-lease-action
+          in: header
+          type: string
+          required: true
+          description: The lease action to perform.
+        - name: x-ms-lease-duration
+          in: header
+          type: integer
+          description: Duration of the lease in seconds. Set to -1 for an infinite lease, or between 15 and 60 seconds for
+            a fixed-duration lease.
+        - name: x-ms-proposed-lease-id
+          in: header
+          type: string
+          description: Proposed lease ID in GUID format.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-restype-container-comp-undelete
+      path: /{container}?restype=container&comp=undelete
+      operations:
+      - name: restorecontainer
+        method: PUT
+        description: Azure Blob Storage Restore container
+        inputParameters:
+        - name: x-ms-deleted-container-name
+          in: header
+          type: string
+          required: true
+          description: The name of the deleted container to restore.
+        - name: x-ms-deleted-container-version
+          in: header
+          type: string
+          required: true
+          description: The version of the deleted container to restore.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob
+      path: /{container}/{blob}
+      operations:
+      - name: putblob
+        method: PUT
+        description: Azure Blob Storage Put blob
+        inputParameters:
+        - name: x-ms-blob-type
+          in: header
+          type: string
+          required: true
+          description: The type of blob to create.
+        - name: Content-Length
+          in: header
+          type: integer
+          description: The length of the request body in bytes. Required for page blobs (set to 0 with x-ms-blob-content-length
+            for the actual size).
+        - name: Content-Type
+          in: header
+          type: string
+          description: The MIME content type of the blob.
+        - name: x-ms-blob-content-type
+          in: header
+          type: string
+          description: The content type to set for the blob.
+        - name: x-ms-access-tier
+          in: header
+          type: string
+          description: The tier to set on the blob.
+        - name: x-ms-blob-content-length
+          in: header
+          type: integer
+          description: Required for page blobs. Specifies the maximum size for the page blob, up to 8 TiB. Must be aligned
+            to a 512-byte boundary.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getblob
+        method: GET
+        description: Azure Blob Storage Get blob
+        inputParameters:
+        - name: Range
+          in: header
+          type: string
+          description: Return only the bytes of the blob in the specified range, for example bytes=0-1023.
+        - name: snapshot
+          in: query
+          type: string
+          description: The snapshot identifier. When specified, the operation returns the snapshot of the blob.
+        - name: versionid
+          in: query
+          type: string
+          description: The version ID. When specified, the operation returns the specified version of the blob.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteblob
+        method: DELETE
+        description: Azure Blob Storage Delete blob
+        inputParameters:
+        - name: x-ms-delete-snapshots
+          in: header
+          type: string
+          description: Required if the blob has associated snapshots. Specifies whether to delete the blob and all snapshots
+            (include) or only the snapshots (only).
+        - name: snapshot
+          in: query
+          type: string
+          description: The snapshot identifier. When specified, only the snapshot is deleted.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-metadata
+      path: /{container}/{blob}?comp=metadata
+      operations:
+      - name: getblobmetadata
+        method: GET
+        description: Azure Blob Storage Get blob metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setblobmetadata
+        method: PUT
+        description: Azure Blob Storage Set blob metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-properties
+      path: /{container}/{blob}?comp=properties
+      operations:
+      - name: setblobhttpheaders
+        method: PUT
+        description: Azure Blob Storage Set blob HTTP headers
+        inputParameters:
+        - name: x-ms-blob-content-type
+          in: header
+          type: string
+          description: The MIME content type of the blob.
+        - name: x-ms-blob-content-encoding
+          in: header
+          type: string
+          description: The content encoding of the blob.
+        - name: x-ms-blob-content-language
+          in: header
+          type: string
+          description: The content language of the blob.
+        - name: x-ms-blob-cache-control
+          in: header
+          type: string
+          description: The cache control directive for the blob.
+        - name: x-ms-blob-content-disposition
+          in: header
+          type: string
+          description: The content disposition of the blob.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-tags
+      path: /{container}/{blob}?comp=tags
+      operations:
+      - name: getblobtags
+        method: GET
+        description: Azure Blob Storage Get blob tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setblobtags
+        method: PUT
+        description: Azure Blob Storage Set blob tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-lease
+      path: /{container}/{blob}?comp=lease
+      operations:
+      - name: leaseblob
+        method: PUT
+        description: Azure Blob Storage Lease blob
+        inputParameters:
+        - name: x-ms-lease-action
+          in: header
+          type: string
+          required: true
+          description: The lease action to perform.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-snapshot
+      path: /{container}/{blob}?comp=snapshot
+      operations:
+      - name: snapshotblob
+        method: PUT
+        description: Azure Blob Storage Snapshot blob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-copy
+      path: /{container}/{blob}?comp=copy
+      operations:
+      - name: copyblob
+        method: PUT
+        description: Azure Blob Storage Copy blob
+        inputParameters:
+        - name: x-ms-copy-source
+          in: header
+          type: string
+          required: true
+          description: URL of the source blob, up to 2 KiB in length.
+        - name: x-ms-access-tier
+          in: header
+          type: string
+          description: The tier to set on the destination blob.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-copy-copyid-copyid
+      path: /{container}/{blob}?comp=copy&copyid={copyId}
+      operations:
+      - name: abortcopyblob
+        method: PUT
+        description: Azure Blob Storage Abort copy blob
+        inputParameters:
+        - name: copyId
+          in: query
+          type: string
+          required: true
+          description: The copy operation identifier returned by the Copy Blob response.
+        - name: x-ms-copy-action
+          in: header
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-undelete
+      path: /{container}/{blob}?comp=undelete
+      operations:
+      - name: undeleteblob
+        method: PUT
+        description: Azure Blob Storage Undelete blob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-tier
+      path: /{container}/{blob}?comp=tier
+      operations:
+      - name: setblobtier
+        method: PUT
+        description: Azure Blob Storage Set blob tier
+        inputParameters:
+        - name: x-ms-access-tier
+          in: header
+          type: string
+          required: true
+          description: The access tier to set for the blob.
+        - name: x-ms-rehydrate-priority
+          in: header
+          type: string
+          description: Priority of rehydration when moving a blob out of the Archive tier. Standard priority may take up to
+            15 hours, High priority within 1 hour at a higher cost.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-immutabilitypolicies
+      path: /{container}/{blob}?comp=immutabilityPolicies
+      operations:
+      - name: setblobimmutabilitypolicy
+        method: PUT
+        description: Azure Blob Storage Set blob immutability policy
+        inputParameters:
+        - name: x-ms-immutability-policy-until-date
+          in: header
+          type: string
+          required: true
+          description: The date until which the immutability policy is in effect.
+        - name: x-ms-immutability-policy-mode
+          in: header
+          type: string
+          required: true
+          description: The mode of the immutability policy.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteblobimmutabilitypolicy
+        method: DELETE
+        description: Azure Blob Storage Delete blob immutability policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-legalhold
+      path: /{container}/{blob}?comp=legalhold
+      operations:
+      - name: setbloblegalhold
+        method: PUT
+        description: Azure Blob Storage Set blob legal hold
+        inputParameters:
+        - name: x-ms-legal-hold
+          in: header
+          type: boolean
+          required: true
+          description: Whether to set or clear the legal hold.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-block
+      path: /{container}/{blob}?comp=block
+      operations:
+      - name: putblock
+        method: PUT
+        description: Azure Blob Storage Put block
+        inputParameters:
+        - name: blockid
+          in: query
+          type: string
+          required: true
+          description: A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same
+            length.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-blocklist
+      path: /{container}/{blob}?comp=blocklist
+      operations:
+      - name: putblocklist
+        method: PUT
+        description: Azure Blob Storage Put block list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getblocklist
+        method: GET
+        description: Azure Blob Storage Get block list
+        inputParameters:
+        - name: blocklisttype
+          in: query
+          type: string
+          description: Specifies which type of block list to retrieve.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-block-fromurl
+      path: /{container}/{blob}?comp=block&fromURL
+      operations:
+      - name: putblockfromurl
+        method: PUT
+        description: Azure Blob Storage Put block from URL
+        inputParameters:
+        - name: blockid
+          in: query
+          type: string
+          required: true
+          description: A base64-encoded block ID that identifies the block.
+        - name: x-ms-copy-source
+          in: header
+          type: string
+          required: true
+          description: URL of the source data.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-page
+      path: /{container}/{blob}?comp=page
+      operations:
+      - name: putpage
+        method: PUT
+        description: Azure Blob Storage Put page
+        inputParameters:
+        - name: x-ms-page-write
+          in: header
+          type: string
+          required: true
+          description: The page write operation type.
+        - name: x-ms-range
+          in: header
+          type: string
+          required: true
+          description: The byte range for the page write operation. Must be aligned to 512-byte boundaries. Format is bytes=startByte-endByte.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-pagelist
+      path: /{container}/{blob}?comp=pagelist
+      operations:
+      - name: getpageranges
+        method: GET
+        description: Azure Blob Storage Get page ranges
+        inputParameters:
+        - name: x-ms-range
+          in: header
+          type: string
+          description: Return only page ranges within the specified byte range.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-pagelist-diff
+      path: /{container}/{blob}?comp=pagelist&diff
+      operations:
+      - name: getpagerangesdiff
+        method: GET
+        description: Azure Blob Storage Get page ranges diff
+        inputParameters:
+        - name: prevsnapshot
+          in: query
+          type: string
+          required: true
+          description: The snapshot identifier for the previous snapshot.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-incrementalcopy
+      path: /{container}/{blob}?comp=incrementalcopy
+      operations:
+      - name: incrementalcopyblob
+        method: PUT
+        description: Azure Blob Storage Incremental copy blob
+        inputParameters:
+        - name: x-ms-copy-source
+          in: header
+          type: string
+          required: true
+          description: URL of the source page blob snapshot.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-appendblock
+      path: /{container}/{blob}?comp=appendblock
+      operations:
+      - name: appendblock
+        method: PUT
+        description: Azure Blob Storage Append block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container-blob-comp-appendblock-fromurl
+      path: /{container}/{blob}?comp=appendblock&fromURL
+      operations:
+      - name: appendblockfromurl
+        method: PUT
+        description: Azure Blob Storage Append block from URL
+        inputParameters:
+        - name: x-ms-copy-source
+          in: header
+          type: string
+          required: true
+          description: URL of the source data to append.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: microsoft-azure-blob-storage-rest
+    description: REST adapter for Azure Blob Storage REST API.
+    resources:
+    - path: /
+      name: listcontainers
+      operations:
+      - method: GET
+        name: listcontainers
+        description: Azure Blob Storage List containers
+        call: microsoft-azure-blob-storage.listcontainers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?restype=service&comp=properties
+      name: getblobserviceproperties
+      operations:
+      - method: GET
+        name: getblobserviceproperties
+        description: Azure Blob Storage Get Blob service properties
+        call: microsoft-azure-blob-storage.getblobserviceproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?restype=service&comp=properties
+      name: setblobserviceproperties
+      operations:
+      - method: PUT
+        name: setblobserviceproperties
+        description: Azure Blob Storage Set Blob service properties
+        call: microsoft-azure-blob-storage.setblobserviceproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?restype=service&comp=stats
+      name: getblobservicestats
+      operations:
+      - method: GET
+        name: getblobservicestats
+        description: Azure Blob Storage Get Blob service stats
+        call: microsoft-azure-blob-storage.getblobservicestats
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?restype=service&comp=userdelegationkey
+      name: getuserdelegationkey
+      operations:
+      - method: POST
+        name: getuserdelegationkey
+        description: Azure Blob Storage Get user delegation key
+        call: microsoft-azure-blob-storage.getuserdelegationkey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?restype=service&comp=batch
+      name: submitblobbatch
+      operations:
+      - method: POST
+        name: submitblobbatch
+        description: Azure Blob Storage Submit blob batch
+        call: microsoft-azure-blob-storage.submitblobbatch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /?comp=blobs
+      name: findblobsbytags
+      operations:
+      - method: GET
+        name: findblobsbytags
+        description: Azure Blob Storage Find blobs by tags
+        call: microsoft-azure-blob-storage.findblobsbytags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}
+      name: createcontainer
+      operations:
+      - method: PUT
+        name: createcontainer
+        description: Azure Blob Storage Create container
+        call: microsoft-azure-blob-storage.createcontainer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}
+      name: getcontainerproperties
+      operations:
+      - method: GET
+        name: getcontainerproperties
+        description: Azure Blob Storage Get container properties
+        call: microsoft-azure-blob-storage.getcontainerproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}
+      name: deletecontainer
+      operations:
+      - method: DELETE
+        name: deletecontainer
+        description: Azure Blob Storage Delete container
+        call: microsoft-azure-blob-storage.deletecontainer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=list
+      name: listblobs
+      operations:
+      - method: GET
+        name: listblobs
+        description: Azure Blob Storage List blobs
+        call: microsoft-azure-blob-storage.listblobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=metadata
+      name: getcontainermetadata
+      operations:
+      - method: GET
+        name: getcontainermetadata
+        description: Azure Blob Storage Get container metadata
+        call: microsoft-azure-blob-storage.getcontainermetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=metadata
+      name: setcontainermetadata
+      operations:
+      - method: PUT
+        name: setcontainermetadata
+        description: Azure Blob Storage Set container metadata
+        call: microsoft-azure-blob-storage.setcontainermetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=acl
+      name: getcontaineracl
+      operations:
+      - method: GET
+        name: getcontaineracl
+        description: Azure Blob Storage Get container ACL
+        call: microsoft-azure-blob-storage.getcontaineracl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=acl
+      name: setcontaineracl
+      operations:
+      - method: PUT
+        name: setcontaineracl
+        description: Azure Blob Storage Set container ACL
+        call: microsoft-azure-blob-storage.setcontaineracl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=lease
+      name: leasecontainer
+      operations:
+      - method: PUT
+        name: leasecontainer
+        description: Azure Blob Storage Lease container
+        call: microsoft-azure-blob-storage.leasecontainer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}?restype=container&comp=undelete
+      name: restorecontainer
+      operations:
+      - method: PUT
+        name: restorecontainer
+        description: Azure Blob Storage Restore container
+        call: microsoft-azure-blob-storage.restorecontainer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}
+      name: putblob
+      operations:
+      - method: PUT
+        name: putblob
+        description: Azure Blob Storage Put blob
+        call: microsoft-azure-blob-storage.putblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}
+      name: getblob
+      operations:
+      - method: GET
+        name: getblob
+        description: Azure Blob Storage Get blob
+        call: microsoft-azure-blob-storage.getblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}
+      name: deleteblob
+      operations:
+      - method: DELETE
+        name: deleteblob
+        description: Azure Blob Storage Delete blob
+        call: microsoft-azure-blob-storage.deleteblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=metadata
+      name: getblobmetadata
+      operations:
+      - method: GET
+        name: getblobmetadata
+        description: Azure Blob Storage Get blob metadata
+        call: microsoft-azure-blob-storage.getblobmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=metadata
+      name: setblobmetadata
+      operations:
+      - method: PUT
+        name: setblobmetadata
+        description: Azure Blob Storage Set blob metadata
+        call: microsoft-azure-blob-storage.setblobmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=properties
+      name: setblobhttpheaders
+      operations:
+      - method: PUT
+        name: setblobhttpheaders
+        description: Azure Blob Storage Set blob HTTP headers
+        call: microsoft-azure-blob-storage.setblobhttpheaders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=tags
+      name: getblobtags
+      operations:
+      - method: GET
+        name: getblobtags
+        description: Azure Blob Storage Get blob tags
+        call: microsoft-azure-blob-storage.getblobtags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=tags
+      name: setblobtags
+      operations:
+      - method: PUT
+        name: setblobtags
+        description: Azure Blob Storage Set blob tags
+        call: microsoft-azure-blob-storage.setblobtags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=lease
+      name: leaseblob
+      operations:
+      - method: PUT
+        name: leaseblob
+        description: Azure Blob Storage Lease blob
+        call: microsoft-azure-blob-storage.leaseblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=snapshot
+      name: snapshotblob
+      operations:
+      - method: PUT
+        name: snapshotblob
+        description: Azure Blob Storage Snapshot blob
+        call: microsoft-azure-blob-storage.snapshotblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=copy
+      name: copyblob
+      operations:
+      - method: PUT
+        name: copyblob
+        description: Azure Blob Storage Copy blob
+        call: microsoft-azure-blob-storage.copyblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=copy&copyid={copyId}
+      name: abortcopyblob
+      operations:
+      - method: PUT
+        name: abortcopyblob
+        description: Azure Blob Storage Abort copy blob
+        call: microsoft-azure-blob-storage.abortcopyblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=undelete
+      name: undeleteblob
+      operations:
+      - method: PUT
+        name: undeleteblob
+        description: Azure Blob Storage Undelete blob
+        call: microsoft-azure-blob-storage.undeleteblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=tier
+      name: setblobtier
+      operations:
+      - method: PUT
+        name: setblobtier
+        description: Azure Blob Storage Set blob tier
+        call: microsoft-azure-blob-storage.setblobtier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=immutabilityPolicies
+      name: setblobimmutabilitypolicy
+      operations:
+      - method: PUT
+        name: setblobimmutabilitypolicy
+        description: Azure Blob Storage Set blob immutability policy
+        call: microsoft-azure-blob-storage.setblobimmutabilitypolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=immutabilityPolicies
+      name: deleteblobimmutabilitypolicy
+      operations:
+      - method: DELETE
+        name: deleteblobimmutabilitypolicy
+        description: Azure Blob Storage Delete blob immutability policy
+        call: microsoft-azure-blob-storage.deleteblobimmutabilitypolicy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=legalhold
+      name: setbloblegalhold
+      operations:
+      - method: PUT
+        name: setbloblegalhold
+        description: Azure Blob Storage Set blob legal hold
+        call: microsoft-azure-blob-storage.setbloblegalhold
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=block
+      name: putblock
+      operations:
+      - method: PUT
+        name: putblock
+        description: Azure Blob Storage Put block
+        call: microsoft-azure-blob-storage.putblock
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=blocklist
+      name: putblocklist
+      operations:
+      - method: PUT
+        name: putblocklist
+        description: Azure Blob Storage Put block list
+        call: microsoft-azure-blob-storage.putblocklist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=blocklist
+      name: getblocklist
+      operations:
+      - method: GET
+        name: getblocklist
+        description: Azure Blob Storage Get block list
+        call: microsoft-azure-blob-storage.getblocklist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=block&fromURL
+      name: putblockfromurl
+      operations:
+      - method: PUT
+        name: putblockfromurl
+        description: Azure Blob Storage Put block from URL
+        call: microsoft-azure-blob-storage.putblockfromurl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=page
+      name: putpage
+      operations:
+      - method: PUT
+        name: putpage
+        description: Azure Blob Storage Put page
+        call: microsoft-azure-blob-storage.putpage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=pagelist
+      name: getpageranges
+      operations:
+      - method: GET
+        name: getpageranges
+        description: Azure Blob Storage Get page ranges
+        call: microsoft-azure-blob-storage.getpageranges
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=pagelist&diff
+      name: getpagerangesdiff
+      operations:
+      - method: GET
+        name: getpagerangesdiff
+        description: Azure Blob Storage Get page ranges diff
+        call: microsoft-azure-blob-storage.getpagerangesdiff
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=incrementalcopy
+      name: incrementalcopyblob
+      operations:
+      - method: PUT
+        name: incrementalcopyblob
+        description: Azure Blob Storage Incremental copy blob
+        call: microsoft-azure-blob-storage.incrementalcopyblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=appendblock
+      name: appendblock
+      operations:
+      - method: PUT
+        name: appendblock
+        description: Azure Blob Storage Append block
+        call: microsoft-azure-blob-storage.appendblock
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /{container}/{blob}?comp=appendblock&fromURL
+      name: appendblockfromurl
+      operations:
+      - method: PUT
+        name: appendblockfromurl
+        description: Azure Blob Storage Append block from URL
+        call: microsoft-azure-blob-storage.appendblockfromurl
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: microsoft-azure-blob-storage-mcp
+    transport: http
+    description: MCP adapter for Azure Blob Storage REST API for AI agent use.
+    tools:
+    - name: listcontainers
+      description: Azure Blob Storage List containers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.listcontainers
+      with:
+        comp: tools.comp
+        prefix: tools.prefix
+        marker: tools.marker
+        maxresults: tools.maxresults
+        include: tools.include
+      inputParameters:
+      - name: comp
+        type: string
+        description: comp
+        required: true
+      - name: prefix
+        type: string
+        description: Filters results to return only containers whose names begin with the specified prefix.
+      - name: marker
+        type: string
+        description: Continuation token for retrieving the next page of results. Returned in the NextMarker element of a previous
+          response.
+      - name: maxresults
+        type: integer
+        description: Maximum number of containers to return in a single response. Defaults to 5000 if not specified.
+      - name: include
+        type: string
+        description: Specifies additional datasets to include in the response such as metadata, deleted containers, or system
+          containers.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblobserviceproperties
+      description: Azure Blob Storage Get Blob service properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblobserviceproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobserviceproperties
+      description: Azure Blob Storage Set Blob service properties
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobserviceproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblobservicestats
+      description: Azure Blob Storage Get Blob service stats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblobservicestats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuserdelegationkey
+      description: Azure Blob Storage Get user delegation key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-azure-blob-storage.getuserdelegationkey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submitblobbatch
+      description: Azure Blob Storage Submit blob batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-azure-blob-storage.submitblobbatch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: findblobsbytags
+      description: Azure Blob Storage Find blobs by tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.findblobsbytags
+      with:
+        where: tools.where
+        marker: tools.marker
+        maxresults: tools.maxresults
+      inputParameters:
+      - name: where
+        type: string
+        description: SQL-like filter expression for blob index tags, for example "tagkey"='tagvalue'.
+        required: true
+      - name: marker
+        type: string
+        description: Continuation token for pagination.
+      - name: maxresults
+        type: integer
+        description: Maximum number of blobs to return.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createcontainer
+      description: Azure Blob Storage Create container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.createcontainer
+      with:
+        restype: tools.restype
+      inputParameters:
+      - name: restype
+        type: string
+        description: restype
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcontainerproperties
+      description: Azure Blob Storage Get container properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getcontainerproperties
+      with:
+        restype: tools.restype
+      inputParameters:
+      - name: restype
+        type: string
+        description: restype
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletecontainer
+      description: Azure Blob Storage Delete container
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-azure-blob-storage.deletecontainer
+      with:
+        restype: tools.restype
+      inputParameters:
+      - name: restype
+        type: string
+        description: restype
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listblobs
+      description: Azure Blob Storage List blobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.listblobs
+      with:
+        prefix: tools.prefix
+        delimiter: tools.delimiter
+        marker: tools.marker
+        maxresults: tools.maxresults
+        include: tools.include
+      inputParameters:
+      - name: prefix
+        type: string
+        description: Filters results to return only blobs whose names begin with the specified prefix.
+      - name: delimiter
+        type: string
+        description: Delimiter character used to traverse a virtual hierarchy of blobs as though it were a file system.
+      - name: marker
+        type: string
+        description: Continuation token for pagination.
+      - name: maxresults
+        type: integer
+        description: Maximum number of blobs to return.
+      - name: include
+        type: string
+        description: Specifies additional datasets to include such as snapshots, metadata, uncommitted blobs, copy, deleted,
+          tags, versions, deletedwithversions, immutabilitypolicy,
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcontainermetadata
+      description: Azure Blob Storage Get container metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getcontainermetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setcontainermetadata
+      description: Azure Blob Storage Set container metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setcontainermetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcontaineracl
+      description: Azure Blob Storage Get container ACL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getcontaineracl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setcontaineracl
+      description: Azure Blob Storage Set container ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setcontaineracl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: leasecontainer
+      description: Azure Blob Storage Lease container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.leasecontainer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restorecontainer
+      description: Azure Blob Storage Restore container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.restorecontainer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: putblob
+      description: Azure Blob Storage Put blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.putblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblob
+      description: Azure Blob Storage Get blob
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblob
+      with:
+        snapshot: tools.snapshot
+        versionid: tools.versionid
+      inputParameters:
+      - name: snapshot
+        type: string
+        description: The snapshot identifier. When specified, the operation returns the snapshot of the blob.
+      - name: versionid
+        type: string
+        description: The version ID. When specified, the operation returns the specified version of the blob.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteblob
+      description: Azure Blob Storage Delete blob
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-azure-blob-storage.deleteblob
+      with:
+        snapshot: tools.snapshot
+      inputParameters:
+      - name: snapshot
+        type: string
+        description: The snapshot identifier. When specified, only the snapshot is deleted.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblobmetadata
+      description: Azure Blob Storage Get blob metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblobmetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobmetadata
+      description: Azure Blob Storage Set blob metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobmetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobhttpheaders
+      description: Azure Blob Storage Set blob HTTP headers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobhttpheaders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblobtags
+      description: Azure Blob Storage Get blob tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblobtags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobtags
+      description: Azure Blob Storage Set blob tags
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobtags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: leaseblob
+      description: Azure Blob Storage Lease blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.leaseblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: snapshotblob
+      description: Azure Blob Storage Snapshot blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.snapshotblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: copyblob
+      description: Azure Blob Storage Copy blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.copyblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: abortcopyblob
+      description: Azure Blob Storage Abort copy blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.abortcopyblob
+      with:
+        copyId: tools.copyId
+      inputParameters:
+      - name: copyId
+        type: string
+        description: The copy operation identifier returned by the Copy Blob response.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: undeleteblob
+      description: Azure Blob Storage Undelete blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.undeleteblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobtier
+      description: Azure Blob Storage Set blob tier
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobtier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setblobimmutabilitypolicy
+      description: Azure Blob Storage Set blob immutability policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setblobimmutabilitypolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteblobimmutabilitypolicy
+      description: Azure Blob Storage Delete blob immutability policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-azure-blob-storage.deleteblobimmutabilitypolicy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: setbloblegalhold
+      description: Azure Blob Storage Set blob legal hold
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.setbloblegalhold
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: putblock
+      description: Azure Blob Storage Put block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.putblock
+      with:
+        blockid: tools.blockid
+      inputParameters:
+      - name: blockid
+        type: string
+        description: A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same
+          length.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: putblocklist
+      description: Azure Blob Storage Put block list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.putblocklist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getblocklist
+      description: Azure Blob Storage Get block list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getblocklist
+      with:
+        blocklisttype: tools.blocklisttype
+      inputParameters:
+      - name: blocklisttype
+        type: string
+        description: Specifies which type of block list to retrieve.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: putblockfromurl
+      description: Azure Blob Storage Put block from URL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.putblockfromurl
+      with:
+        blockid: tools.blockid
+      inputParameters:
+      - name: blockid
+        type: string
+        description: A base64-encoded block ID that identifies the block.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: putpage
+      description: Azure Blob Storage Put page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.putpage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getpageranges
+      description: Azure Blob Storage Get page ranges
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getpageranges
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getpagerangesdiff
+      description: Azure Blob Storage Get page ranges diff
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.getpagerangesdiff
+      with:
+        prevsnapshot: tools.prevsnapshot
+      inputParameters:
+      - name: prevsnapshot
+        type: string
+        description: The snapshot identifier for the previous snapshot.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: incrementalcopyblob
+      description: Azure Blob Storage Incremental copy blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.incrementalcopyblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: appendblock
+      description: Azure Blob Storage Append block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.appendblock
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: appendblockfromurl
+      description: Azure Blob Storage Append block from URL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-azure-blob-storage.appendblockfromurl
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_AZURE_BLOB_STORAGE_TOKEN: MICROSOFT_AZURE_BLOB_STORAGE_TOKEN
