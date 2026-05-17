@@ -40,7 +40,7 @@ apis:
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
       - type: Reference
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
-      - type: Change Log
+      - type: ChangeLog
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
       - type: Quotas
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
@@ -63,7 +63,7 @@ apis:
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem
       - type: Authentication
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
-      - type: Getting Started
+      - type: GettingStarted
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
       - type: Pricing
         url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
@@ -91,19 +91,19 @@ apis:
 common:
   - type: Portal
     url: https://portal.azure.com/
-  - type: Status
+  - type: StatusPage
     url: https://status.azure.com/
   - type: Support
     url: https://azure.microsoft.com/en-us/support/options/
   - type: Blog
     url: https://azure.microsoft.com/en-us/blog/topics/storage/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://azure.microsoft.com/en-us/support/legal/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://privacy.microsoft.com/en-us/privacystatement
-  - type: Getting Started
+  - type: GettingStarted
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
-  - type: Change Log
+  - type: ChangeLog
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/previous-azure-storage-service-versions
   - type: Documentation
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/
@@ -113,15 +113,15 @@ common:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
   - type: Website
     url: https://azure.microsoft.com/en-us/products/storage/blobs/
-  - type: Sign Up
+  - type: SignUp
     url: https://azure.microsoft.com/en-us/free/
   - type: Console
     url: https://portal.azure.com/
   - type: SDKs
     url: https://learn.microsoft.com/en-us/azure/storage/common/storage-srp-overview
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/azure-blob-storage
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/Azure
   - type: Developer Tools
     url: https://azure.microsoft.com/en-us/products/storage/storage-explorer
