@@ -1,0 +1,213 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Blob Storage REST API — Block Blobs
+  description: 'Azure Blob Storage REST API — Block Blobs. 4 operations. Lead operation: Azure Blob Storage Put block. Self-contained
+    Naftiko capability covering one Azure Blob Storage business surface.'
+  tags:
+  - Azure Blob Storage
+  - Block Blobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AZURE_BLOB_STORAGE_API_KEY: AZURE_BLOB_STORAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-block-blobs
+    baseUri: https://{accountName}.blob.core.windows.net
+    description: Azure Blob Storage REST API — Block Blobs business capability. Self-contained, no shared references.
+    resources:
+    - name: container-blob}?comp=block
+      path: /{container}/{blob}?comp=block
+      operations:
+      - name: putblock
+        method: PUT
+        description: Azure Blob Storage Put block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: blockid
+          in: query
+          type: string
+          description: A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same
+            length.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: container-blob}?comp=block&fromURL
+      path: /{container}/{blob}?comp=block&fromURL
+      operations:
+      - name: putblockfromurl
+        method: PUT
+        description: Azure Blob Storage Put block from URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: blockid
+          in: query
+          type: string
+          description: A base64-encoded block ID that identifies the block.
+          required: true
+        - name: x-ms-copy-source
+          in: header
+          type: string
+          description: URL of the source data.
+          required: true
+    - name: container-blob}?comp=blocklist
+      path: /{container}/{blob}?comp=blocklist
+      operations:
+      - name: putblocklist
+        method: PUT
+        description: Azure Blob Storage Put block list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getblocklist
+        method: GET
+        description: Azure Blob Storage Get block list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: blocklisttype
+          in: query
+          type: string
+          description: Specifies which type of block list to retrieve.
+    authentication:
+      type: bearer
+      token: '{{env.AZURE_BLOB_STORAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-block-blobs-rest
+    port: 8080
+    description: REST adapter for Azure Blob Storage REST API — Block Blobs. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/{container}/blob-comp-block
+      name: container-blob-comp-block
+      description: REST surface for container-blob}?comp=block.
+      operations:
+      - method: PUT
+        name: putblock
+        description: Azure Blob Storage Put block
+        call: rest-block-blobs.putblock
+        with:
+          blockid: rest.blockid
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{container}/blob-comp-block-fromurl
+      name: container-blob-comp-block-fromurl
+      description: REST surface for container-blob}?comp=block&fromURL.
+      operations:
+      - method: PUT
+        name: putblockfromurl
+        description: Azure Blob Storage Put block from URL
+        call: rest-block-blobs.putblockfromurl
+        with:
+          blockid: rest.blockid
+          x-ms-copy-source: rest.x-ms-copy-source
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{container}/blob-comp-blocklist
+      name: container-blob-comp-blocklist
+      description: REST surface for container-blob}?comp=blocklist.
+      operations:
+      - method: PUT
+        name: putblocklist
+        description: Azure Blob Storage Put block list
+        call: rest-block-blobs.putblocklist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getblocklist
+        description: Azure Blob Storage Get block list
+        call: rest-block-blobs.getblocklist
+        with:
+          blocklisttype: rest.blocklisttype
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-block-blobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Blob Storage REST API — Block Blobs. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: azure-blob-storage-put-block
+      description: Azure Blob Storage Put block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-block-blobs.putblock
+      with:
+        blockid: tools.blockid
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-put-block-2
+      description: Azure Blob Storage Put block from URL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-block-blobs.putblockfromurl
+      with:
+        blockid: tools.blockid
+        x-ms-copy-source: tools.x-ms-copy-source
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-put-block-3
+      description: Azure Blob Storage Put block list
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-block-blobs.putblocklist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-block
+      description: Azure Blob Storage Get block list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-block-blobs.getblocklist
+      with:
+        blocklisttype: tools.blocklisttype
+      outputParameters:
+      - type: object
+        mapping: $.

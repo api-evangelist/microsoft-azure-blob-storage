@@ -1,0 +1,443 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Blob Storage REST API — Containers
+  description: 'Azure Blob Storage REST API — Containers. 10 operations. Lead operation: Azure Blob Storage Create container.
+    Self-contained Naftiko capability covering one Azure Blob Storage business surface.'
+  tags:
+  - Azure Blob Storage
+  - Containers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AZURE_BLOB_STORAGE_API_KEY: AZURE_BLOB_STORAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-containers
+    baseUri: https://{accountName}.blob.core.windows.net
+    description: Azure Blob Storage REST API — Containers business capability. Self-contained, no shared references.
+    resources:
+    - name: container
+      path: /{container}
+      operations:
+      - name: createcontainer
+        method: PUT
+        description: Azure Blob Storage Create container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+        - name: x-ms-blob-public-access
+          in: header
+          type: string
+          description: Specifies whether data in the container may be accessed publicly and the level of access.
+        - name: x-ms-default-encryption-scope
+          in: header
+          type: string
+          description: The default encryption scope for the container.
+      - name: getcontainerproperties
+        method: GET
+        description: Azure Blob Storage Get container properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+      - name: deletecontainer
+        method: DELETE
+        description: Azure Blob Storage Delete container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: restype
+          in: query
+          type: string
+          required: true
+    - name: container}?restype=container&comp=acl
+      path: /{container}?restype=container&comp=acl
+      operations:
+      - name: getcontaineracl
+        method: GET
+        description: Azure Blob Storage Get container ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setcontaineracl
+        method: PUT
+        description: Azure Blob Storage Set container ACL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container}?restype=container&comp=lease
+      path: /{container}?restype=container&comp=lease
+      operations:
+      - name: leasecontainer
+        method: PUT
+        description: Azure Blob Storage Lease container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-ms-lease-action
+          in: header
+          type: string
+          description: The lease action to perform.
+          required: true
+        - name: x-ms-lease-duration
+          in: header
+          type: integer
+          description: Duration of the lease in seconds. Set to -1 for an infinite lease, or between 15 and 60 seconds for
+            a fixed-duration lease.
+        - name: x-ms-proposed-lease-id
+          in: header
+          type: string
+          description: Proposed lease ID in GUID format.
+    - name: container}?restype=container&comp=list
+      path: /{container}?restype=container&comp=list
+      operations:
+      - name: listblobs
+        method: GET
+        description: Azure Blob Storage List blobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: prefix
+          in: query
+          type: string
+          description: Filters results to return only blobs whose names begin with the specified prefix.
+        - name: delimiter
+          in: query
+          type: string
+          description: Delimiter character used to traverse a virtual hierarchy of blobs as though it were a file system.
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for pagination.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of blobs to return.
+        - name: include
+          in: query
+          type: string
+          description: Specifies additional datasets to include such as snapshots, metadata, uncommitted blobs, copy, deleted,
+            tags, versions, deletedwithversions, immutabilitypolicy,
+    - name: container}?restype=container&comp=metadata
+      path: /{container}?restype=container&comp=metadata
+      operations:
+      - name: getcontainermetadata
+        method: GET
+        description: Azure Blob Storage Get container metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setcontainermetadata
+        method: PUT
+        description: Azure Blob Storage Set container metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: container}?restype=container&comp=undelete
+      path: /{container}?restype=container&comp=undelete
+      operations:
+      - name: restorecontainer
+        method: PUT
+        description: Azure Blob Storage Restore container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: x-ms-deleted-container-name
+          in: header
+          type: string
+          description: The name of the deleted container to restore.
+          required: true
+        - name: x-ms-deleted-container-version
+          in: header
+          type: string
+          description: The version of the deleted container to restore.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.AZURE_BLOB_STORAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-containers-rest
+    port: 8080
+    description: REST adapter for Azure Blob Storage REST API — Containers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/{container}
+      name: container
+      description: REST surface for container.
+      operations:
+      - method: PUT
+        name: createcontainer
+        description: Azure Blob Storage Create container
+        call: rest-containers.createcontainer
+        with:
+          restype: rest.restype
+          x-ms-blob-public-access: rest.x-ms-blob-public-access
+          x-ms-default-encryption-scope: rest.x-ms-default-encryption-scope
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getcontainerproperties
+        description: Azure Blob Storage Get container properties
+        call: rest-containers.getcontainerproperties
+        with:
+          restype: rest.restype
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecontainer
+        description: Azure Blob Storage Delete container
+        call: rest-containers.deletecontainer
+        with:
+          restype: rest.restype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/container-restype-container-comp-acl
+      name: container-restype-container-comp-acl
+      description: REST surface for container}?restype=container&comp=acl.
+      operations:
+      - method: GET
+        name: getcontaineracl
+        description: Azure Blob Storage Get container ACL
+        call: rest-containers.getcontaineracl
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setcontaineracl
+        description: Azure Blob Storage Set container ACL
+        call: rest-containers.setcontaineracl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/container-restype-container-comp-lease
+      name: container-restype-container-comp-lease
+      description: REST surface for container}?restype=container&comp=lease.
+      operations:
+      - method: PUT
+        name: leasecontainer
+        description: Azure Blob Storage Lease container
+        call: rest-containers.leasecontainer
+        with:
+          x-ms-lease-action: rest.x-ms-lease-action
+          x-ms-lease-duration: rest.x-ms-lease-duration
+          x-ms-proposed-lease-id: rest.x-ms-proposed-lease-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/container-restype-container-comp-list
+      name: container-restype-container-comp-list
+      description: REST surface for container}?restype=container&comp=list.
+      operations:
+      - method: GET
+        name: listblobs
+        description: Azure Blob Storage List blobs
+        call: rest-containers.listblobs
+        with:
+          prefix: rest.prefix
+          delimiter: rest.delimiter
+          marker: rest.marker
+          maxresults: rest.maxresults
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/container-restype-container-comp-metadata
+      name: container-restype-container-comp-metadata
+      description: REST surface for container}?restype=container&comp=metadata.
+      operations:
+      - method: GET
+        name: getcontainermetadata
+        description: Azure Blob Storage Get container metadata
+        call: rest-containers.getcontainermetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setcontainermetadata
+        description: Azure Blob Storage Set container metadata
+        call: rest-containers.setcontainermetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/container-restype-container-comp-undelete
+      name: container-restype-container-comp-undelete
+      description: REST surface for container}?restype=container&comp=undelete.
+      operations:
+      - method: PUT
+        name: restorecontainer
+        description: Azure Blob Storage Restore container
+        call: rest-containers.restorecontainer
+        with:
+          x-ms-deleted-container-name: rest.x-ms-deleted-container-name
+          x-ms-deleted-container-version: rest.x-ms-deleted-container-version
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-containers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Blob Storage REST API — Containers. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: azure-blob-storage-create-container
+      description: Azure Blob Storage Create container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-containers.createcontainer
+      with:
+        restype: tools.restype
+        x-ms-blob-public-access: tools.x-ms-blob-public-access
+        x-ms-default-encryption-scope: tools.x-ms-default-encryption-scope
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-container
+      description: Azure Blob Storage Get container properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-containers.getcontainerproperties
+      with:
+        restype: tools.restype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-delete-container
+      description: Azure Blob Storage Delete container
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-containers.deletecontainer
+      with:
+        restype: tools.restype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-container-2
+      description: Azure Blob Storage Get container ACL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-containers.getcontaineracl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-set-container
+      description: Azure Blob Storage Set container ACL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-containers.setcontaineracl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-lease-container
+      description: Azure Blob Storage Lease container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-containers.leasecontainer
+      with:
+        x-ms-lease-action: tools.x-ms-lease-action
+        x-ms-lease-duration: tools.x-ms-lease-duration
+        x-ms-proposed-lease-id: tools.x-ms-proposed-lease-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-list-blobs
+      description: Azure Blob Storage List blobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-containers.listblobs
+      with:
+        prefix: tools.prefix
+        delimiter: tools.delimiter
+        marker: tools.marker
+        maxresults: tools.maxresults
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-container-3
+      description: Azure Blob Storage Get container metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-containers.getcontainermetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-set-container-2
+      description: Azure Blob Storage Set container metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-containers.setcontainermetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-restore-container
+      description: Azure Blob Storage Restore container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-containers.restorecontainer
+      with:
+        x-ms-deleted-container-name: tools.x-ms-deleted-container-name
+        x-ms-deleted-container-version: tools.x-ms-deleted-container-version
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,341 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Azure Blob Storage REST API
+  description: 'Azure Blob Storage REST API. 7 operations. Lead operation: Azure Blob Storage List containers. Self-contained
+    Naftiko capability covering one Azure Blob Storage business surface.'
+  tags:
+  - Azure Blob Storage
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AZURE_BLOB_STORAGE_API_KEY: AZURE_BLOB_STORAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-general
+    baseUri: https://{accountName}.blob.core.windows.net
+    description: Azure Blob Storage REST API business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: listcontainers
+        method: GET
+        description: Azure Blob Storage List containers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: comp
+          in: query
+          type: string
+          required: true
+        - name: prefix
+          in: query
+          type: string
+          description: Filters results to return only containers whose names begin with the specified prefix.
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for retrieving the next page of results. Returned in the NextMarker element of a
+            previous response.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of containers to return in a single response. Defaults to 5000 if not specified.
+        - name: include
+          in: query
+          type: string
+          description: Specifies additional datasets to include in the response such as metadata, deleted containers, or system
+            containers.
+    - name: ?comp=blobs
+      path: /?comp=blobs
+      operations:
+      - name: findblobsbytags
+        method: GET
+        description: Azure Blob Storage Find blobs by tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: where
+          in: query
+          type: string
+          description: SQL-like filter expression for blob index tags, for example "tagkey"='tagvalue'.
+          required: true
+        - name: marker
+          in: query
+          type: string
+          description: Continuation token for pagination.
+        - name: maxresults
+          in: query
+          type: integer
+          description: Maximum number of blobs to return.
+    - name: ?restype=service&comp=batch
+      path: /?restype=service&comp=batch
+      operations:
+      - name: submitblobbatch
+        method: POST
+        description: Azure Blob Storage Submit blob batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?restype=service&comp=properties
+      path: /?restype=service&comp=properties
+      operations:
+      - name: getblobserviceproperties
+        method: GET
+        description: Azure Blob Storage Get Blob service properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setblobserviceproperties
+        method: PUT
+        description: Azure Blob Storage Set Blob service properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ?restype=service&comp=stats
+      path: /?restype=service&comp=stats
+      operations:
+      - name: getblobservicestats
+        method: GET
+        description: Azure Blob Storage Get Blob service stats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ?restype=service&comp=userdelegationkey
+      path: /?restype=service&comp=userdelegationkey
+      operations:
+      - name: getuserdelegationkey
+        method: POST
+        description: Azure Blob Storage Get user delegation key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.AZURE_BLOB_STORAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-general-rest
+    port: 8080
+    description: REST adapter for Azure Blob Storage REST API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: listcontainers
+        description: Azure Blob Storage List containers
+        call: rest-general.listcontainers
+        with:
+          comp: rest.comp
+          prefix: rest.prefix
+          marker: rest.marker
+          maxresults: rest.maxresults
+          include: rest.include
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comp-blobs
+      name: comp-blobs
+      description: REST surface for ?comp=blobs.
+      operations:
+      - method: GET
+        name: findblobsbytags
+        description: Azure Blob Storage Find blobs by tags
+        call: rest-general.findblobsbytags
+        with:
+          where: rest.where
+          marker: rest.marker
+          maxresults: rest.maxresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restype-service-comp-batch
+      name: restype-service-comp-batch
+      description: REST surface for ?restype=service&comp=batch.
+      operations:
+      - method: POST
+        name: submitblobbatch
+        description: Azure Blob Storage Submit blob batch
+        call: rest-general.submitblobbatch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restype-service-comp-properties
+      name: restype-service-comp-properties
+      description: REST surface for ?restype=service&comp=properties.
+      operations:
+      - method: GET
+        name: getblobserviceproperties
+        description: Azure Blob Storage Get Blob service properties
+        call: rest-general.getblobserviceproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setblobserviceproperties
+        description: Azure Blob Storage Set Blob service properties
+        call: rest-general.setblobserviceproperties
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restype-service-comp-stats
+      name: restype-service-comp-stats
+      description: REST surface for ?restype=service&comp=stats.
+      operations:
+      - method: GET
+        name: getblobservicestats
+        description: Azure Blob Storage Get Blob service stats
+        call: rest-general.getblobservicestats
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restype-service-comp-userdelegationkey
+      name: restype-service-comp-userdelegationkey
+      description: REST surface for ?restype=service&comp=userdelegationkey.
+      operations:
+      - method: POST
+        name: getuserdelegationkey
+        description: Azure Blob Storage Get user delegation key
+        call: rest-general.getuserdelegationkey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Azure Blob Storage REST API. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: azure-blob-storage-list-containers
+      description: Azure Blob Storage List containers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-general.listcontainers
+      with:
+        comp: tools.comp
+        prefix: tools.prefix
+        marker: tools.marker
+        maxresults: tools.maxresults
+        include: tools.include
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-find-blobs
+      description: Azure Blob Storage Find blobs by tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-general.findblobsbytags
+      with:
+        where: tools.where
+        marker: tools.marker
+        maxresults: tools.maxresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-submit-blob
+      description: Azure Blob Storage Submit blob batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-general.submitblobbatch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-blob
+      description: Azure Blob Storage Get Blob service properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-general.getblobserviceproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-set-blob
+      description: Azure Blob Storage Set Blob service properties
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-general.setblobserviceproperties
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-blob-2
+      description: Azure Blob Storage Get Blob service stats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-general.getblobservicestats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: azure-blob-storage-get-user
+      description: Azure Blob Storage Get user delegation key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: rest-general.getuserdelegationkey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
