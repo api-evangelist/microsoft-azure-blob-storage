@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Container",
+  "title": "Container",
+  "type": "object",
+  "description": "A blob container in Azure Storage.",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The container name"
+    },
+    "Properties": {
+      "type": "object",
+      "description": "System properties of the container",
+      "properties": {
+        "Last-Modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "Etag": {
+          "type": "string",
+          "description": "The ETag value for conditional operations"
+        },
+        "LeaseStatus": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ],
+          "description": "The lease status of the container"
+        },
+        "LeaseState": {
+          "type": "string",
+          "enum": [
+            "available",
+            "leased",
+            "expired",
+            "breaking",
+            "broken"
+          ],
+          "description": "The lease state of the container"
+        },
+        "LeaseDuration": {
+          "type": "string",
+          "enum": [
+            "infinite",
+            "fixed"
+          ],
+          "description": "The duration type of the lease"
+        },
+        "PublicAccess": {
+          "type": "string",
+          "enum": [
+            "container",
+            "blob"
+          ],
+          "description": "The public access level"
+        },
+        "HasImmutabilityPolicy": {
+          "type": "boolean",
+          "description": "Whether an immutability policy exists on the container"
+        },
+        "HasLegalHold": {
+          "type": "boolean",
+          "description": "Whether a legal hold is in effect"
+        },
+        "DefaultEncryptionScope": {
+          "type": "string",
+          "description": "The default encryption scope for the container"
+        },
+        "DenyEncryptionScopeOverride": {
+          "type": "boolean",
+          "description": "Whether blob-level encryption scope override is denied"
+        },
+        "ImmutableStorageWithVersioningEnabled": {
+          "type": "boolean",
+          "description": "Whether version-level immutability is enabled"
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "User-defined key-value metadata pairs",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

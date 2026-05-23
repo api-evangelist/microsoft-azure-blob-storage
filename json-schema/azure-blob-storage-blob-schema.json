@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Blob",
+  "title": "Blob",
+  "type": "object",
+  "description": "A blob in Azure Storage.",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The blob name"
+    },
+    "Properties": {
+      "type": "object",
+      "description": "System properties of the blob",
+      "properties": {
+        "Last-Modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        },
+        "Etag": {
+          "type": "string",
+          "description": "The ETag value for conditional operations"
+        },
+        "Content-Length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the blob in bytes"
+        },
+        "Content-Type": {
+          "type": "string",
+          "description": "The MIME content type of the blob"
+        },
+        "Content-Encoding": {
+          "type": "string",
+          "description": "The content encoding of the blob"
+        },
+        "Content-Language": {
+          "type": "string",
+          "description": "The content language of the blob"
+        },
+        "Content-MD5": {
+          "type": "string",
+          "description": "The MD5 hash of the blob content"
+        },
+        "Cache-Control": {
+          "type": "string",
+          "description": "The cache control directive"
+        },
+        "BlobType": {
+          "type": "string",
+          "enum": [
+            "BlockBlob",
+            "PageBlob",
+            "AppendBlob"
+          ],
+          "description": "The type of blob"
+        },
+        "LeaseStatus": {
+          "type": "string",
+          "enum": [
+            "locked",
+            "unlocked"
+          ],
+          "description": "The lease status of the blob"
+        },
+        "LeaseState": {
+          "type": "string",
+          "enum": [
+            "available",
+            "leased",
+            "expired",
+            "breaking",
+            "broken"
+          ],
+          "description": "The lease state of the blob"
+        },
+        "AccessTier": {
+          "type": "string",
+          "enum": [
+            "Hot",
+            "Cool",
+            "Cold",
+            "Archive"
+          ],
+          "description": "The access tier of the blob"
+        },
+        "AccessTierInferred": {
+          "type": "boolean",
+          "description": "Whether the access tier was inferred from the account default"
+        },
+        "ArchiveStatus": {
+          "type": "string",
+          "enum": [
+            "rehydrate-pending-to-hot",
+            "rehydrate-pending-to-cool",
+            "rehydrate-pending-to-cold"
+          ],
+          "description": "Rehydration status when moving from Archive tier"
+        },
+        "ServerEncrypted": {
+          "type": "boolean",
+          "description": "Whether the blob data is encrypted at rest"
+        },
+        "CreationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the blob was created"
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "User-defined key-value metadata pairs",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "User-defined blob index tags",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

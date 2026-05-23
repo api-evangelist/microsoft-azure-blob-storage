@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CorsRule",
+  "title": "CorsRule",
+  "type": "object",
+  "description": "A CORS rule for the Blob service.",
+  "properties": {
+    "AllowedOrigins": {
+      "type": "string",
+      "description": "Comma-separated list of allowed origin domains, or * for all"
+    },
+    "AllowedMethods": {
+      "type": "string",
+      "description": "Comma-separated list of allowed HTTP methods (GET, PUT, etc.)"
+    },
+    "AllowedHeaders": {
+      "type": "string",
+      "description": "Comma-separated list of allowed request headers"
+    },
+    "ExposedHeaders": {
+      "type": "string",
+      "description": "Comma-separated list of response headers exposed to the client"
+    },
+    "MaxAgeInSeconds": {
+      "type": "integer",
+      "description": "Maximum number of seconds the browser should cache the preflight response"
+    }
+  }
+}

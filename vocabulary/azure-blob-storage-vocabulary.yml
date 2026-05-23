@@ -1,0 +1,15 @@
+name: Azure Blob Storage Domain Vocabulary
+provider: Azure Blob Storage
+providerId: azure-blob-storage
+description: Tag-derived vocabulary for the Azure Blob Storage API surface; sourced from openapi/ tags.
+terms:
+- term: Append Blobs
+  description: Operations specific to append blobs including append block
+- term: Blobs
+  description: Operations on blobs including get, put, delete, and metadata
+- term: Block Blobs
+  description: Operations specific to block blobs including put block and put block list
+- term: Containers
+  description: Operations on blob containers
+- term: Page Blobs
+  description: Operations specific to page blobs including put page and get page ranges

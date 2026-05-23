@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ContainerList",
+  "title": "ContainerList",
+  "type": "object",
+  "description": "The list of containers returned by the List Containers operation.",
+  "properties": {
+    "ServiceEndpoint": {
+      "type": "string",
+      "description": "The service endpoint URL"
+    },
+    "MaxResults": {
+      "type": "integer",
+      "description": "Maximum number of results requested"
+    },
+    "Prefix": {
+      "type": "string",
+      "description": "The prefix filter applied"
+    },
+    "Containers": {
+      "type": "array",
+      "description": "The list of containers",
+      "items": {
+        "$ref": "#/components/schemas/Container"
+      }
+    },
+    "NextMarker": {
+      "type": "string",
+      "description": "Continuation token for the next page of results"
+    }
+  }
+}

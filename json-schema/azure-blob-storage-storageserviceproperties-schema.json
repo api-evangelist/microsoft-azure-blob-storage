@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StorageServiceProperties",
+  "title": "StorageServiceProperties",
+  "type": "object",
+  "description": "Properties of the Blob service.",
+  "properties": {
+    "Logging": {
+      "type": "object",
+      "description": "Azure Analytics logging settings",
+      "properties": {
+        "Version": {
+          "type": "string",
+          "description": "The version of analytics logging"
+        },
+        "Read": {
+          "type": "boolean",
+          "description": "Whether read requests are logged"
+        },
+        "Write": {
+          "type": "boolean",
+          "description": "Whether write requests are logged"
+        },
+        "Delete": {
+          "type": "boolean",
+          "description": "Whether delete requests are logged"
+        },
+        "RetentionPolicy": {
+          "$ref": "#/components/schemas/RetentionPolicy"
+        }
+      }
+    },
+    "HourMetrics": {
+      "$ref": "#/components/schemas/Metrics"
+    },
+    "MinuteMetrics": {
+      "$ref": "#/components/schemas/Metrics"
+    },
+    "Cors": {
+      "type": "array",
+      "description": "CORS rules for the Blob service",
+      "items": {
+        "$ref": "#/components/schemas/CorsRule"
+      }
+    },
+    "DefaultServiceVersion": {
+      "type": "string",
+      "description": "The default REST API version for requests without a version"
+    },
+    "DeleteRetentionPolicy": {
+      "$ref": "#/components/schemas/RetentionPolicy"
+    },
+    "StaticWebsite": {
+      "type": "object",
+      "description": "Static website configuration",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "description": "Whether static website hosting is enabled"
+        },
+        "IndexDocument": {
+          "type": "string",
+          "description": "The default index document path"
+        },
+        "ErrorDocument404Path": {
+          "type": "string",
+          "description": "The path to the 404 error document"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "provider": "Azure Blob Storage",
+  "providerId": "azure-blob-storage",
+  "kind": "json-structure",
+  "description": "Structural overview of the Azure Blob Storage API surface; extracted from openapi/.",
+  "schemaCount": 8,
+  "operationCount": 44,
+  "schemas": [
+    {
+      "name": "ContainerList",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Container",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "BlobList",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "Blob",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "StorageServiceProperties",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Metrics",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RetentionPolicy",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CorsRule",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/",
+      "operationId": "listContainers",
+      "summary": "Azure Blob Storage List containers",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/?restype=service&comp=properties",
+      "operationId": "getBlobServiceProperties",
+      "summary": "Azure Blob Storage Get Blob service properties",
+      "tags": []
+    },
+    {
+      "method": "PUT",
+      "path": "/?restype=service&comp=properties",
+      "operationId": "setBlobServiceProperties",
+      "summary": "Azure Blob Storage Set Blob service properties",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/?restype=service&comp=stats",
+      "operationId": "getBlobServiceStats",
+      "summary": "Azure Blob Storage Get Blob service stats",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/?restype=service&comp=userdelegationkey",
+      "operationId": "getUserDelegationKey",
+      "summary": "Azure Blob Storage Get user delegation key",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/?restype=service&comp=batch",
+      "operationId": "submitBlobBatch",
+      "summary": "Azure Blob Storage Submit blob batch",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/?comp=blobs",
+      "operationId": "findBlobsByTags",
+      "summary": "Azure Blob Storage Find blobs by tags",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/{container}",
+      "operationId": "getContainerProperties",
+      "summary": "Azure Blob Storage Get container properties",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}",
+      "operationId": "createContainer",
+      "summary": "Azure Blob Storage Create container",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/{container}",
+      "operationId": "deleteContainer",
+      "summary": "Azure Blob Storage Delete container",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}?restype=container&comp=list",
+      "operationId": "listBlobs",
+      "summary": "Azure Blob Storage List blobs",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}?restype=container&comp=metadata",
+      "operationId": "getContainerMetadata",
+      "summary": "Azure Blob Storage Get container metadata",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}?restype=container&comp=metadata",
+      "operationId": "setContainerMetadata",
+      "summary": "Azure Blob Storage Set container metadata",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}?restype=container&comp=acl",
+      "operationId": "getContainerACL",
+      "summary": "Azure Blob Storage Get container ACL",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}?restype=container&comp=acl",
+      "operationId": "setContainerACL",
+      "summary": "Azure Blob Storage Set container ACL",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}?restype=container&comp=lease",
+      "operationId": "leaseContainer",
+      "summary": "Azure Blob Storage Lease container",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}?restype=container&comp=undelete",
+      "operationId": "restoreContainer",
+      "summary": "Azure Blob Storage Restore container",
+      "tags": [
+        "Containers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}",
+      "operationId": "getBlob",
+      "summary": "Azure Blob Storage Get blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}",
+      "operationId": "putBlob",
+      "summary": "Azure Blob Storage Put blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/{container}/{blob}",
+      "operationId": "deleteBlob",
+      "summary": "Azure Blob Storage Delete blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}?comp=metadata",
+      "operationId": "getBlobMetadata",
+      "summary": "Azure Blob Storage Get blob metadata",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=metadata",
+      "operationId": "setBlobMetadata",
+      "summary": "Azure Blob Storage Set blob metadata",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=properties",
+      "operationId": "setBlobHTTPHeaders",
+      "summary": "Azure Blob Storage Set blob HTTP headers",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}?comp=tags",
+      "operationId": "getBlobTags",
+      "summary": "Azure Blob Storage Get blob tags",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=tags",
+      "operationId": "setBlobTags",
+      "summary": "Azure Blob Storage Set blob tags",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=lease",
+      "operationId": "leaseBlob",
+      "summary": "Azure Blob Storage Lease blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=snapshot",
+      "operationId": "snapshotBlob",
+      "summary": "Azure Blob Storage Snapshot blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=copy",
+      "operationId": "copyBlob",
+      "summary": "Azure Blob Storage Copy blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=copy&copyid={copyId}",
+      "operationId": "abortCopyBlob",
+      "summary": "Azure Blob Storage Abort copy blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=undelete",
+      "operationId": "undeleteBlob",
+      "summary": "Azure Blob Storage Undelete blob",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=tier",
+      "operationId": "setBlobTier",
+      "summary": "Azure Blob Storage Set blob tier",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=immutabilityPolicies",
+      "operationId": "setBlobImmutabilityPolicy",
+      "summary": "Azure Blob Storage Set blob immutability policy",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/{container}/{blob}?comp=immutabilityPolicies",
+      "operationId": "deleteBlobImmutabilityPolicy",
+      "summary": "Azure Blob Storage Delete blob immutability policy",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=legalhold",
+      "operationId": "setBlobLegalHold",
+      "summary": "Azure Blob Storage Set blob legal hold",
+      "tags": [
+        "Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=block",
+      "operationId": "putBlock",
+      "summary": "Azure Blob Storage Put block",
+      "tags": [
+        "Block Blobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}?comp=blocklist",
+      "operationId": "getBlockList",
+      "summary": "Azure Blob Storage Get block list",
+      "tags": [
+        "Block Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=blocklist",
+      "operationId": "putBlockList",
+      "summary": "Azure Blob Storage Put block list",
+      "tags": [
+        "Block Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=block&fromURL",
+      "operationId": "putBlockFromURL",
+      "summary": "Azure Blob Storage Put block from URL",
+      "tags": [
+        "Block Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=page",
+      "operationId": "putPage",
+      "summary": "Azure Blob Storage Put page",
+      "tags": [
+        "Page Blobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}?comp=pagelist",
+      "operationId": "getPageRanges",
+      "summary": "Azure Blob Storage Get page ranges",
+      "tags": [
+        "Page Blobs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{container}/{blob}?comp=pagelist&diff",
+      "operationId": "getPageRangesDiff",
+      "summary": "Azure Blob Storage Get page ranges diff",
+      "tags": [
+        "Page Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=incrementalcopy",
+      "operationId": "incrementalCopyBlob",
+      "summary": "Azure Blob Storage Incremental copy blob",
+      "tags": [
+        "Page Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=appendblock",
+      "operationId": "appendBlock",
+      "summary": "Azure Blob Storage Append block",
+      "tags": [
+        "Append Blobs"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/{container}/{blob}?comp=appendblock&fromURL",
+      "operationId": "appendBlockFromURL",
+      "summary": "Azure Blob Storage Append block from URL",
+      "tags": [
+        "Append Blobs"
+      ]
+    }
+  ]
+}
