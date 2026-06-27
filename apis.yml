@@ -37,7 +37,7 @@ apis:
         url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
       - type: SDKs
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
-      - type: Quickstart
+      - type: GettingStarted
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
       - type: Tutorials
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
@@ -47,7 +47,7 @@ apis:
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
       - type: ChangeLog
         url: https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
-      - type: Quotas
+      - type: RateLimits
         url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
       - type: GitHubRepository
         url: https://github.com/Azure/azure-rest-api-specs
@@ -121,11 +121,11 @@ common:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/
   - type: Authentication
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
-  - type: Quotas
+  - type: RateLimits
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
   - type: Website
     url: https://azure.microsoft.com/en-us/products/storage/blobs/
-  - type: SignUp
+  - type: Signup
     url: https://azure.microsoft.com/en-us/free/
   - type: Console
     url: https://portal.azure.com/
