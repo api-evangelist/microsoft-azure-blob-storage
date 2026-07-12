@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/azure-blob-storage-rest-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: sharedKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Azure Storage shared key authorization using the storage account access key.
+  sources:
+  - openapi/azure-blob-storage-rest-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+  sources:
+  - openapi/azure-blob-storage-rest-openapi.yml
+- name: sharedAccessSignature
+  type: apiKey
+  in: query
+  parameter: sig
+  description: Shared access signature (SAS) token granting delegated access to blob resources.
+  sources:
+  - openapi/azure-blob-storage-rest-openapi.yml
