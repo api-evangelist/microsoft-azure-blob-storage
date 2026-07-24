@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST Append Blobs API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://{accountName}.blob.core.windows.net
+  description: Azure Blob Storage endpoint
+  variables:
+    accountName:
+      description: The name of the Azure Storage account
+      default: mystorageaccount
+security:
+- sharedKey: []
+- bearerAuth: []
+- sharedAccessSignature: []
+tags:
+- name: Append Blobs
+  description: Operations specific to append blobs including append block
+paths:
+  /{container}/{blob}?comp=appendblock:
+    put:
+      operationId: appendBlock
+      summary: Azure Blob Storage Append block
+      description: Commits a new block of data to the end of an existing append blob. Each block can be up to 4 MiB in size. An append blob can contain up to 50,000 blocks.
+      tags:
+      - Append Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Block appended successfully
+  /{container}/{blob}?comp=appendblock&fromURL:
+    put:
+      operationId: appendBlockFromURL
+      summary: Azure Blob Storage Append block from URL
+      description: Commits a new block of data to the end of an append blob where the contents are read from a source URL.
+      tags:
+      - Append Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: x-ms-copy-source
+        in: header
+        required: true
+        description: URL of the source data to append.
+        schema:
+          type: string
+          format: uri
+      responses:
+        '201':
+          description: Block appended from URL
+components:
+  parameters:
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
+    BlobName:
+      name: blob
+      in: path
+      required: true
+      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
+      schema:
+        type: string
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Azure Storage shared key authorization using the storage account access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: Shared access signature (SAS) token granting delegated access to blob resources.
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api

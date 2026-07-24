@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST Append Blobs Block Blobs API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://{accountName}.blob.core.windows.net
+  description: Azure Blob Storage endpoint
+  variables:
+    accountName:
+      description: The name of the Azure Storage account
+      default: mystorageaccount
+security:
+- sharedKey: []
+- bearerAuth: []
+- sharedAccessSignature: []
+tags:
+- name: Block Blobs
+  description: Operations specific to block blobs including put block and put block list
+paths:
+  /{container}/{blob}?comp=block:
+    put:
+      operationId: putBlock
+      summary: Azure Blob Storage Put block
+      description: Uploads a block to be committed as part of a block blob. Each block can be up to 4000 MiB in size. The block is identified by a base64-encoded block ID. Blocks must be committed using Put Block List to form the final blob.
+      tags:
+      - Block Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: blockid
+        in: query
+        required: true
+        description: A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same length.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Block uploaded successfully
+  /{container}/{blob}?comp=blocklist:
+    put:
+      operationId: putBlockList
+      summary: Azure Blob Storage Put block list
+      description: Commits a blob by specifying the set of block IDs that comprise the block blob. Blocks can be from the latest uncommitted block list, the committed block list, or both.
+      tags:
+      - Block Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                Latest:
+                  type: array
+                  description: Block IDs from the latest uncommitted blocks
+                  items:
+                    type: string
+                Committed:
+                  type: array
+                  description: Block IDs from the committed block list
+                  items:
+                    type: string
+                Uncommitted:
+                  type: array
+                  description: Block IDs from the uncommitted block list
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Block list committed and blob created
+    get:
+      operationId: getBlockList
+      summary: Azure Blob Storage Get block list
+      description: Retrieves the list of blocks that have been uploaded as part of a block blob. Returns committed, uncommitted, or all blocks.
+      tags:
+      - Block Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: blocklisttype
+        in: query
+        description: Specifies which type of block list to retrieve.
+        schema:
+          type: string
+          enum:
+          - committed
+          - uncommitted
+          - all
+      responses:
+        '200':
+          description: Block list returned
+  /{container}/{blob}?comp=block&fromURL:
+    put:
+      operationId: putBlockFromURL
+      summary: Azure Blob Storage Put block from URL
+      description: Creates a new block to be committed as part of a block blob where the contents are read from a URL. This avoids the need to upload the content through the client.
+      tags:
+      - Block Blobs
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/BlobName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: blockid
+        in: query
+        required: true
+        description: A base64-encoded block ID that identifies the block.
+        schema:
+          type: string
+      - name: x-ms-copy-source
+        in: header
+        required: true
+        description: URL of the source data.
+        schema:
+          type: string
+          format: uri
+      responses:
+        '201':
+          description: Block created from URL
+components:
+  parameters:
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
+    BlobName:
+      name: blob
+      in: path
+      required: true
+      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
+      schema:
+        type: string
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Azure Storage shared key authorization using the storage account access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: Shared access signature (SAS) token granting delegated access to blob resources.
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api

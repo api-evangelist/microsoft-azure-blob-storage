@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST Append Blobs ?restype=service&comp=properties API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://{accountName}.blob.core.windows.net
+  description: Azure Blob Storage endpoint
+  variables:
+    accountName:
+      description: The name of the Azure Storage account
+      default: mystorageaccount
+security:
+- sharedKey: []
+- bearerAuth: []
+- sharedAccessSignature: []
+tags:
+- name: ?restype=service&comp=properties
+paths:
+  /?restype=service&comp=properties:
+    get:
+      operationId: getBlobServiceProperties
+      summary: Azure Blob Storage Get Blob service properties
+      description: Retrieves the properties of the Blob service, including logging, metrics, CORS rules, the default service version, and soft delete settings.
+      tags:
+      - ?restype=service&comp=properties
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Blob service properties returned successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StorageServiceProperties'
+    put:
+      operationId: setBlobServiceProperties
+      summary: Azure Blob Storage Set Blob service properties
+      description: Sets the properties of the Blob service, including logging, metrics, CORS rules, the default service version, and soft delete settings.
+      tags:
+      - ?restype=service&comp=properties
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/StorageServiceProperties'
+      responses:
+        '202':
+          description: Properties accepted and being applied
+components:
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+  schemas:
+    Metrics:
+      type: object
+      description: Azure Analytics metrics settings.
+      properties:
+        Version:
+          type: string
+          description: The version of metrics
+        Enabled:
+          type: boolean
+          description: Whether metrics are enabled
+        IncludeAPIs:
+          type: boolean
+          description: Whether to include API-level metrics
+        RetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+    RetentionPolicy:
+      type: object
+      description: The retention policy configuration.
+      properties:
+        Enabled:
+          type: boolean
+          description: Whether the retention policy is enabled
+        Days:
+          type: integer
+          minimum: 1
+          maximum: 365
+          description: Number of days data is retained
+    CorsRule:
+      type: object
+      description: A CORS rule for the Blob service.
+      properties:
+        AllowedOrigins:
+          type: string
+          description: Comma-separated list of allowed origin domains, or * for all
+        AllowedMethods:
+          type: string
+          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
+        AllowedHeaders:
+          type: string
+          description: Comma-separated list of allowed request headers
+        ExposedHeaders:
+          type: string
+          description: Comma-separated list of response headers exposed to the client
+        MaxAgeInSeconds:
+          type: integer
+          description: Maximum number of seconds the browser should cache the preflight response
+    StorageServiceProperties:
+      type: object
+      description: Properties of the Blob service.
+      properties:
+        Logging:
+          type: object
+          description: Azure Analytics logging settings
+          properties:
+            Version:
+              type: string
+              description: The version of analytics logging
+            Read:
+              type: boolean
+              description: Whether read requests are logged
+            Write:
+              type: boolean
+              description: Whether write requests are logged
+            Delete:
+              type: boolean
+              description: Whether delete requests are logged
+            RetentionPolicy:
+              $ref: '#/components/schemas/RetentionPolicy'
+        HourMetrics:
+          $ref: '#/components/schemas/Metrics'
+        MinuteMetrics:
+          $ref: '#/components/schemas/Metrics'
+        Cors:
+          type: array
+          description: CORS rules for the Blob service
+          items:
+            $ref: '#/components/schemas/CorsRule'
+        DefaultServiceVersion:
+          type: string
+          description: The default REST API version for requests without a version
+        DeleteRetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+        StaticWebsite:
+          type: object
+          description: Static website configuration
+          properties:
+            Enabled:
+              type: boolean
+              description: Whether static website hosting is enabled
+            IndexDocument:
+              type: string
+              description: The default index document path
+            ErrorDocument404Path:
+              type: string
+              description: The path to the 404 error document
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Azure Storage shared key authorization using the storage account access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: Shared access signature (SAS) token granting delegated access to blob resources.
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api

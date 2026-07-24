@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST Append Blobs ?restype=service&comp=stats API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://{accountName}.blob.core.windows.net
+  description: Azure Blob Storage endpoint
+  variables:
+    accountName:
+      description: The name of the Azure Storage account
+      default: mystorageaccount
+security:
+- sharedKey: []
+- bearerAuth: []
+- sharedAccessSignature: []
+tags:
+- name: ?restype=service&comp=stats
+paths:
+  /?restype=service&comp=stats:
+    get:
+      operationId: getBlobServiceStats
+      summary: Azure Blob Storage Get Blob service stats
+      description: Retrieves statistics related to replication for Blob Storage. This operation is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.
+      tags:
+      - ?restype=service&comp=stats
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Replication statistics returned
+components:
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Azure Storage shared key authorization using the storage account access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: Shared access signature (SAS) token granting delegated access to blob resources.
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api

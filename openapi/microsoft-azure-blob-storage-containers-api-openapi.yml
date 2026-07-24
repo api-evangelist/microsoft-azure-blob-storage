@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: Azure Blob Storage REST Append Blobs Containers API
+  description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
+  version: '2024-11-04'
+  contact:
+    name: Microsoft Azure Support
+    url: https://azure.microsoft.com/en-us/support/
+  termsOfService: https://azure.microsoft.com/en-us/support/legal/
+servers:
+- url: https://{accountName}.blob.core.windows.net
+  description: Azure Blob Storage endpoint
+  variables:
+    accountName:
+      description: The name of the Azure Storage account
+      default: mystorageaccount
+security:
+- sharedKey: []
+- bearerAuth: []
+- sharedAccessSignature: []
+tags:
+- name: Containers
+  description: Operations on blob containers
+paths:
+  /{container}:
+    put:
+      operationId: createContainer
+      summary: Azure Blob Storage Create container
+      description: Creates a new container under the specified storage account. The container name must be a valid DNS name and conform to Azure Storage naming rules.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: restype
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - container
+      - name: x-ms-blob-public-access
+        in: header
+        description: Specifies whether data in the container may be accessed publicly and the level of access.
+        schema:
+          type: string
+          enum:
+          - container
+          - blob
+      - name: x-ms-default-encryption-scope
+        in: header
+        description: The default encryption scope for the container.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Container created successfully
+        '409':
+          description: Container already exists
+    get:
+      operationId: getContainerProperties
+      summary: Azure Blob Storage Get container properties
+      description: Returns all user-defined metadata and system properties of the specified container. The container metadata is returned as x-ms-meta- response headers.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: restype
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - container
+      responses:
+        '200':
+          description: Container properties returned in response headers
+        '404':
+          description: Container not found
+    delete:
+      operationId: deleteContainer
+      summary: Azure Blob Storage Delete container
+      description: Marks the specified container for deletion. The container and any blobs it contains are later deleted during garbage collection. If soft delete is enabled, the container can be restored within the retention period.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: restype
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - container
+      responses:
+        '202':
+          description: Container marked for deletion
+        '404':
+          description: Container not found
+  /{container}?restype=container&comp=list:
+    get:
+      operationId: listBlobs
+      summary: Azure Blob Storage List blobs
+      description: Returns a list of blobs in the specified container. Results can be filtered by prefix, segmented using a delimiter for virtual directory hierarchy, and paginated using marker and maxresults.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: prefix
+        in: query
+        description: Filters results to return only blobs whose names begin with the specified prefix.
+        schema:
+          type: string
+      - name: delimiter
+        in: query
+        description: Delimiter character used to traverse a virtual hierarchy of blobs as though it were a file system.
+        schema:
+          type: string
+      - name: marker
+        in: query
+        description: Continuation token for pagination.
+        schema:
+          type: string
+      - name: maxresults
+        in: query
+        description: Maximum number of blobs to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5000
+      - name: include
+        in: query
+        description: Specifies additional datasets to include such as snapshots, metadata, uncommitted blobs, copy, deleted, tags, versions, deletedwithversions, immutabilitypolicy, legalhold, and permissions.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Blobs listed successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BlobList'
+  /{container}?restype=container&comp=metadata:
+    get:
+      operationId: getContainerMetadata
+      summary: Azure Blob Storage Get container metadata
+      description: Returns only user-defined metadata for the specified container as x-ms-meta- response headers.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container metadata returned in response headers
+    put:
+      operationId: setContainerMetadata
+      summary: Azure Blob Storage Set container metadata
+      description: Sets one or more user-defined name-value pairs for the specified container. Existing metadata is replaced entirely with the new set.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container metadata set successfully
+  /{container}?restype=container&comp=acl:
+    get:
+      operationId: getContainerACL
+      summary: Azure Blob Storage Get container ACL
+      description: Returns the public access policy and stored access policies for the specified container.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container ACL and stored access policies returned
+    put:
+      operationId: setContainerACL
+      summary: Azure Blob Storage Set container ACL
+      description: Sets the public access policy and stored access policies for the specified container. Stored access policies can be used to create service-level shared access signatures.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Container ACL and stored access policies set
+  /{container}?restype=container&comp=lease:
+    put:
+      operationId: leaseContainer
+      summary: Azure Blob Storage Lease container
+      description: Establishes and manages a lock on a container for delete operations. The lock duration can be infinite or between 15 and 60 seconds. Lease actions include acquire, renew, change, release, and break.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: x-ms-lease-action
+        in: header
+        required: true
+        description: The lease action to perform.
+        schema:
+          type: string
+          enum:
+          - acquire
+          - renew
+          - change
+          - release
+          - break
+      - name: x-ms-lease-duration
+        in: header
+        description: Duration of the lease in seconds. Set to -1 for an infinite lease, or between 15 and 60 seconds for a fixed-duration lease.
+        schema:
+          type: integer
+      - name: x-ms-proposed-lease-id
+        in: header
+        description: Proposed lease ID in GUID format.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Lease operation completed
+        '201':
+          description: Lease acquired
+  /{container}?restype=container&comp=undelete:
+    put:
+      operationId: restoreContainer
+      summary: Azure Blob Storage Restore container
+      description: Restores a soft-deleted container. This operation is only available when container soft delete is enabled for the storage account and the retention period has not expired.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/ContainerName'
+      - $ref: '#/components/parameters/ApiVersion'
+      - name: x-ms-deleted-container-name
+        in: header
+        required: true
+        description: The name of the deleted container to restore.
+        schema:
+          type: string
+      - name: x-ms-deleted-container-version
+        in: header
+        required: true
+        description: The version of the deleted container to restore.
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Container restored successfully
+components:
+  schemas:
+    Blob:
+      type: object
+      description: A blob in Azure Storage.
+      properties:
+        Name:
+          type: string
+          description: The blob name
+        Properties:
+          type: object
+          description: System properties of the blob
+          properties:
+            Last-Modified:
+              type: string
+              format: date-time
+              description: Last modification timestamp
+            Etag:
+              type: string
+              description: The ETag value for conditional operations
+            Content-Length:
+              type: integer
+              format: int64
+              description: The size of the blob in bytes
+            Content-Type:
+              type: string
+              description: The MIME content type of the blob
+            Content-Encoding:
+              type: string
+              description: The content encoding of the blob
+            Content-Language:
+              type: string
+              description: The content language of the blob
+            Content-MD5:
+              type: string
+              description: The MD5 hash of the blob content
+            Cache-Control:
+              type: string
+              description: The cache control directive
+            BlobType:
+              type: string
+              enum:
+              - BlockBlob
+              - PageBlob
+              - AppendBlob
+              description: The type of blob
+            LeaseStatus:
+              type: string
+              enum:
+              - locked
+              - unlocked
+              description: The lease status of the blob
+            LeaseState:
+              type: string
+              enum:
+              - available
+              - leased
+              - expired
+              - breaking
+              - broken
+              description: The lease state of the blob
+            AccessTier:
+              type: string
+              enum:
+              - Hot
+              - Cool
+              - Cold
+              - Archive
+              description: The access tier of the blob
+            AccessTierInferred:
+              type: boolean
+              description: Whether the access tier was inferred from the account default
+            ArchiveStatus:
+              type: string
+              enum:
+              - rehydrate-pending-to-hot
+              - rehydrate-pending-to-cool
+              - rehydrate-pending-to-cold
+              description: Rehydration status when moving from Archive tier
+            ServerEncrypted:
+              type: boolean
+              description: Whether the blob data is encrypted at rest
+            CreationTime:
+              type: string
+              format: date-time
+              description: The date and time the blob was created
+        Metadata:
+          type: object
+          description: User-defined key-value metadata pairs
+          additionalProperties:
+            type: string
+        Tags:
+          type: object
+          description: User-defined blob index tags
+          additionalProperties:
+            type: string
+    BlobList:
+      type: object
+      description: The list of blobs returned by the List Blobs operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        ContainerName:
+          type: string
+          description: The container name
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Delimiter:
+          type: string
+          description: The delimiter used for virtual directory hierarchy
+        Blobs:
+          type: array
+          description: The list of blobs
+          items:
+            $ref: '#/components/schemas/Blob'
+        BlobPrefixes:
+          type: array
+          description: Virtual directory prefixes when using a delimiter
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
+  parameters:
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+  securitySchemes:
+    sharedKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Azure Storage shared key authorization using the storage account access key.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Microsoft Entra ID OAuth 2.0 bearer token for accessing blob resources.
+    sharedAccessSignature:
+      type: apiKey
+      in: query
+      name: sig
+      description: Shared access signature (SAS) token granting delegated access to blob resources.
+externalDocs:
+  description: Azure Blob Storage REST API Documentation
+  url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
