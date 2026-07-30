@@ -2,6 +2,19 @@ name: Azure Blob Storage
 description: >-
   Microsoft Azure Blob Storage is a service for storing large amounts of unstructured object data, such as text or
   binary data, that can be accessed from anywhere in the world via HTTP or HTTPS.
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://azure.microsoft.com/svghandler/storage-blobs/
 tags:
   - Azure
@@ -14,93 +27,499 @@ created: '2024'
 modified: '2026-05-19'
 url: https://azure.microsoft.com/en-us/services/storage/blobs/
 apis:
-  - name: Azure Blob Storage REST API
-    description: >-
-      The REST API for Azure Blob Storage provides operations for working with blobs and containers, including create,
-      read, update, and delete operations.
-    image: https://azure.microsoft.com/svghandler/storage-blobs/
-    humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
-    baseURL: https://{accountName}.blob.core.windows.net
-    tags:
-      - Blobs
-      - Containers
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/data-plane/Microsoft.BlobStorage/stable/2021-12-02/blob.json
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
-      - type: Pricing
-        url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
-      - type: SDKs
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
-      - type: Tutorials
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-      - type: Code Samples
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
-      - type: Reference
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
-      - type: ChangeLog
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
-      - type: RateLimits
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
-      - type: GitHubRepository
-        url: https://github.com/Azure/azure-rest-api-specs
-  - name: Azure Data Lake Storage Gen2 REST API
-    description: >-
-      The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file system
-      interface. They enable creation and management of file systems, directories, and files on storage accounts with
-      hierarchical namespace enabled, supporting big data analytics workloads.
-    image: https://azure.microsoft.com/svghandler/storage-blobs/
-    humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
-    baseURL: https://{accountName}.dfs.core.windows.net
-    tags:
-      - Big Data
-      - Data Lake
-      - File System
-      - Hierarchical Namespace
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
-      - type: Reference
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
-      - type: Pricing
-        url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
-      - type: SDKs
-        url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
-  - name: Azure Storage Resource Provider REST API
-    description: >-
-      The Azure Storage Resource Provider REST API enables programmatic management of storage accounts and related
-      resources through Azure Resource Manager. It supports operations such as creating, updating, listing, and deleting
-      storage accounts, managing access keys, and configuring storage account properties.
-    image: https://azure.microsoft.com/svghandler/storage-blobs/
-    humanURL: https://learn.microsoft.com/en-us/rest/api/storagerp/
-    baseURL: https://management.azure.com
-    tags:
-      - Administration
-      - Management
-      - Resource Provider
-      - Storage Accounts
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/rest/api/storagerp/
-      - type: Reference
-        url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/resource-manager/Microsoft.Storage/stable/2023-05-01/storage.json
+- name: Azure Data Lake Storage Gen2 REST API
+  description: >-
+    The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file
+    system interface. They enable creation and management of file systems, directories, and files on storage
+    accounts with hierarchical namespace enabled, supporting big data analytics workloads.
+  image: https://azure.microsoft.com/svghandler/storage-blobs/
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
+  baseURL: https://{accountName}.dfs.core.windows.net
+  tags:
+  - Big Data
+  - Data Lake
+  - File System
+  - Hierarchical Namespace
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2
+  - type: Reference
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-append-blobs-api
+  name: Azure Blob Storage Append Blobs API
+  description: Operations specific to append blobs including append block
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Append Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-append-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: >-
+    microsoft-azure-blob-storage:microsoft-azure-blob-storage-azure-blob-storage-rest-api-api
+  name: Azure Blob Storage Azure Blob Storage REST API API
+  description: >-
+    The Azure Blob Storage REST API API from Azure Blob Storage — 1 operation(s) for azure blob storage
+    rest api.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Azure Blob Storage REST API
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-blobs-api
+  name: Azure Blob Storage Blobs API
+  description: Operations on blobs including get, put, delete, and metadata
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-block-blobs-api
+  name: Azure Blob Storage Block Blobs API
+  description: Operations specific to block blobs including put block and put block list
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Block Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-block-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-comp-blobs-api
+  name: Azure Blob Storage ?comp=blobs API
+  description: The ?comp=blobs API from Azure Blob Storage — 1 operation(s) for ?comp=blobs.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - ?comp=blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-comp-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-containers-api
+  name: Azure Blob Storage Containers API
+  description: Operations on blob containers
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-containers-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-page-blobs-api
+  name: Azure Blob Storage Page Blobs API
+  description: Operations specific to page blobs including put page and get page ranges
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - Page Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-page-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-restype-service-comp-batch-api
+  name: Azure Blob Storage ?restype=service&comp=batch API
+  description: >-
+    The ?restype=service&comp=batch API from Azure Blob Storage — 1 operation(s) for ?restype=service&comp=batch.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - ?restype=service&comp=batch
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: >-
+    microsoft-azure-blob-storage:microsoft-azure-blob-storage-restype-service-comp-properties-api
+  name: Azure Blob Storage ?restype=service&comp=properties API
+  description: >-
+    The ?restype=service&comp=properties API from Azure Blob Storage — 1 operation(s) for ?restype=service&comp=properties.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - ?restype=service&comp=properties
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: microsoft-azure-blob-storage:microsoft-azure-blob-storage-restype-service-comp-stats-api
+  name: Azure Blob Storage ?restype=service&comp=stats API
+  description: >-
+    The ?restype=service&comp=stats API from Azure Blob Storage — 1 operation(s) for ?restype=service&comp=stats.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - ?restype=service&comp=stats
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
+- aid: >-
+    microsoft-azure-blob-storage:microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api
+  name: Azure Blob Storage ?restype=service&comp=userdelegationkey API
+  description: >-
+    The ?restype=service&comp=userdelegationkey API from Azure Blob Storage — 1 operation(s) for ?restype=service&comp=userdelegationkey.
+  humanURL: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  baseURL: https://{accountName}.blob.core.windows.net
+  tags:
+  - ?restype=service&comp=userdelegationkey
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage
+  - type: Pricing
+    url: https://azure.microsoft.com/en-us/pricing/details/storage/blobs/
+  - type: SDKs
+    url: >-
+      https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
+  - type: Tutorials
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
+  - type: Code Samples
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets
+  - type: GitHubRepository
+    url: https://github.com/Azure/azure-rest-api-specs
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/
+  - type: Reference
+    url: https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/azure-blob-storage/overview
   - type: AgenticAccess
     url: agentic-access/microsoft-azure-blob-storage-agentic-access.yml
   - type: DomainSecurity
