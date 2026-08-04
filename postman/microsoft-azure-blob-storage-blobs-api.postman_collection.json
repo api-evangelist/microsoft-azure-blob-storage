@@ -1,0 +1,2525 @@
+{
+  "info": {
+    "_postman_id": "c955486e-797d-4428-b2c4-47cd55d57134",
+    "name": "Azure Blob Storage REST Append Blobs API",
+    "description": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:45.000Z",
+    "updatedAt": "2026-07-28T02:09:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c955486e-797d-4428-b2c4-47cd55d57134"
+  },
+  "item": [
+    {
+      "name": "{container}",
+      "item": [
+        {
+          "name": "{blob}",
+          "item": [
+            {
+              "name": "Azure Blob Storage Put blob",
+              "id": "15dd5066-fa2b-4db0-9d58-031f97c83a34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) The type of blob to create.",
+                    "key": "x-ms-blob-type",
+                    "value": "PageBlob"
+                  },
+                  {
+                    "description": "The length of the request body in bytes. Required for page blobs (set to 0 with x-ms-blob-content-length for the actual size).",
+                    "key": "Content-Length",
+                    "value": "<integer>"
+                  },
+                  {
+                    "description": "The content type to set for the blob.",
+                    "key": "x-ms-blob-content-type",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The tier to set on the blob.",
+                    "key": "x-ms-access-tier",
+                    "value": "Archive"
+                  },
+                  {
+                    "description": "Required for page blobs. Specifies the maximum size for the page blob, up to 8 TiB. Must be aligned to a 512-byte boundary.",
+                    "key": "x-ms-blob-content-length",
+                    "value": "<long>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:container/:blob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    ":blob"
+                  ],
+                  "variable": [
+                    {
+                      "id": "121781d0-c086-4ba6-af96-3508b7b0eff0",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "id": "be53a3ba-9b21-44ae-aaea-1db6ad8aec68",
+                      "key": "blob",
+                      "value": "<string>",
+                      "description": "(Required) The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+                    }
+                  ]
+                },
+                "description": "Creates a new blob or replaces an existing blob within a container. The type of blob to create is specified in the x-ms-blob-type header. For block blobs up to 5000 MiB, the entire content can be uploaded in a single request."
+              },
+              "response": [
+                {
+                  "id": "15bc7b7c-80cb-4e61-8bd9-be25325e5331",
+                  "name": "Blob created or replaced successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The type of blob to create.",
+                        "key": "x-ms-blob-type",
+                        "value": "PageBlob"
+                      },
+                      {
+                        "description": "The length of the request body in bytes. Required for page blobs (set to 0 with x-ms-blob-content-length for the actual size).",
+                        "key": "Content-Length",
+                        "value": "<integer>"
+                      },
+                      {
+                        "description": "The content type to set for the blob.",
+                        "key": "x-ms-blob-content-type",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The tier to set on the blob.",
+                        "key": "x-ms-access-tier",
+                        "value": "Archive"
+                      },
+                      {
+                        "description": "Required for page blobs. Specifies the maximum size for the page blob, up to 8 TiB. Must be aligned to a 512-byte boundary.",
+                        "key": "x-ms-blob-content-length",
+                        "value": "<long>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-15bc7b7c-80cb-4e61-8bd9-be25325e5331"
+                },
+                {
+                  "id": "3c2d0510-4dc3-481c-8079-6d18fc9f3d22",
+                  "name": "Conflict - blob exists and has an active lease",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The type of blob to create.",
+                        "key": "x-ms-blob-type",
+                        "value": "PageBlob"
+                      },
+                      {
+                        "description": "The length of the request body in bytes. Required for page blobs (set to 0 with x-ms-blob-content-length for the actual size).",
+                        "key": "Content-Length",
+                        "value": "<integer>"
+                      },
+                      {
+                        "description": "The content type to set for the blob.",
+                        "key": "x-ms-blob-content-type",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The tier to set on the blob.",
+                        "key": "x-ms-access-tier",
+                        "value": "Archive"
+                      },
+                      {
+                        "description": "Required for page blobs. Specifies the maximum size for the page blob, up to 8 TiB. Must be aligned to a 512-byte boundary.",
+                        "key": "x-ms-blob-content-length",
+                        "value": "<long>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-3c2d0510-4dc3-481c-8079-6d18fc9f3d22"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-15dd5066-fa2b-4db0-9d58-031f97c83a34"
+            },
+            {
+              "name": "Azure Blob Storage Get blob",
+              "id": "eb41e84b-827b-4871-ad99-0c4438122155",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "Return only the bytes of the blob in the specified range, for example bytes=0-1023.",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>&versionid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    ":blob"
+                  ],
+                  "query": [
+                    {
+                      "description": "The snapshot identifier. When specified, the operation returns the snapshot of the blob.",
+                      "key": "snapshot",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The version ID. When specified, the operation returns the specified version of the blob.",
+                      "key": "versionid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "51ccd711-4f2a-4ef8-bec3-771e04bd3cb5",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "id": "eee8fdba-5a20-41bf-88ed-50ee593d88da",
+                      "key": "blob",
+                      "value": "<string>",
+                      "description": "(Required) The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+                    }
+                  ]
+                },
+                "description": "Reads or downloads a blob from Blob Storage, including its user-defined metadata and system properties. A range of bytes can be requested using the Range header."
+              },
+              "response": [
+                {
+                  "id": "32dc7915-6b36-4baf-95ae-76dbd852cdd4",
+                  "name": "Blob content returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Return only the bytes of the blob in the specified range, for example bytes=0-1023.",
+                        "key": "Range",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>&versionid=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "query": [
+                        {
+                          "description": "The snapshot identifier. When specified, the operation returns the snapshot of the blob.",
+                          "key": "snapshot",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The version ID. When specified, the operation returns the specified version of the blob.",
+                          "key": "versionid",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/octet-stream"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-32dc7915-6b36-4baf-95ae-76dbd852cdd4"
+                },
+                {
+                  "id": "ab8e9469-7b3b-4d8e-a902-045b4fbc6bdc",
+                  "name": "Partial blob content returned for range request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Return only the bytes of the blob in the specified range, for example bytes=0-1023.",
+                        "key": "Range",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>&versionid=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "query": [
+                        {
+                          "description": "The snapshot identifier. When specified, the operation returns the snapshot of the blob.",
+                          "key": "snapshot",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The version ID. When specified, the operation returns the specified version of the blob.",
+                          "key": "versionid",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Partial Content",
+                  "code": 206,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-ab8e9469-7b3b-4d8e-a902-045b4fbc6bdc"
+                },
+                {
+                  "id": "5612ba52-ebb9-42ba-9692-2d717683e9c6",
+                  "name": "Blob not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Return only the bytes of the blob in the specified range, for example bytes=0-1023.",
+                        "key": "Range",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>&versionid=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "query": [
+                        {
+                          "description": "The snapshot identifier. When specified, the operation returns the snapshot of the blob.",
+                          "key": "snapshot",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The version ID. When specified, the operation returns the specified version of the blob.",
+                          "key": "versionid",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-5612ba52-ebb9-42ba-9692-2d717683e9c6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-eb41e84b-827b-4871-ad99-0c4438122155"
+            },
+            {
+              "name": "Azure Blob Storage Get blob properties",
+              "id": "e5faa5f3-13a0-4592-8b1b-5243053fc252",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "HEAD",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/:blob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    ":blob"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bbd9b282-ceee-4b7a-b02a-a5a9787877d7",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "id": "6a5c0d57-e734-4310-8c82-912e606353db",
+                      "key": "blob",
+                      "value": "<string>",
+                      "description": "(Required) The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+                    }
+                  ]
+                },
+                "description": "Returns all system properties and user-defined metadata on the blob. Does not return the blob content. Properties are returned as response headers."
+              },
+              "response": [
+                {
+                  "id": "35abc9fa-3b9a-47d0-bc28-282244a0322c",
+                  "name": "Blob properties returned in response headers",
+                  "originalRequest": {
+                    "method": "HEAD",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-35abc9fa-3b9a-47d0-bc28-282244a0322c"
+                },
+                {
+                  "id": "9e8cdbec-cc4e-4b09-9bc3-b8fc08429332",
+                  "name": "Blob not found",
+                  "originalRequest": {
+                    "method": "HEAD",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-9e8cdbec-cc4e-4b09-9bc3-b8fc08429332"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-e5faa5f3-13a0-4592-8b1b-5243053fc252"
+            },
+            {
+              "name": "Azure Blob Storage Delete blob",
+              "id": "45d0c742-9973-4caa-8bbc-72d60e6d8541",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "Required if the blob has associated snapshots. Specifies whether to delete the blob and all snapshots (include) or only the snapshots (only).",
+                    "key": "x-ms-delete-snapshots",
+                    "value": "only"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    ":blob"
+                  ],
+                  "query": [
+                    {
+                      "description": "The snapshot identifier. When specified, only the snapshot is deleted.",
+                      "key": "snapshot",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "74988adc-1d88-40e6-b25c-2b29ee756b69",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "id": "458ea008-4ea6-4505-90a2-cf0277ac3a86",
+                      "key": "blob",
+                      "value": "<string>",
+                      "description": "(Required) The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+                    }
+                  ]
+                },
+                "description": "Marks the specified blob or snapshot for deletion. The blob is later deleted during garbage collection. If soft delete is enabled, the blob can be restored within the retention period."
+              },
+              "response": [
+                {
+                  "id": "86ee3c06-b19c-433b-a4b5-f5f32d645c6d",
+                  "name": "Blob marked for deletion",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Required if the blob has associated snapshots. Specifies whether to delete the blob and all snapshots (include) or only the snapshots (only).",
+                        "key": "x-ms-delete-snapshots",
+                        "value": "only"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "query": [
+                        {
+                          "description": "The snapshot identifier. When specified, only the snapshot is deleted.",
+                          "key": "snapshot",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-86ee3c06-b19c-433b-a4b5-f5f32d645c6d"
+                },
+                {
+                  "id": "82521f03-d878-4dc5-92e5-5e6ebd425204",
+                  "name": "Blob not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Required if the blob has associated snapshots. Specifies whether to delete the blob and all snapshots (include) or only the snapshots (only).",
+                        "key": "x-ms-delete-snapshots",
+                        "value": "only"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/:blob?snapshot=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        ":blob"
+                      ],
+                      "query": [
+                        {
+                          "description": "The snapshot identifier. When specified, only the snapshot is deleted.",
+                          "key": "snapshot",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        },
+                        {
+                          "key": "blob"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-82521f03-d878-4dc5-92e5-5e6ebd425204"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-45d0c742-9973-4caa-8bbc-72d60e6d8541"
+            }
+          ],
+          "id": "966ff3c8-39ec-4771-a5d7-167850ffb70b",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-966ff3c8-39ec-4771-a5d7-167850ffb70b"
+        },
+        {
+          "name": "{blob}?comp=metadata",
+          "item": [
+            {
+              "name": "Azure Blob Storage Get blob metadata",
+              "id": "730e6106-2567-4630-86ff-c53e28ffd71f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=metadata",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "metadata"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "604b6472-8e5c-476f-a86b-99390aee87d0",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Retrieves all user-defined metadata of an existing blob or snapshot. Metadata is returned as x-ms-meta- response headers."
+              },
+              "response": [
+                {
+                  "id": "5c02262e-9c77-4122-b31c-bdec42a22543",
+                  "name": "Blob metadata returned in response headers",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-5c02262e-9c77-4122-b31c-bdec42a22543"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-730e6106-2567-4630-86ff-c53e28ffd71f"
+            },
+            {
+              "name": "Azure Blob Storage Set blob metadata",
+              "id": "231e373b-9d0f-4184-a1e6-c0c3b664a6ce",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=metadata",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "metadata"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "9b28439b-cb33-4987-afd7-855acb359cc3",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets user-defined metadata for the specified blob as one or more name-value pairs. Existing metadata is replaced entirely."
+              },
+              "response": [
+                {
+                  "id": "cf579b6e-93ec-4703-90fd-7709e89209b9",
+                  "name": "Blob metadata set successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-cf579b6e-93ec-4703-90fd-7709e89209b9"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-231e373b-9d0f-4184-a1e6-c0c3b664a6ce"
+            }
+          ],
+          "id": "45d242d4-9e99-4f23-93ca-adfc4e981fc1",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-45d242d4-9e99-4f23-93ca-adfc4e981fc1"
+        },
+        {
+          "name": "{blob}?comp=properties",
+          "item": [
+            {
+              "name": "Azure Blob Storage Set blob HTTP headers",
+              "id": "94fe7e2b-ad51-4045-a6f0-ce82a75ba547",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "The MIME content type of the blob.",
+                    "key": "x-ms-blob-content-type",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The content encoding of the blob.",
+                    "key": "x-ms-blob-content-encoding",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The content language of the blob.",
+                    "key": "x-ms-blob-content-language",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The cache control directive for the blob.",
+                    "key": "x-ms-blob-cache-control",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The content disposition of the blob.",
+                    "key": "x-ms-blob-content-disposition",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=properties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "properties"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "0ff35336-d5cf-4420-8302-a841a0ce8e23",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets system properties defined for an existing blob such as content type, content encoding, content language, content disposition, and cache control."
+              },
+              "response": [
+                {
+                  "id": "c708786a-5bbe-4343-ab79-48e7a14e20ce",
+                  "name": "Blob HTTP headers set successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "The MIME content type of the blob.",
+                        "key": "x-ms-blob-content-type",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The content encoding of the blob.",
+                        "key": "x-ms-blob-content-encoding",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The content language of the blob.",
+                        "key": "x-ms-blob-content-language",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The cache control directive for the blob.",
+                        "key": "x-ms-blob-cache-control",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The content disposition of the blob.",
+                        "key": "x-ms-blob-content-disposition",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-c708786a-5bbe-4343-ab79-48e7a14e20ce"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-94fe7e2b-ad51-4045-a6f0-ce82a75ba547"
+            }
+          ],
+          "id": "b298a2c4-e727-416a-b0e6-7e1658330e47",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-b298a2c4-e727-416a-b0e6-7e1658330e47"
+        },
+        {
+          "name": "{blob}?comp=tags",
+          "item": [
+            {
+              "name": "Azure Blob Storage Get blob tags",
+              "id": "5b21243b-b063-4813-a0b1-8b7365ce214e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "tags"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "c11c66ca-d105-4f73-91b3-22c9ccc7e93a",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Retrieves user-defined blob index tags. Tags form a secondary index that can be queried using the Find Blobs by Tags operation."
+              },
+              "response": [
+                {
+                  "id": "8e648b5e-b7b6-4ec5-a134-e0e2e1144ea4",
+                  "name": "Blob tags returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-8e648b5e-b7b6-4ec5-a134-e0e2e1144ea4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-5b21243b-b063-4813-a0b1-8b7365ce214e"
+            },
+            {
+              "name": "Azure Blob Storage Set blob tags",
+              "id": "6d3bd700-ca75-421a-a70d-36ae2ce789bd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "tags"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "748e5185-8820-4ba4-9cd0-89910c743ba8",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets user-defined blob index tags on an existing blob. Tags are key-value pairs that form a secondary index, enabling efficient querying across all blobs in a storage account."
+              },
+              "response": [
+                {
+                  "id": "cd7b3431-90bc-49b8-be80-7b31c2bb84e4",
+                  "name": "Blob tags set successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-cd7b3431-90bc-49b8-be80-7b31c2bb84e4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-6d3bd700-ca75-421a-a70d-36ae2ce789bd"
+            }
+          ],
+          "id": "f44b4673-2605-4359-a9bc-171b1eecab0e",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-f44b4673-2605-4359-a9bc-171b1eecab0e"
+        },
+        {
+          "name": "{blob}?comp=lease",
+          "item": [
+            {
+              "name": "Azure Blob Storage Lease blob",
+              "id": "82b8e711-117b-4c10-9ac8-c48e83fc9648",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) The lease action to perform.",
+                    "key": "x-ms-lease-action",
+                    "value": "acquire"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=lease",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "lease"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "127e9e8f-efe0-4d3a-bcf3-860e8e4df8a7",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Establishes and manages a lock on write and delete operations for a blob. The lock can be infinite or between 15 and 60 seconds."
+              },
+              "response": [
+                {
+                  "id": "0bf7c926-dea4-4cd4-bff7-e1b41e9e43b0",
+                  "name": "Lease operation completed",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The lease action to perform.",
+                        "key": "x-ms-lease-action",
+                        "value": "acquire"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-0bf7c926-dea4-4cd4-bff7-e1b41e9e43b0"
+                },
+                {
+                  "id": "c28bb928-346b-4ccc-865d-df5e5311d040",
+                  "name": "Lease acquired",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The lease action to perform.",
+                        "key": "x-ms-lease-action",
+                        "value": "acquire"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-c28bb928-346b-4ccc-865d-df5e5311d040"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-82b8e711-117b-4c10-9ac8-c48e83fc9648"
+            }
+          ],
+          "id": "668cdecd-7a06-46a4-a80b-8686fe8c3445",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-668cdecd-7a06-46a4-a80b-8686fe8c3445"
+        },
+        {
+          "name": "{blob}?comp=snapshot",
+          "item": [
+            {
+              "name": "Azure Blob Storage Snapshot blob",
+              "id": "49b43191-5be3-4376-ba52-ba32f048bd9a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=snapshot",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "snapshot"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "918312fd-9f29-4b26-8037-cc8ab332bba4",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Creates a read-only snapshot of a blob. A snapshot is a version of a blob that is captured at a point in time. Snapshots share the same blob name and are distinguished by the snapshot query parameter."
+              },
+              "response": [
+                {
+                  "id": "8ca455fa-faa7-49c7-bf0c-03a91231a862",
+                  "name": "Snapshot created",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-8ca455fa-faa7-49c7-bf0c-03a91231a862"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-49b43191-5be3-4376-ba52-ba32f048bd9a"
+            }
+          ],
+          "id": "5cce9362-1520-43d6-8e58-fae3227ca150",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-5cce9362-1520-43d6-8e58-fae3227ca150"
+        },
+        {
+          "name": "{blob}?comp=copy",
+          "item": [
+            {
+              "name": "Azure Blob Storage Copy blob",
+              "id": "34905d53-2ded-404d-b22a-6fdc5afe153a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) URL of the source blob, up to 2 KiB in length.",
+                    "key": "x-ms-copy-source",
+                    "value": "<uri>"
+                  },
+                  {
+                    "description": "The tier to set on the destination blob.",
+                    "key": "x-ms-access-tier",
+                    "value": "Archive"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=copy",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "copy"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "f7bdc2f5-f1e8-422e-bb1d-f745132fd443",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Copies a source blob to a destination blob within the same storage account or across storage accounts. The copy operation is asynchronous and the status can be checked using Get Blob Properties."
+              },
+              "response": [
+                {
+                  "id": "6a5b66bf-011f-42b4-bf38-a0e81103f4f5",
+                  "name": "Copy operation initiated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) URL of the source blob, up to 2 KiB in length.",
+                        "key": "x-ms-copy-source",
+                        "value": "<uri>"
+                      },
+                      {
+                        "description": "The tier to set on the destination blob.",
+                        "key": "x-ms-access-tier",
+                        "value": "Archive"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-6a5b66bf-011f-42b4-bf38-a0e81103f4f5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-34905d53-2ded-404d-b22a-6fdc5afe153a"
+            }
+          ],
+          "id": "69ffde81-a3db-4d12-ab13-59ee637b8683",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-69ffde81-a3db-4d12-ab13-59ee637b8683"
+        },
+        {
+          "name": "{blob}?comp=copy&copyid={copyId}",
+          "item": [
+            {
+              "name": "Azure Blob Storage Abort copy blob",
+              "id": "a99e8970-e754-40ce-9b0c-eab75f6ce7ab",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) ",
+                    "key": "x-ms-copy-action",
+                    "value": "abort"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=copy&copyid={{copyId}}&copyId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "copy"
+                    },
+                    {
+                      "key": "copyid",
+                      "value": "{{copyId}}"
+                    },
+                    {
+                      "description": "(Required) The copy operation identifier returned by the Copy Blob response.",
+                      "key": "copyId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "3b0844e3-80cd-4037-b9f1-a45d3ff6d764",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Aborts a pending Copy Blob operation and leaves the destination blob with zero length and full metadata. The copy must be in a pending state."
+              },
+              "response": [
+                {
+                  "id": "395ecf6f-08bb-4ad3-8807-5a1128734aba",
+                  "name": "Copy operation aborted",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) ",
+                        "key": "x-ms-copy-action",
+                        "value": "abort"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}?copyId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The copy operation identifier returned by the Copy Blob response.",
+                          "key": "copyId",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-395ecf6f-08bb-4ad3-8807-5a1128734aba"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-a99e8970-e754-40ce-9b0c-eab75f6ce7ab"
+            }
+          ],
+          "id": "491e90fe-b698-4a45-a4e5-3620733f8a90",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-491e90fe-b698-4a45-a4e5-3620733f8a90"
+        },
+        {
+          "name": "{blob}?comp=undelete",
+          "item": [
+            {
+              "name": "Azure Blob Storage Undelete blob",
+              "id": "2add6e54-296b-4660-8ec2-bd1c0dc8a857",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=undelete",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "undelete"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "7d76cc0a-472e-483f-9fb5-62647aac4cb8",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Restores the contents and metadata of a soft-deleted blob and any associated soft-deleted snapshots. This is only available when soft delete is enabled and the retention period has not expired."
+              },
+              "response": [
+                {
+                  "id": "04cf25d1-b2c5-47ca-8462-469147bcf68e",
+                  "name": "Blob undeleted successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-04cf25d1-b2c5-47ca-8462-469147bcf68e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-2add6e54-296b-4660-8ec2-bd1c0dc8a857"
+            }
+          ],
+          "id": "107e88ca-f025-4d7c-b63d-26c02f747a89",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-107e88ca-f025-4d7c-b63d-26c02f747a89"
+        },
+        {
+          "name": "{blob}?comp=tier",
+          "item": [
+            {
+              "name": "Azure Blob Storage Set blob tier",
+              "id": "0bc0725b-1e16-4455-ab59-dda479b05c5a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) The access tier to set for the blob.",
+                    "key": "x-ms-access-tier",
+                    "value": "Archive"
+                  },
+                  {
+                    "description": "Priority of rehydration when moving a blob out of the Archive tier. Standard priority may take up to 15 hours, High priority within 1 hour at a higher cost.",
+                    "key": "x-ms-rehydrate-priority",
+                    "value": "Standard"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=tier",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "tier"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "6cb7ad29-f92a-400d-a42b-3c1458a5e751",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets the access tier of a block blob or page blob. For block blobs, supported tiers are Hot, Cool, Cold, and Archive. Moving a blob from Archive tier requires rehydration, which can take hours."
+              },
+              "response": [
+                {
+                  "id": "c74874cd-b8f9-41c7-ba1a-eae107a1c102",
+                  "name": "Blob tier set successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The access tier to set for the blob.",
+                        "key": "x-ms-access-tier",
+                        "value": "Archive"
+                      },
+                      {
+                        "description": "Priority of rehydration when moving a blob out of the Archive tier. Standard priority may take up to 15 hours, High priority within 1 hour at a higher cost.",
+                        "key": "x-ms-rehydrate-priority",
+                        "value": "Standard"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-c74874cd-b8f9-41c7-ba1a-eae107a1c102"
+                },
+                {
+                  "id": "9109bdd1-ffbc-43b9-a448-017989065063",
+                  "name": "Tier change accepted with rehydration pending",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The access tier to set for the blob.",
+                        "key": "x-ms-access-tier",
+                        "value": "Archive"
+                      },
+                      {
+                        "description": "Priority of rehydration when moving a blob out of the Archive tier. Standard priority may take up to 15 hours, High priority within 1 hour at a higher cost.",
+                        "key": "x-ms-rehydrate-priority",
+                        "value": "Standard"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-9109bdd1-ffbc-43b9-a448-017989065063"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-0bc0725b-1e16-4455-ab59-dda479b05c5a"
+            }
+          ],
+          "id": "de23a9a2-c53f-4ac3-9593-8694294cb7a3",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-de23a9a2-c53f-4ac3-9593-8694294cb7a3"
+        },
+        {
+          "name": "{blob}?comp=immutabilityPolicies",
+          "item": [
+            {
+              "name": "Azure Blob Storage Set blob immutability policy",
+              "id": "58112dd3-a12e-4c4a-a3b9-6d24e1a1b554",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) The date until which the immutability policy is in effect.",
+                    "key": "x-ms-immutability-policy-until-date",
+                    "value": "<dateTime>"
+                  },
+                  {
+                    "description": "(Required) The mode of the immutability policy.",
+                    "key": "x-ms-immutability-policy-mode",
+                    "value": "Locked"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=immutabilityPolicies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "immutabilityPolicies"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "31489401-f5f6-462f-b710-1eeabab4b821",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets the immutability policy on a blob. Immutability policies prevent blob modification and deletion for a specified retention period. Supports unlocked and locked policy modes."
+              },
+              "response": [
+                {
+                  "id": "85abe120-aee9-4a07-a453-d8c463fbde4e",
+                  "name": "Immutability policy set successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) The date until which the immutability policy is in effect.",
+                        "key": "x-ms-immutability-policy-until-date",
+                        "value": "<dateTime>"
+                      },
+                      {
+                        "description": "(Required) The mode of the immutability policy.",
+                        "key": "x-ms-immutability-policy-mode",
+                        "value": "Locked"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-85abe120-aee9-4a07-a453-d8c463fbde4e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-58112dd3-a12e-4c4a-a3b9-6d24e1a1b554"
+            },
+            {
+              "name": "Azure Blob Storage Delete blob immutability policy",
+              "id": "f8977143-ef07-45ea-8158-573a586e910f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=immutabilityPolicies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "immutabilityPolicies"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "3190657b-a039-46ea-a558-5f3580d75c73",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Deletes the immutability policy on a blob. The policy must be in Unlocked mode to be deleted."
+              },
+              "response": [
+                {
+                  "id": "fb98f9df-1f4b-44f8-a3dc-ee26f9c743d1",
+                  "name": "Immutability policy deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-fb98f9df-1f4b-44f8-a3dc-ee26f9c743d1"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-f8977143-ef07-45ea-8158-573a586e910f"
+            }
+          ],
+          "id": "51a61273-17e4-4962-9744-f8f7b7b645f5",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-51a61273-17e4-4962-9744-f8f7b7b645f5"
+        },
+        {
+          "name": "{blob}?comp=legalhold",
+          "item": [
+            {
+              "name": "Azure Blob Storage Set blob legal hold",
+              "id": "45a61d59-072d-47da-b4f4-7047d218e241",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) Whether to set or clear the legal hold.",
+                    "key": "x-ms-legal-hold",
+                    "value": "<boolean>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=legalhold",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "legalhold"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "4b89d6f3-ad22-4dc0-bf62-890bcf5cc22d",
+                      "key": "container",
+                      "value": "rz368h0m7do0qjgvz4tu91tlx1zyryer4a0hipyara",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Sets or clears a legal hold on a blob. A legal hold prevents the blob from being modified or deleted regardless of the immutability policy."
+              },
+              "response": [
+                {
+                  "id": "862a0aa0-1ea4-4899-996c-b5063992e0f0",
+                  "name": "Legal hold set or cleared",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) Whether to set or clear the legal hold.",
+                        "key": "x-ms-legal-hold",
+                        "value": "<boolean>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:46.000Z",
+                  "updatedAt": "2026-07-28T02:09:46.000Z",
+                  "uid": "35240-862a0aa0-1ea4-4899-996c-b5063992e0f0"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:45.000Z",
+              "updatedAt": "2026-07-28T02:09:45.000Z",
+              "uid": "35240-45a61d59-072d-47da-b4f4-7047d218e241"
+            }
+          ],
+          "id": "8925b812-e72b-4645-ad94-3102a73cc6ce",
+          "createdAt": "2026-07-28T02:09:45.000Z",
+          "updatedAt": "2026-07-28T02:09:45.000Z",
+          "uid": "35240-8925b812-e72b-4645-ad94-3102a73cc6ce"
+        }
+      ],
+      "id": "71e2be77-37d0-4e52-998a-ab7f2eacaebe",
+      "createdAt": "2026-07-28T02:09:45.000Z",
+      "updatedAt": "2026-07-28T02:09:45.000Z",
+      "uid": "35240-71e2be77-37d0-4e52-998a-ab7f2eacaebe"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "accountName",
+      "value": "mystorageaccount"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{accountName}}.blob.core.windows.net"
+    },
+    {
+      "key": "blob",
+      "value": "<string>"
+    }
+  ]
+}

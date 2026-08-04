@@ -1,0 +1,255 @@
+{
+  "info": {
+    "_postman_id": "5d1bf029-521f-4ea9-8f94-c99a3212ff8f",
+    "name": "Azure Blob Storage REST Append Blobs Azure Blob Storage REST API API",
+    "description": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:44.000Z",
+    "updatedAt": "2026-07-28T02:09:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5d1bf029-521f-4ea9-8f94-c99a3212ff8f"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Azure Blob Storage List containers",
+          "id": "c0b4608d-da61-4462-ac7a-2508d633befe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?comp=list&prefix=<string>&marker=<string>&maxresults=<integer>&include=metadata",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) ",
+                  "key": "comp",
+                  "value": "list"
+                },
+                {
+                  "description": "Filters results to return only containers whose names begin with the specified prefix.",
+                  "key": "prefix",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Continuation token for retrieving the next page of results. Returned in the NextMarker element of a previous response.",
+                  "key": "marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of containers to return in a single response. Defaults to 5000 if not specified.",
+                  "key": "maxresults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Specifies additional datasets to include in the response such as metadata, deleted containers, or system containers.",
+                  "key": "include",
+                  "value": "metadata"
+                }
+              ]
+            },
+            "description": "Returns a list of containers under the specified storage account. Results can be filtered by prefix and paginated using marker and maxresults parameters."
+          },
+          "response": [
+            {
+              "id": "67c9e4b6-7ff6-4605-a017-8761777c364a",
+              "name": "Successfully listed containers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?comp=list&prefix=<string>&marker=<string>&maxresults=<integer>&include=metadata",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "comp",
+                      "value": "list"
+                    },
+                    {
+                      "description": "Filters results to return only containers whose names begin with the specified prefix.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Continuation token for retrieving the next page of results. Returned in the NextMarker element of a previous response.",
+                      "key": "marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of containers to return in a single response. Defaults to 5000 if not specified.",
+                      "key": "maxresults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specifies additional datasets to include in the response such as metadata, deleted containers, or system containers.",
+                      "key": "include",
+                      "value": "metadata"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <ServiceEndpoint>(string)</ServiceEndpoint>\n  <MaxResults>(integer)</MaxResults>\n  <Prefix>(string)</Prefix>\n  <Containers>\n    <Name>(string)</Name>\n    <Properties>\n      <Last-Modified>(string)</Last-Modified>\n      <Etag>(string)</Etag>\n      <LeaseStatus>(string)</LeaseStatus>\n      <LeaseState>(string)</LeaseState>\n      <LeaseDuration>(string)</LeaseDuration>\n      <PublicAccess>(string)</PublicAccess>\n      <HasImmutabilityPolicy>(boolean)</HasImmutabilityPolicy>\n      <HasLegalHold>(boolean)</HasLegalHold>\n      <DefaultEncryptionScope>(string)</DefaultEncryptionScope>\n      <DenyEncryptionScopeOverride>(boolean)</DenyEncryptionScopeOverride>\n      <ImmutableStorageWithVersioningEnabled>(boolean)</ImmutableStorageWithVersioningEnabled>\n    </Properties>\n    <Metadata>\n    </Metadata>\n  </Containers>\n  <Containers>\n    <Name>(string)</Name>\n    <Properties>\n      <Last-Modified>(string)</Last-Modified>\n      <Etag>(string)</Etag>\n      <LeaseStatus>(string)</LeaseStatus>\n      <LeaseState>(string)</LeaseState>\n      <LeaseDuration>(string)</LeaseDuration>\n      <PublicAccess>(string)</PublicAccess>\n      <HasImmutabilityPolicy>(boolean)</HasImmutabilityPolicy>\n      <HasLegalHold>(boolean)</HasLegalHold>\n      <DefaultEncryptionScope>(string)</DefaultEncryptionScope>\n      <DenyEncryptionScopeOverride>(boolean)</DenyEncryptionScopeOverride>\n      <ImmutableStorageWithVersioningEnabled>(boolean)</ImmutableStorageWithVersioningEnabled>\n    </Properties>\n    <Metadata>\n    </Metadata>\n  </Containers>\n  <NextMarker>(string)</NextMarker>\n</element>",
+              "createdAt": "2026-07-28T02:09:44.000Z",
+              "updatedAt": "2026-07-28T02:09:44.000Z",
+              "uid": "35240-67c9e4b6-7ff6-4605-a017-8761777c364a"
+            },
+            {
+              "id": "2ea35de2-4d7e-4597-aec3-d17cb3db77e4",
+              "name": "Forbidden - authentication or authorization failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?comp=list&prefix=<string>&marker=<string>&maxresults=<integer>&include=metadata",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "comp",
+                      "value": "list"
+                    },
+                    {
+                      "description": "Filters results to return only containers whose names begin with the specified prefix.",
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Continuation token for retrieving the next page of results. Returned in the NextMarker element of a previous response.",
+                      "key": "marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of containers to return in a single response. Defaults to 5000 if not specified.",
+                      "key": "maxresults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Specifies additional datasets to include in the response such as metadata, deleted containers, or system containers.",
+                      "key": "include",
+                      "value": "metadata"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:09:44.000Z",
+              "updatedAt": "2026-07-28T02:09:44.000Z",
+              "uid": "35240-2ea35de2-4d7e-4597-aec3-d17cb3db77e4"
+            }
+          ],
+          "createdAt": "2026-07-28T02:09:44.000Z",
+          "updatedAt": "2026-07-28T02:09:44.000Z",
+          "uid": "35240-c0b4608d-da61-4462-ac7a-2508d633befe"
+        }
+      ],
+      "id": "6546ea17-f6f0-444d-9fca-90d989015baa",
+      "createdAt": "2026-07-28T02:09:44.000Z",
+      "updatedAt": "2026-07-28T02:09:44.000Z",
+      "uid": "35240-6546ea17-f6f0-444d-9fca-90d989015baa"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "accountName",
+      "value": "mystorageaccount"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{accountName}}.blob.core.windows.net"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "3b3d7715-27c7-4785-a097-4eea905b5f28",
+    "name": "Azure Blob Storage REST Append Blobs ?restype=service&comp=stats API",
+    "description": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:54.000Z",
+    "updatedAt": "2026-07-28T02:09:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3b3d7715-27c7-4785-a097-4eea905b5f28"
+  },
+  "item": [
+    {
+      "name": "?restype=service&comp=stats",
+      "item": [
+        {
+          "name": "Azure Blob Storage Get Blob service stats",
+          "id": "5072b66e-79ab-4664-9129-97f7e45ee774",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?restype=service&comp=stats",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "restype",
+                  "value": "service"
+                },
+                {
+                  "key": "comp",
+                  "value": "stats"
+                }
+              ]
+            },
+            "description": "Retrieves statistics related to replication for Blob Storage. This operation is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account."
+          },
+          "response": [
+            {
+              "id": "67bf6586-8f4e-4737-ba9d-2fdaa92d50db",
+              "name": "Replication statistics returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:09:55.000Z",
+              "updatedAt": "2026-07-28T02:09:55.000Z",
+              "uid": "35240-67bf6586-8f4e-4737-ba9d-2fdaa92d50db"
+            }
+          ],
+          "createdAt": "2026-07-28T02:09:55.000Z",
+          "updatedAt": "2026-07-28T02:09:55.000Z",
+          "uid": "35240-5072b66e-79ab-4664-9129-97f7e45ee774"
+        }
+      ],
+      "id": "76338ef3-7570-4df1-8071-5aae9f5c43fa",
+      "createdAt": "2026-07-28T02:09:55.000Z",
+      "updatedAt": "2026-07-28T02:09:55.000Z",
+      "uid": "35240-76338ef3-7570-4df1-8071-5aae9f5c43fa"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "accountName",
+      "value": "mystorageaccount"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{accountName}}.blob.core.windows.net"
+    }
+  ]
+}

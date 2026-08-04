@@ -1,0 +1,542 @@
+{
+  "info": {
+    "_postman_id": "6bb7c5c3-9628-4791-a6da-e934446fb827",
+    "name": "Azure Blob Storage REST Append Blobs Block Blobs API",
+    "description": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:47.000Z",
+    "updatedAt": "2026-07-28T02:09:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6bb7c5c3-9628-4791-a6da-e934446fb827"
+  },
+  "item": [
+    {
+      "name": "{container}",
+      "item": [
+        {
+          "name": "{blob}?comp=block",
+          "item": [
+            {
+              "name": "Azure Blob Storage Put block",
+              "id": "5e0f1d70-3e38-44e9-acc8-f1528f933906",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=block&blockid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "block"
+                    },
+                    {
+                      "description": "(Required) A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same length.",
+                      "key": "blockid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8626fec6-c8e7-4015-b293-5b960212c21b",
+                      "key": "container",
+                      "value": "d1e506sz257vm2-mervtq5lxh32",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Uploads a block to be committed as part of a block blob. Each block can be up to 4000 MiB in size. The block is identified by a base64-encoded block ID. Blocks must be committed using Put Block List to form the final blob."
+              },
+              "response": [
+                {
+                  "id": "5248b79b-3867-465c-a5d5-ed5929501a71",
+                  "name": "Block uploaded successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}?blockid=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same length.",
+                          "key": "blockid",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:48.000Z",
+                  "updatedAt": "2026-07-28T02:09:48.000Z",
+                  "uid": "35240-5248b79b-3867-465c-a5d5-ed5929501a71"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:48.000Z",
+              "updatedAt": "2026-07-28T02:09:48.000Z",
+              "uid": "35240-5e0f1d70-3e38-44e9-acc8-f1528f933906"
+            }
+          ],
+          "id": "be3d1ae8-63f7-4574-9e22-2a357eab4f18",
+          "createdAt": "2026-07-28T02:09:48.000Z",
+          "updatedAt": "2026-07-28T02:09:48.000Z",
+          "uid": "35240-be3d1ae8-63f7-4574-9e22-2a357eab4f18"
+        },
+        {
+          "name": "{blob}?comp=blocklist",
+          "item": [
+            {
+              "name": "Azure Blob Storage Put block list",
+              "id": "c2585f2a-876e-40c1-a9eb-b373a39bff93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Latest>(string)</Latest>\n  <Latest>(string)</Latest>\n  <Committed>(string)</Committed>\n  <Committed>(string)</Committed>\n  <Uncommitted>(string)</Uncommitted>\n  <Uncommitted>(string)</Uncommitted>\n</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=blocklist",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "blocklist"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "16d7227b-8e9c-43af-9cb3-8a6c04490bd7",
+                      "key": "container",
+                      "value": "d1e506sz257vm2-mervtq5lxh32",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Commits a blob by specifying the set of block IDs that comprise the block blob. Blocks can be from the latest uncommitted block list, the committed block list, or both."
+              },
+              "response": [
+                {
+                  "id": "644a341f-02fa-448a-9b84-446b1a1bbb33",
+                  "name": "Block list committed and blob created",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/xml"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Latest>(string)</Latest>\n  <Latest>(string)</Latest>\n  <Committed>(string)</Committed>\n  <Committed>(string)</Committed>\n  <Uncommitted>(string)</Uncommitted>\n  <Uncommitted>(string)</Uncommitted>\n</element>",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "xml",
+                          "language": "xml"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:48.000Z",
+                  "updatedAt": "2026-07-28T02:09:48.000Z",
+                  "uid": "35240-644a341f-02fa-448a-9b84-446b1a1bbb33"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:48.000Z",
+              "updatedAt": "2026-07-28T02:09:48.000Z",
+              "uid": "35240-c2585f2a-876e-40c1-a9eb-b373a39bff93"
+            },
+            {
+              "name": "Azure Blob Storage Get block list",
+              "id": "345f9aa9-b3b5-44c2-8c16-9d396d7fdd46",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=blocklist&blocklisttype=committed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "blocklist"
+                    },
+                    {
+                      "description": "Specifies which type of block list to retrieve.",
+                      "key": "blocklisttype",
+                      "value": "committed"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "186c43fe-ec06-4363-b7bc-026fb17b1b69",
+                      "key": "container",
+                      "value": "d1e506sz257vm2-mervtq5lxh32",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Retrieves the list of blocks that have been uploaded as part of a block blob. Returns committed, uncommitted, or all blocks."
+              },
+              "response": [
+                {
+                  "id": "3adc2960-1237-454a-9cf8-a7143053f304",
+                  "name": "Block list returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}?blocklisttype=committed",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies which type of block list to retrieve.",
+                          "key": "blocklisttype",
+                          "value": "committed"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:48.000Z",
+                  "updatedAt": "2026-07-28T02:09:48.000Z",
+                  "uid": "35240-3adc2960-1237-454a-9cf8-a7143053f304"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:48.000Z",
+              "updatedAt": "2026-07-28T02:09:48.000Z",
+              "uid": "35240-345f9aa9-b3b5-44c2-8c16-9d396d7fdd46"
+            }
+          ],
+          "id": "7e67f8f7-37a2-4d07-9b1e-a9d7e8fbcaad",
+          "createdAt": "2026-07-28T02:09:48.000Z",
+          "updatedAt": "2026-07-28T02:09:48.000Z",
+          "uid": "35240-7e67f8f7-37a2-4d07-9b1e-a9d7e8fbcaad"
+        },
+        {
+          "name": "{blob}?comp=block&fromURL",
+          "item": [
+            {
+              "name": "Azure Blob Storage Put block from URL",
+              "id": "47702b6b-2181-4a99-9595-976b1bce6559",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "(Required) URL of the source data.",
+                    "key": "x-ms-copy-source",
+                    "value": "<uri>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:container/{{blob}}?comp=block&fromURL&blockid=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "block"
+                    },
+                    {
+                      "key": "fromURL",
+                      "value": ""
+                    },
+                    {
+                      "description": "(Required) A base64-encoded block ID that identifies the block.",
+                      "key": "blockid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "09e34eb3-d251-4dc9-992d-6e8afcf2b2db",
+                      "key": "container",
+                      "value": "d1e506sz257vm2-mervtq5lxh32",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    }
+                  ]
+                },
+                "description": "Creates a new block to be committed as part of a block blob where the contents are read from a URL. This avoids the need to upload the content through the client."
+              },
+              "response": [
+                {
+                  "id": "cf8c2422-1d9e-4978-ac63-fb900f17b386",
+                  "name": "Block created from URL",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                        "key": "x-ms-version",
+                        "value": "2024-11-04"
+                      },
+                      {
+                        "description": "(Required) URL of the source data.",
+                        "key": "x-ms-copy-source",
+                        "value": "<uri>"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:container/{{blob}}?blockid=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":container",
+                        "{{blob}}"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A base64-encoded block ID that identifies the block.",
+                          "key": "blockid",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "container"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:09:48.000Z",
+                  "updatedAt": "2026-07-28T02:09:48.000Z",
+                  "uid": "35240-cf8c2422-1d9e-4978-ac63-fb900f17b386"
+                }
+              ],
+              "createdAt": "2026-07-28T02:09:48.000Z",
+              "updatedAt": "2026-07-28T02:09:48.000Z",
+              "uid": "35240-47702b6b-2181-4a99-9595-976b1bce6559"
+            }
+          ],
+          "id": "0637df3b-95ca-4e1c-b377-1ecf82231634",
+          "createdAt": "2026-07-28T02:09:48.000Z",
+          "updatedAt": "2026-07-28T02:09:48.000Z",
+          "uid": "35240-0637df3b-95ca-4e1c-b377-1ecf82231634"
+        }
+      ],
+      "id": "4c56a41d-82ec-4de9-92d9-4236e72af884",
+      "createdAt": "2026-07-28T02:09:48.000Z",
+      "updatedAt": "2026-07-28T02:09:48.000Z",
+      "uid": "35240-4c56a41d-82ec-4de9-92d9-4236e72af884"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "accountName",
+      "value": "mystorageaccount"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{accountName}}.blob.core.windows.net"
+    },
+    {
+      "key": "blob",
+      "value": "<string>"
+    }
+  ]
+}

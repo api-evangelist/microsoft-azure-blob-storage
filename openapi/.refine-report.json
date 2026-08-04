@@ -1,0 +1,34 @@
+{
+  "provider": "microsoft-azure-blob-storage",
+  "sources": [
+    "microsoft-azure-blob-storage-append-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml",
+    "microsoft-azure-blob-storage-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-block-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-comp-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-containers-api-openapi.yml",
+    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml"
+  ],
+  "outputs": [
+    "microsoft-azure-blob-storage-append-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml",
+    "microsoft-azure-blob-storage-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-block-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-comp-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-containers-api-openapi.yml",
+    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml",
+    "microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

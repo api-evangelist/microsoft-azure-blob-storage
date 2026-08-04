@@ -1,0 +1,161 @@
+{
+  "info": {
+    "_postman_id": "34e8af48-8c27-4924-b836-dbe10e8f88d5",
+    "name": "Azure Blob Storage REST Append Blobs ?comp=blobs API",
+    "description": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:48.000Z",
+    "updatedAt": "2026-07-28T02:09:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-34e8af48-8c27-4924-b836-dbe10e8f88d5"
+  },
+  "item": [
+    {
+      "name": "?comp=blobs",
+      "item": [
+        {
+          "name": "Azure Blob Storage Find blobs by tags",
+          "id": "2e7fcd9a-b8ef-45eb-b7e4-2d83474b86b3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?comp=blobs&where=<string>&marker=<string>&maxresults=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "key": "comp",
+                  "value": "blobs"
+                },
+                {
+                  "description": "(Required) SQL-like filter expression for blob index tags, for example \"tagkey\"='tagvalue'.",
+                  "key": "where",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Continuation token for pagination.",
+                  "key": "marker",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of blobs to return.",
+                  "key": "maxresults",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Finds blobs in the storage account whose tags match a given search expression. The search expression uses a SQL-like syntax against blob index tags."
+          },
+          "response": [
+            {
+              "id": "18608a33-b8a7-40f1-b4be-c6d76c912340",
+              "name": "Blobs matching the tag filter expression returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?where=<string>&marker=<string>&maxresults=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) SQL-like filter expression for blob index tags, for example \"tagkey\"='tagvalue'.",
+                      "key": "where",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Continuation token for pagination.",
+                      "key": "marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of blobs to return.",
+                      "key": "maxresults",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:09:49.000Z",
+              "updatedAt": "2026-07-28T02:09:49.000Z",
+              "uid": "35240-18608a33-b8a7-40f1-b4be-c6d76c912340"
+            }
+          ],
+          "createdAt": "2026-07-28T02:09:49.000Z",
+          "updatedAt": "2026-07-28T02:09:49.000Z",
+          "uid": "35240-2e7fcd9a-b8ef-45eb-b7e4-2d83474b86b3"
+        }
+      ],
+      "id": "79211aa4-c645-4bfb-a0df-b87bdccbe5e1",
+      "createdAt": "2026-07-28T02:09:49.000Z",
+      "updatedAt": "2026-07-28T02:09:49.000Z",
+      "uid": "35240-79211aa4-c645-4bfb-a0df-b87bdccbe5e1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "accountName",
+      "value": "mystorageaccount"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{accountName}}.blob.core.windows.net"
+    }
+  ]
+}
