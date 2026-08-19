@@ -1,0 +1,349 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs Containers API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Get container properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "restype",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all user-defined metadata and system properties of the specified container. The container metadata is returned as x-ms-meta- response headers."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Create container",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-public-access",
+                "value": ""
+              },
+              {
+                "name": "x-ms-default-encryption-scope",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "restype",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Creates a new container under the specified storage account. The container name must be a valid DNS name and conform to Azure Storage naming rules."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Delete container",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{accountName}.blob.core.windows.net/:container",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "restype",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Marks the specified container for deletion. The container and any blobs it contains are later deleted during garbage collection. If soft delete is enabled, the container can be restored within the retention period."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage List blobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=list",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to return only blobs whose names begin with the specified prefix."
+              },
+              {
+                "name": "delimiter",
+                "value": "",
+                "type": "query",
+                "description": "Delimiter character used to traverse a virtual hierarchy of blobs as though it were a file system."
+              },
+              {
+                "name": "marker",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination."
+              },
+              {
+                "name": "maxresults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of blobs to return."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional datasets to include such as snapshots, metadata, uncommitted blobs, copy, deleted, tags, versions, deletedwithversions, immutabilitypolicy, legalhold, and permissions."
+              }
+            ]
+          },
+          "docs": "Returns a list of blobs in the specified container. Results can be filtered by prefix, segmented using a delimiter for virtual directory hierarchy, and paginated using marker and maxresults."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get container metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=metadata",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Returns only user-defined metadata for the specified container as x-ms-meta- response headers."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set container metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=metadata",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Sets one or more user-defined name-value pairs for the specified container. Existing metadata is replaced entirely with the new set."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get container ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=acl",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Returns the public access policy and stored access policies for the specified container."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set container ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=acl",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Sets the public access policy and stored access policies for the specified container. Stored access policies can be used to create service-level shared access signatures."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Lease container",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=lease",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-lease-action",
+                "value": ""
+              },
+              {
+                "name": "x-ms-lease-duration",
+                "value": ""
+              },
+              {
+                "name": "x-ms-proposed-lease-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Establishes and manages a lock on a container for delete operations. The lock duration can be infinite or between 15 and 60 seconds. Lease actions include acquire, renew, change, release, and break."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Restore container",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container?restype=container&comp=undelete",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-deleted-container-name",
+                "value": ""
+              },
+              {
+                "name": "x-ms-deleted-container-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              }
+            ]
+          },
+          "docs": "Restores a soft-deleted container. This operation is only available when container soft delete is enabled for the storage account and the retention period has not expired."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

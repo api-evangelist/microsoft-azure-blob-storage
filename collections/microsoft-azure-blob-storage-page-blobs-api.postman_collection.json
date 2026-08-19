@@ -1,0 +1,610 @@
+{
+  "item": [
+    {
+      "id": "dd7a55be-4908-4bae-9c36-8b6a96127e1e",
+      "name": "Page Blobs",
+      "description": {
+        "content": "Operations specific to page blobs including put page and get page ranges",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44f23399-9f3e-4f40-a789-6bdda802b833",
+          "name": "Azure Blob Storage Put page",
+          "request": {
+            "name": "Azure Blob Storage Put page",
+            "description": {
+              "content": "Writes a range of pages to a page blob. Pages must be aligned to 512-byte boundaries. The update action writes data to the blob, and the clear action deallocates the specified pages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":container",
+                "{{blob}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "comp",
+                  "value": "page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "container",
+                  "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                },
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The page write operation type.",
+                "key": "x-ms-page-write",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The byte range for the page write operation. Must be aligned to 512-byte boundaries. Format is bytes=startByte-endByte.",
+                "key": "x-ms-range",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "59934cb0-9d1a-43e5-9e6d-7b81c4b236fd",
+              "name": "Page written successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "container",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The page write operation type.",
+                    "key": "x-ms-page-write",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The byte range for the page write operation. Must be aligned to 512-byte boundaries. Format is bytes=startByte-endByte.",
+                    "key": "x-ms-range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36d0c36e-7402-4b84-b483-3101584cdf34",
+          "name": "Azure Blob Storage Get page ranges",
+          "request": {
+            "name": "Azure Blob Storage Get page ranges",
+            "description": {
+              "content": "Returns a list of valid page ranges for a page blob or a snapshot of a page blob.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":container",
+                "{{blob}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "comp",
+                  "value": "pagelist"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "container",
+                  "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                },
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "disabled": false,
+                "description": "Return only page ranges within the specified byte range.",
+                "key": "x-ms-range",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf019637-6584-41a9-a06d-f50be330b570",
+              "name": "Page ranges returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "container",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Return only page ranges within the specified byte range.",
+                    "key": "x-ms-range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb63aefe-17b8-4136-8989-b8451982ef01",
+          "name": "Azure Blob Storage Get page ranges diff",
+          "request": {
+            "name": "Azure Blob Storage Get page ranges diff",
+            "description": {
+              "content": "Returns the list of page ranges that differ between a previous snapshot and the current blob or between two snapshots. Useful for incremental backup scenarios.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":container",
+                "{{blob}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "comp",
+                  "value": "pagelist"
+                },
+                {
+                  "key": "diff",
+                  "value": "null"
+                },
+                {
+                  "disabled": false,
+                  "key": "prevsnapshot",
+                  "value": "<string>",
+                  "description": "(Required) The snapshot identifier for the previous snapshot."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "container",
+                  "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                },
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9040899b-b3b4-4fea-af66-972fa97f0795",
+              "name": "Differential page ranges returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "prevsnapshot",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "container",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c77c4b3-cfe5-433d-8dc9-da4eb15b64e4",
+          "name": "Azure Blob Storage Incremental copy blob",
+          "request": {
+            "name": "Azure Blob Storage Incremental copy blob",
+            "description": {
+              "content": "Copies a snapshot of a source page blob to a destination page blob. Only the differential changes between the previously copied snapshot and the new snapshot are transferred to the destination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":container",
+                "{{blob}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "comp",
+                  "value": "incrementalcopy"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "container",
+                  "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                },
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) URL of the source page blob snapshot.",
+                "key": "x-ms-copy-source",
+                "value": "<uri>"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee27b249-dfc8-4f1e-8ea8-3ce3731195c4",
+              "name": "Incremental copy operation initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":container",
+                    "{{blob}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "container",
+                      "description": "(Required) The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+                    },
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) URL of the source page blob snapshot.",
+                    "key": "x-ms-copy-source",
+                    "value": "<uri>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Azure Storage account",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mystorageaccount",
+      "key": "accountName"
+    },
+    {
+      "type": "string",
+      "value": "https://{{accountName}}.blob.core.windows.net",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "blob"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15a8d8ae-0195-44d6-af42-0346736ccaf2",
+    "name": "Azure Blob Storage REST Append Blobs Page Blobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+      "type": "text/plain"
+    }
+  }
+}

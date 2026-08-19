@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "9c447201-89a4-45a4-9e05-4b36e02fdf1e",
+      "name": "?restype=service&comp=batch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f130580b-abea-45b1-bf7a-b35b2e169414",
+          "name": "Azure Blob Storage Submit blob batch",
+          "request": {
+            "name": "Azure Blob Storage Submit blob batch",
+            "description": {
+              "content": "Submits a batch request containing multiple subrequests. The batch request body is a multipart MIME message containing individual subrequests. Currently supports batch delete blob and batch set blob tier operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "restype",
+                  "value": "service"
+                },
+                {
+                  "key": "comp",
+                  "value": "batch"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/mixed"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "15d73ff5-ba99-425c-a467-51ed6267ed8e",
+              "name": "Batch request accepted and processed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Azure Storage account",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mystorageaccount",
+      "key": "accountName"
+    },
+    {
+      "type": "string",
+      "value": "https://{{accountName}}.blob.core.windows.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f494ab3a-c9bd-4db1-9b96-206a4de75cf1",
+    "name": "Azure Blob Storage REST Append Blobs ?restype=service&comp=batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+      "type": "text/plain"
+    }
+  }
+}

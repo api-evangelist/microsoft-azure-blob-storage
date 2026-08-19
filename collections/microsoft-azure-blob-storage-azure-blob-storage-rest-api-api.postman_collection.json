@@ -1,0 +1,287 @@
+{
+  "item": [
+    {
+      "id": "b6438374-051e-4a5b-a2a9-80e32dff7404",
+      "name": "Azure Blob Storage REST API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ae0588e-a744-4185-87db-9772c7befa89",
+          "name": "Azure Blob Storage List containers",
+          "request": {
+            "name": "Azure Blob Storage List containers",
+            "description": {
+              "content": "Returns a list of containers under the specified storage account. Results can be filtered by prefix and paginated using marker and maxresults parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "comp",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "prefix",
+                  "value": "<string>",
+                  "description": "Filters results to return only containers whose names begin with the specified prefix."
+                },
+                {
+                  "disabled": false,
+                  "key": "marker",
+                  "value": "<string>",
+                  "description": "Continuation token for retrieving the next page of results. Returned in the NextMarker element of a previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxresults",
+                  "value": "<integer>",
+                  "description": "Maximum number of containers to return in a single response. Defaults to 5000 if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Specifies additional datasets to include in the response such as metadata, deleted containers, or system containers."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfbf6f43-1728-4150-8a20-9df54e0f09a8",
+              "name": "Successfully listed containers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxresults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <ServiceEndpoint>(string)</ServiceEndpoint>\n  <MaxResults>(integer)</MaxResults>\n  <Prefix>(string)</Prefix>\n  <Containers>\n    <Name>(string)</Name>\n    <Properties>\n      <Last-Modified>(string)</Last-Modified>\n      <Etag>(string)</Etag>\n      <LeaseStatus>(string)</LeaseStatus>\n      <LeaseState>(string)</LeaseState>\n      <LeaseDuration>(string)</LeaseDuration>\n      <PublicAccess>(string)</PublicAccess>\n      <HasImmutabilityPolicy>(boolean)</HasImmutabilityPolicy>\n      <HasLegalHold>(boolean)</HasLegalHold>\n      <DefaultEncryptionScope>(string)</DefaultEncryptionScope>\n      <DenyEncryptionScopeOverride>(boolean)</DenyEncryptionScopeOverride>\n      <ImmutableStorageWithVersioningEnabled>(boolean)</ImmutableStorageWithVersioningEnabled>\n    </Properties>\n    <Metadata>\n    </Metadata>\n  </Containers>\n  <Containers>\n    <Name>(string)</Name>\n    <Properties>\n      <Last-Modified>(string)</Last-Modified>\n      <Etag>(string)</Etag>\n      <LeaseStatus>(string)</LeaseStatus>\n      <LeaseState>(string)</LeaseState>\n      <LeaseDuration>(string)</LeaseDuration>\n      <PublicAccess>(string)</PublicAccess>\n      <HasImmutabilityPolicy>(boolean)</HasImmutabilityPolicy>\n      <HasLegalHold>(boolean)</HasLegalHold>\n      <DefaultEncryptionScope>(string)</DefaultEncryptionScope>\n      <DenyEncryptionScopeOverride>(boolean)</DenyEncryptionScopeOverride>\n      <ImmutableStorageWithVersioningEnabled>(boolean)</ImmutableStorageWithVersioningEnabled>\n    </Properties>\n    <Metadata>\n    </Metadata>\n  </Containers>\n  <NextMarker>(string)</NextMarker>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "618d7724-083b-4103-8864-f1f381fb2d65",
+              "name": "Forbidden - authentication or authorization failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "marker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxresults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Azure Storage account",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mystorageaccount",
+      "key": "accountName"
+    },
+    {
+      "type": "string",
+      "value": "https://{{accountName}}.blob.core.windows.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "716b8d0a-5654-421a-9c53-75e79e13b94b",
+    "name": "Azure Blob Storage REST Append Blobs Azure Blob Storage REST API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+      "type": "text/plain"
+    }
+  }
+}

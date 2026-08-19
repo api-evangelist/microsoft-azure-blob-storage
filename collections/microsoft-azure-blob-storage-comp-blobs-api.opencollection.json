@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs ?comp=blobs API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "?comp=blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Find blobs by tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/?comp=blobs",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "where",
+                "value": "",
+                "type": "query",
+                "description": "SQL-like filter expression for blob index tags, for example \"tagkey\"='tagvalue'."
+              },
+              {
+                "name": "marker",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for pagination."
+              },
+              {
+                "name": "maxresults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of blobs to return."
+              }
+            ]
+          },
+          "docs": "Finds blobs in the storage account whose tags match a given search expression. The search expression uses a SQL-like syntax against blob index tags."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs ?restype=service&comp=batch API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "?restype=service&comp=batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Submit blob batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{accountName}.blob.core.windows.net/?restype=service&comp=batch",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Submits a batch request containing multiple subrequests. The batch request body is a multipart MIME message containing individual subrequests. Currently supports batch delete blob and batch set blob tier operations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

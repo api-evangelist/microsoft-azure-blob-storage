@@ -1,0 +1,696 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Get blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "query",
+                "description": "The snapshot identifier. When specified, the operation returns the snapshot of the blob."
+              },
+              {
+                "name": "versionid",
+                "value": "",
+                "type": "query",
+                "description": "The version ID. When specified, the operation returns the specified version of the blob."
+              }
+            ]
+          },
+          "docs": "Reads or downloads a blob from Blob Storage, including its user-defined metadata and system properties. A range of bytes can be requested using the Range header."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Put blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-type",
+                "value": ""
+              },
+              {
+                "name": "Content-Length",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-ms-access-tier",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-length",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Creates a new blob or replaces an existing blob within a container. The type of blob to create is specified in the x-ms-blob-type header. For block blobs up to 5000 MiB, the entire content can be uploaded in a single request."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Delete blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-delete-snapshots",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "query",
+                "description": "The snapshot identifier. When specified, only the snapshot is deleted."
+              }
+            ]
+          },
+          "docs": "Marks the specified blob or snapshot for deletion. The blob is later deleted during garbage collection. If soft delete is enabled, the blob can be restored within the retention period."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get blob properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Returns all system properties and user-defined metadata on the blob. Does not return the blob content. Properties are returned as response headers."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get blob metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=metadata",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Retrieves all user-defined metadata of an existing blob or snapshot. Metadata is returned as x-ms-meta- response headers."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=metadata",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets user-defined metadata for the specified blob as one or more name-value pairs. Existing metadata is replaced entirely."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob HTTP headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=properties",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-encoding",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-language",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-cache-control",
+                "value": ""
+              },
+              {
+                "name": "x-ms-blob-content-disposition",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets system properties defined for an existing blob such as content type, content encoding, content language, content disposition, and cache control."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get blob tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=tags",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Retrieves user-defined blob index tags. Tags form a secondary index that can be queried using the Find Blobs by Tags operation."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=tags",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets user-defined blob index tags on an existing blob. Tags are key-value pairs that form a secondary index, enabling efficient querying across all blobs in a storage account."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Lease blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=lease",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-lease-action",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Establishes and manages a lock on write and delete operations for a blob. The lock can be infinite or between 15 and 60 seconds."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Snapshot blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=snapshot",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Creates a read-only snapshot of a blob. A snapshot is a version of a blob that is captured at a point in time. Snapshots share the same blob name and are distinguished by the snapshot query parameter."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Copy blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=copy",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-copy-source",
+                "value": ""
+              },
+              {
+                "name": "x-ms-access-tier",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Copies a source blob to a destination blob within the same storage account or across storage accounts. The copy operation is asynchronous and the status can be checked using Get Blob Properties."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Abort copy blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=copy&copyid=:copyId",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-copy-action",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "copyId",
+                "value": "",
+                "type": "query",
+                "description": "The copy operation identifier returned by the Copy Blob response."
+              }
+            ]
+          },
+          "docs": "Aborts a pending Copy Blob operation and leaves the destination blob with zero length and full metadata. The copy must be in a pending state."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Undelete blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=undelete",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Restores the contents and metadata of a soft-deleted blob and any associated soft-deleted snapshots. This is only available when soft delete is enabled and the retention period has not expired."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=tier",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-access-tier",
+                "value": ""
+              },
+              {
+                "name": "x-ms-rehydrate-priority",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets the access tier of a block blob or page blob. For block blobs, supported tiers are Hot, Cool, Cold, and Archive. Moving a blob from Archive tier requires rehydration, which can take hours."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob immutability policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=immutabilityPolicies",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-immutability-policy-until-date",
+                "value": ""
+              },
+              {
+                "name": "x-ms-immutability-policy-mode",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets the immutability policy on a blob. Immutability policies prevent blob modification and deletion for a specified retention period. Supports unlocked and locked policy modes."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Delete blob immutability policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=immutabilityPolicies",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Deletes the immutability policy on a blob. The policy must be in Unlocked mode to be deleted."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Set blob legal hold",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=legalhold",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-legal-hold",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Sets or clears a legal hold on a blob. A legal hold prevents the blob from being modified or deleted regardless of the immutability policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

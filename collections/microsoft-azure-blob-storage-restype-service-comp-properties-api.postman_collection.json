@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "6abbe6d0-2de6-42ad-b849-e3210d219f85",
+      "name": "?restype=service&comp=properties",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "447b90a7-c184-4790-bb5b-8505887f861a",
+          "name": "Azure Blob Storage Get Blob service properties",
+          "request": {
+            "name": "Azure Blob Storage Get Blob service properties",
+            "description": {
+              "content": "Retrieves the properties of the Blob service, including logging, metrics, CORS rules, the default service version, and soft delete settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "restype",
+                  "value": "service"
+                },
+                {
+                  "key": "comp",
+                  "value": "properties"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "290ac882-ba61-4677-b30e-fda3abe9fabf",
+              "name": "Blob service properties returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Logging>\n    <Version>(string)</Version>\n    <Read>(boolean)</Read>\n    <Write>(boolean)</Write>\n    <Delete>(boolean)</Delete>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </Logging>\n  <HourMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </HourMetrics>\n  <MinuteMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </MinuteMetrics>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <DefaultServiceVersion>(string)</DefaultServiceVersion>\n  <DeleteRetentionPolicy>\n    <Enabled>(boolean)</Enabled>\n    <Days>(integer)</Days>\n  </DeleteRetentionPolicy>\n  <StaticWebsite>\n    <Enabled>(boolean)</Enabled>\n    <IndexDocument>(string)</IndexDocument>\n    <ErrorDocument404Path>(string)</ErrorDocument404Path>\n  </StaticWebsite>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b1cda7c-c08f-4272-a5bc-79eef4d266c5",
+          "name": "Azure Blob Storage Set Blob service properties",
+          "request": {
+            "name": "Azure Blob Storage Set Blob service properties",
+            "description": {
+              "content": "Sets the properties of the Blob service, including logging, metrics, CORS rules, the default service version, and soft delete settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "restype",
+                  "value": "service"
+                },
+                {
+                  "key": "comp",
+                  "value": "properties"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The name of the Azure Storage account",
+                  "type": "any",
+                  "value": "{{accountName}}",
+                  "key": "accountName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                "key": "x-ms-version",
+                "value": "2024-11-04"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Logging>\n    <Version>(string)</Version>\n    <Read>(boolean)</Read>\n    <Write>(boolean)</Write>\n    <Delete>(boolean)</Delete>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </Logging>\n  <HourMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </HourMetrics>\n  <MinuteMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </MinuteMetrics>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <DefaultServiceVersion>(string)</DefaultServiceVersion>\n  <DeleteRetentionPolicy>\n    <Enabled>(boolean)</Enabled>\n    <Days>(integer)</Days>\n  </DeleteRetentionPolicy>\n  <StaticWebsite>\n    <Enabled>(boolean)</Enabled>\n    <IndexDocument>(string)</IndexDocument>\n    <ErrorDocument404Path>(string)</ErrorDocument404Path>\n  </StaticWebsite>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4b58ed1-9979-4488-9a25-2348b358bdae",
+              "name": "Properties accepted and being applied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The name of the Azure Storage account",
+                      "type": "any",
+                      "value": "{{accountName}}",
+                      "key": "accountName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Specifies the version of the Azure Storage REST API to use for the request.",
+                    "key": "x-ms-version",
+                    "value": "2024-11-04"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <Logging>\n    <Version>(string)</Version>\n    <Read>(boolean)</Read>\n    <Write>(boolean)</Write>\n    <Delete>(boolean)</Delete>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </Logging>\n  <HourMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </HourMetrics>\n  <MinuteMetrics>\n    <Version>(string)</Version>\n    <Enabled>(boolean)</Enabled>\n    <IncludeAPIs>(boolean)</IncludeAPIs>\n    <RetentionPolicy>\n      <Enabled>(boolean)</Enabled>\n      <Days>(integer)</Days>\n    </RetentionPolicy>\n  </MinuteMetrics>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <Cors>\n    <AllowedOrigins>(string)</AllowedOrigins>\n    <AllowedMethods>(string)</AllowedMethods>\n    <AllowedHeaders>(string)</AllowedHeaders>\n    <ExposedHeaders>(string)</ExposedHeaders>\n    <MaxAgeInSeconds>(integer)</MaxAgeInSeconds>\n  </Cors>\n  <DefaultServiceVersion>(string)</DefaultServiceVersion>\n  <DeleteRetentionPolicy>\n    <Enabled>(boolean)</Enabled>\n    <Days>(integer)</Days>\n  </DeleteRetentionPolicy>\n  <StaticWebsite>\n    <Enabled>(boolean)</Enabled>\n    <IndexDocument>(string)</IndexDocument>\n    <ErrorDocument404Path>(string)</ErrorDocument404Path>\n  </StaticWebsite>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The name of the Azure Storage account",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mystorageaccount",
+      "key": "accountName"
+    },
+    {
+      "type": "string",
+      "value": "https://{{accountName}}.blob.core.windows.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c718b4b-503c-407b-bfed-b5bb140e597a",
+    "name": "Azure Blob Storage REST Append Blobs ?restype=service&comp=properties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.\n\nContact Support:\n Name: Microsoft Azure Support",
+      "type": "text/plain"
+    }
+  }
+}

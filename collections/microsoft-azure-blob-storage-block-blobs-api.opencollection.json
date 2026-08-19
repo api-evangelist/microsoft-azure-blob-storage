@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs Block Blobs API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Block Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Put block",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=block",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "blockid",
+                "value": "",
+                "type": "query",
+                "description": "A base64-encoded block ID that identifies the block. All block IDs for a given blob must be the same length."
+              }
+            ]
+          },
+          "docs": "Uploads a block to be committed as part of a block blob. Each block can be up to 4000 MiB in size. The block is identified by a base64-encoded block ID. Blocks must be committed using Put Block List to form the final blob."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Get block list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=blocklist",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "blocklisttype",
+                "value": "",
+                "type": "query",
+                "description": "Specifies which type of block list to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of blocks that have been uploaded as part of a block blob. Returns committed, uncommitted, or all blocks."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Put block list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=blocklist",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Commits a blob by specifying the set of block IDs that comprise the block blob. Blocks can be from the latest uncommitted block list, the committed block list, or both."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Put block from URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=block&fromURL",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-copy-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              },
+              {
+                "name": "blockid",
+                "value": "",
+                "type": "query",
+                "description": "A base64-encoded block ID that identifies the block."
+              }
+            ]
+          },
+          "docs": "Creates a new block to be committed as part of a block blob where the contents are read from a URL. This avoids the need to upload the content through the client."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

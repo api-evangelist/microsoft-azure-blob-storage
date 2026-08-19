@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs ?restype=service&comp=userdelegationkey API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "?restype=service&comp=userdelegationkey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Get user delegation key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{accountName}.blob.core.windows.net/?restype=service&comp=userdelegationkey",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Obtains a key that can be used to sign a user delegation shared access signature (SAS), granting access to blob resources using Microsoft Entra ID credentials. The key is valid for the specified time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

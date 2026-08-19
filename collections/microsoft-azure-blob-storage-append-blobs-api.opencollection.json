@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Azure Blob Storage REST Append Blobs API",
+    "version": "2024-11-04"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Append Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Azure Blob Storage Append block",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=appendblock",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Commits a new block of data to the end of an existing append blob. Each block can be up to 4 MiB in size. An append blob can contain up to 50,000 blocks."
+        },
+        {
+          "info": {
+            "name": "Azure Blob Storage Append block from URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{accountName}.blob.core.windows.net/:container/:blob?comp=appendblock&fromURL",
+            "headers": [
+              {
+                "name": "x-ms-version",
+                "value": ""
+              },
+              {
+                "name": "x-ms-copy-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "container",
+                "value": "",
+                "type": "path",
+                "description": "The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens."
+              },
+              {
+                "name": "blob",
+                "value": "",
+                "type": "path",
+                "description": "The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy."
+              }
+            ]
+          },
+          "docs": "Commits a new block of data to the end of an append blob where the contents are read from a source URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
