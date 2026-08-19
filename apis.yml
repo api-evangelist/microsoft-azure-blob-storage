@@ -2,6 +2,7 @@ name: Azure Blob Storage
 description: >-
   Microsoft Azure Blob Storage is a service for storing large amounts of unstructured object data, such as text or
   binary data, that can be accessed from anywhere in the world via HTTP or HTTPS.
+specificationVersion: '0.23'
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -80,7 +81,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -124,7 +125,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -165,7 +166,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -206,7 +207,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -247,7 +248,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -288,7 +289,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -329,7 +330,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -371,7 +372,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -414,7 +415,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -456,7 +457,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
@@ -500,7 +501,7 @@ apis:
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
   - type: Tutorials
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview
-  - type: Code Samples
+  - type: CodeExamples
     url: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli
   - type: Reference
     url: https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs
