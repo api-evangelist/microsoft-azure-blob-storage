@@ -39,6 +39,11 @@ apis:
   tags:
   - Big Data
   - Data Lake
+  - Filesystem
+  - Hierarchical Namespace
+  tags_raw:
+  - Big Data
+  - Data Lake
   - File System
   - Hierarchical Namespace
   properties:
