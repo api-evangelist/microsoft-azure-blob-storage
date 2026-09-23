@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Blob Storage REST Append Blobs ?restype=service&comp=properties ?restype=service&comp=properties API
+  title: Azure Blob Storage REST ?restype=service&comp=properties API
   description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
   version: '2024-11-04'
   contact:
@@ -56,37 +56,6 @@ paths:
           description: Properties accepted and being applied
 components:
   schemas:
-    CorsRule:
-      type: object
-      description: A CORS rule for the Blob service.
-      properties:
-        AllowedOrigins:
-          type: string
-          description: Comma-separated list of allowed origin domains, or * for all
-        AllowedMethods:
-          type: string
-          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
-        AllowedHeaders:
-          type: string
-          description: Comma-separated list of allowed request headers
-        ExposedHeaders:
-          type: string
-          description: Comma-separated list of response headers exposed to the client
-        MaxAgeInSeconds:
-          type: integer
-          description: Maximum number of seconds the browser should cache the preflight response
-    RetentionPolicy:
-      type: object
-      description: The retention policy configuration.
-      properties:
-        Enabled:
-          type: boolean
-          description: Whether the retention policy is enabled
-        Days:
-          type: integer
-          minimum: 1
-          maximum: 365
-          description: Number of days data is retained
     StorageServiceProperties:
       type: object
       description: Properties of the Blob service.
@@ -136,6 +105,25 @@ components:
             ErrorDocument404Path:
               type: string
               description: The path to the 404 error document
+    CorsRule:
+      type: object
+      description: A CORS rule for the Blob service.
+      properties:
+        AllowedOrigins:
+          type: string
+          description: Comma-separated list of allowed origin domains, or * for all
+        AllowedMethods:
+          type: string
+          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
+        AllowedHeaders:
+          type: string
+          description: Comma-separated list of allowed request headers
+        ExposedHeaders:
+          type: string
+          description: Comma-separated list of response headers exposed to the client
+        MaxAgeInSeconds:
+          type: integer
+          description: Maximum number of seconds the browser should cache the preflight response
     Metrics:
       type: object
       description: Azure Analytics metrics settings.
@@ -151,6 +139,18 @@ components:
           description: Whether to include API-level metrics
         RetentionPolicy:
           $ref: '#/components/schemas/RetentionPolicy'
+    RetentionPolicy:
+      type: object
+      description: The retention policy configuration.
+      properties:
+        Enabled:
+          type: boolean
+          description: Whether the retention policy is enabled
+        Days:
+          type: integer
+          minimum: 1
+          maximum: 365
+          description: Number of days data is retained
   parameters:
     ApiVersion:
       name: x-ms-version

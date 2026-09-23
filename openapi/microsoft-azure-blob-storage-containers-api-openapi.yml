@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Blob Storage REST Append Blobs Containers API
+  title: Azure Blob Storage REST Containers API
   description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
   version: '2024-11-04'
   contact:
@@ -257,7 +257,59 @@ paths:
         '201':
           description: Container restored successfully
 components:
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
   schemas:
+    BlobList:
+      type: object
+      description: The list of blobs returned by the List Blobs operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        ContainerName:
+          type: string
+          description: The container name
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Delimiter:
+          type: string
+          description: The delimiter used for virtual directory hierarchy
+        Blobs:
+          type: array
+          description: The list of blobs
+          items:
+            $ref: '#/components/schemas/Blob'
+        BlobPrefixes:
+          type: array
+          description: Virtual directory prefixes when using a delimiter
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
     Blob:
       type: object
       description: A blob in Azure Storage.
@@ -352,58 +404,6 @@ components:
           description: User-defined blob index tags
           additionalProperties:
             type: string
-    BlobList:
-      type: object
-      description: The list of blobs returned by the List Blobs operation.
-      properties:
-        ServiceEndpoint:
-          type: string
-          description: The service endpoint URL
-        ContainerName:
-          type: string
-          description: The container name
-        MaxResults:
-          type: integer
-          description: Maximum number of results requested
-        Prefix:
-          type: string
-          description: The prefix filter applied
-        Delimiter:
-          type: string
-          description: The delimiter used for virtual directory hierarchy
-        Blobs:
-          type: array
-          description: The list of blobs
-          items:
-            $ref: '#/components/schemas/Blob'
-        BlobPrefixes:
-          type: array
-          description: Virtual directory prefixes when using a delimiter
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-        NextMarker:
-          type: string
-          description: Continuation token for the next page of results
-  parameters:
-    ApiVersion:
-      name: x-ms-version
-      in: header
-      required: true
-      description: Specifies the version of the Azure Storage REST API to use for the request.
-      schema:
-        type: string
-        default: '2024-11-04'
-    ContainerName:
-      name: container
-      in: path
-      required: true
-      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
-      schema:
-        type: string
-        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
   securitySchemes:
     sharedKey:
       type: apiKey

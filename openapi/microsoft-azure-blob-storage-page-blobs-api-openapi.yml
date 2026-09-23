@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Azure Blob Storage REST Append Blobs Page Blobs API
+  title: Azure Blob Storage REST Page Blobs API
   description: The Azure Blob Storage REST API provides programmatic access to unstructured data storage in Azure. It supports operations on the Blob service, containers, and blobs, including block blobs, append blobs, and page blobs. Blobs can store any type of text or binary data such as documents, media files, and application installers. Blob Storage is optimized for storing massive amounts of unstructured data accessible via HTTP or HTTPS from anywhere in the world.
   version: '2024-11-04'
   contact:
