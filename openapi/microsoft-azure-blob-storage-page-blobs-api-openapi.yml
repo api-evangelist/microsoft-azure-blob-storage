@@ -127,13 +127,6 @@ components:
       schema:
         type: string
         default: '2024-11-04'
-    BlobName:
-      name: blob
-      in: path
-      required: true
-      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
-      schema:
-        type: string
     ContainerName:
       name: container
       in: path
@@ -142,6 +135,13 @@ components:
       schema:
         type: string
         pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
+    BlobName:
+      name: blob
+      in: path
+      required: true
+      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
+      schema:
+        type: string
   securitySchemes:
     sharedKey:
       type: apiKey

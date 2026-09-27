@@ -275,41 +275,6 @@ components:
         type: string
         pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
   schemas:
-    BlobList:
-      type: object
-      description: The list of blobs returned by the List Blobs operation.
-      properties:
-        ServiceEndpoint:
-          type: string
-          description: The service endpoint URL
-        ContainerName:
-          type: string
-          description: The container name
-        MaxResults:
-          type: integer
-          description: Maximum number of results requested
-        Prefix:
-          type: string
-          description: The prefix filter applied
-        Delimiter:
-          type: string
-          description: The delimiter used for virtual directory hierarchy
-        Blobs:
-          type: array
-          description: The list of blobs
-          items:
-            $ref: '#/components/schemas/Blob'
-        BlobPrefixes:
-          type: array
-          description: Virtual directory prefixes when using a delimiter
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-        NextMarker:
-          type: string
-          description: Continuation token for the next page of results
     Blob:
       type: object
       description: A blob in Azure Storage.
@@ -404,6 +369,41 @@ components:
           description: User-defined blob index tags
           additionalProperties:
             type: string
+    BlobList:
+      type: object
+      description: The list of blobs returned by the List Blobs operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        ContainerName:
+          type: string
+          description: The container name
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Delimiter:
+          type: string
+          description: The delimiter used for virtual directory hierarchy
+        Blobs:
+          type: array
+          description: The list of blobs
+          items:
+            $ref: '#/components/schemas/Blob'
+        BlobPrefixes:
+          type: array
+          description: Virtual directory prefixes when using a delimiter
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
   securitySchemes:
     sharedKey:
       type: apiKey
