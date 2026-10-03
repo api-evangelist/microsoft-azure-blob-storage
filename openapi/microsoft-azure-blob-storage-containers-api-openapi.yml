@@ -257,23 +257,6 @@ paths:
         '201':
           description: Container restored successfully
 components:
-  parameters:
-    ApiVersion:
-      name: x-ms-version
-      in: header
-      required: true
-      description: Specifies the version of the Azure Storage REST API to use for the request.
-      schema:
-        type: string
-        default: '2024-11-04'
-    ContainerName:
-      name: container
-      in: path
-      required: true
-      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
-      schema:
-        type: string
-        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
   schemas:
     Blob:
       type: object
@@ -404,6 +387,23 @@ components:
         NextMarker:
           type: string
           description: Continuation token for the next page of results
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
+    ContainerName:
+      name: container
+      in: path
+      required: true
+      description: The container name. Must be a valid DNS name, 3 to 63 characters, starting with a letter or number, and containing only lowercase letters, numbers, and hyphens.
+      schema:
+        type: string
+        pattern: ^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$
   securitySchemes:
     sharedKey:
       type: apiKey

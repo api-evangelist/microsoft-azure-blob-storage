@@ -11,9 +11,7 @@
     "microsoft-azure-blob-storage-containers-api-openapi.yml",
     "microsoft-azure-blob-storage-page-blobs-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 5 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -27,20 +25,14 @@
     "azure-blob-storage-rest-openapi.yml: tagged paths POST /?restype=service&comp=batch -> Azure Blob Storage REST API",
     "azure-blob-storage-rest-openapi.yml: tagged paths GET /?comp=blobs -> Azure Blob Storage REST API",
     "azure-blob-storage-rest-openapi.yml: declared missing tag: Azure Blob Storage REST API",
-    "superseded outputs removed: microsoft-azure-blob-storage-comp-blobs-api-openapi.yml, microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml, microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml, microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml, microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml",
-    "apis.yml register: written (+0 apis, 7 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "microsoft-azure-blob-storage-append-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "microsoft-azure-blob-storage-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "microsoft-azure-blob-storage-block-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-comp-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "microsoft-azure-blob-storage-containers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
