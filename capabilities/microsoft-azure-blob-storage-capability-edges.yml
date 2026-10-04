@@ -1,0 +1,71 @@
+slug: microsoft-azure-blob-storage
+provider: Azure Blob Storage
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Append Blobs
+  spec_file: microsoft-azure-blob-storage-append-blobs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Azure Blob Storage Append block''; description: ''programmatic access to unstructured data
+    storage in Azure'''
+  reason: Object-storage write primitives are cloud storage infrastructure operations; BC-600.50 explicitly
+    covers storage. Narrow, purely technical surface so confidence kept moderate.
+- tag: Azure Blob Storage REST API
+  spec_file: microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Get Blob service properties'', ''Set Blob service properties'', ''List containers''; schema
+    StorageServiceProperties'
+  reason: Service-level configuration and inventory of a cloud object-storage service — cloud storage
+    infrastructure management.
+- tag: Blobs
+  spec_file: microsoft-azure-blob-storage-blobs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Put blob'', ''Get blob'', ''Delete blob'', ''Snapshot blob'', ''Copy blob'''
+  reason: CRUD over stored objects in a cloud object store is storage infrastructure usage/management,
+    not business data governance.
+- tag: Block Blobs
+  spec_file: microsoft-azure-blob-storage-block-blobs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Put block'', ''Put block list'', ''Get block list'''
+  reason: Low-level block upload primitives of a cloud object store — storage infrastructure plumbing
+    under IT Infrastructure Management.
+- tag: Containers
+  spec_file: microsoft-azure-blob-storage-containers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Create container'', ''Set container ACL'', ''Restore container'', ''List blobs'''
+  reason: Lifecycle and access configuration of object-storage containers is cloud storage infrastructure
+    management.
+- tag: Page Blobs
+  spec_file: microsoft-azure-blob-storage-page-blobs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Put page'', ''Get page ranges'', ''Incremental copy blob'''
+  reason: Page-blob primitives (backing VM disks) are cloud storage infrastructure operations; no business
+    capability is realised.
