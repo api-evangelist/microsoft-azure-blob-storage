@@ -194,7 +194,56 @@ paths:
         '200':
           description: Blobs matching the tag filter expression returned
 components:
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
   schemas:
+    CorsRule:
+      type: object
+      description: A CORS rule for the Blob service.
+      properties:
+        AllowedOrigins:
+          type: string
+          description: Comma-separated list of allowed origin domains, or * for all
+        AllowedMethods:
+          type: string
+          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
+        AllowedHeaders:
+          type: string
+          description: Comma-separated list of allowed request headers
+        ExposedHeaders:
+          type: string
+          description: Comma-separated list of response headers exposed to the client
+        MaxAgeInSeconds:
+          type: integer
+          description: Maximum number of seconds the browser should cache the preflight response
+    ContainerList:
+      type: object
+      description: The list of containers returned by the List Containers operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Containers:
+          type: array
+          description: The list of containers
+          items:
+            $ref: '#/components/schemas/Container'
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
     StorageServiceProperties:
       type: object
       description: Properties of the Blob service.
@@ -244,18 +293,6 @@ components:
             ErrorDocument404Path:
               type: string
               description: The path to the 404 error document
-    RetentionPolicy:
-      type: object
-      description: The retention policy configuration.
-      properties:
-        Enabled:
-          type: boolean
-          description: Whether the retention policy is enabled
-        Days:
-          type: integer
-          minimum: 1
-          maximum: 365
-          description: Number of days data is retained
     Metrics:
       type: object
       description: Azure Analytics metrics settings.
@@ -271,27 +308,18 @@ components:
           description: Whether to include API-level metrics
         RetentionPolicy:
           $ref: '#/components/schemas/RetentionPolicy'
-    ContainerList:
+    RetentionPolicy:
       type: object
-      description: The list of containers returned by the List Containers operation.
+      description: The retention policy configuration.
       properties:
-        ServiceEndpoint:
-          type: string
-          description: The service endpoint URL
-        MaxResults:
+        Enabled:
+          type: boolean
+          description: Whether the retention policy is enabled
+        Days:
           type: integer
-          description: Maximum number of results requested
-        Prefix:
-          type: string
-          description: The prefix filter applied
-        Containers:
-          type: array
-          description: The list of containers
-          items:
-            $ref: '#/components/schemas/Container'
-        NextMarker:
-          type: string
-          description: Continuation token for the next page of results
+          minimum: 1
+          maximum: 365
+          description: Number of days data is retained
     Container:
       type: object
       description: A blob container in Azure Storage.
@@ -357,34 +385,6 @@ components:
           description: User-defined key-value metadata pairs
           additionalProperties:
             type: string
-    CorsRule:
-      type: object
-      description: A CORS rule for the Blob service.
-      properties:
-        AllowedOrigins:
-          type: string
-          description: Comma-separated list of allowed origin domains, or * for all
-        AllowedMethods:
-          type: string
-          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
-        AllowedHeaders:
-          type: string
-          description: Comma-separated list of allowed request headers
-        ExposedHeaders:
-          type: string
-          description: Comma-separated list of response headers exposed to the client
-        MaxAgeInSeconds:
-          type: integer
-          description: Maximum number of seconds the browser should cache the preflight response
-  parameters:
-    ApiVersion:
-      name: x-ms-version
-      in: header
-      required: true
-      description: Specifies the version of the Azure Storage REST API to use for the request.
-      schema:
-        type: string
-        default: '2024-11-04'
   securitySchemes:
     sharedKey:
       type: apiKey
