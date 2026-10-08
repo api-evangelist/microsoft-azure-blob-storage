@@ -326,6 +326,10 @@ apis:
   - type: Authentication
     url: https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider
 common:
+- type: Plans
+  url: plans/microsoft-azure-blob-storage-plans-pricing.yml
+- type: FinOps
+  url: finops/microsoft-azure-blob-storage-finops.yml
 - type: CapabilityMap
   url: capabilities/microsoft-azure-blob-storage-capability-edges.yml
   name: Azure Blob Storage Business Capability Map
