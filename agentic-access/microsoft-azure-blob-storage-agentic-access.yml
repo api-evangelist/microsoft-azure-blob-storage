@@ -1,19 +1,56 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/azure-blob-storage-rest-openapi.yml
+source: openapi/microsoft-azure-blob-storage-append-blobs-api-openapi.yml, openapi/microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml,
+  openapi/microsoft-azure-blob-storage-blobs-api-openapi.yml, openapi/microsoft-azure-blob-storage-block-blobs-api-openapi.yml,
+  openapi/microsoft-azure-blob-storage-comp-blobs-api-openapi.yml, openapi/microsoft-azure-blob-storage-containers-api-openapi.yml,
+  openapi/microsoft-azure-blob-storage-page-blobs-api-openapi.yml, openapi/microsoft-azure-blob-storage-restype-service-comp-batch-api-openapi.yml,
+  openapi/microsoft-azure-blob-storage-restype-service-comp-properties-api-openapi.yml, openapi/microsoft-azure-blob-storage-restype-service-comp-stats-api-openapi.yml,
+  openapi/microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 45
   by_action_class:
-    connected: 15
-    acting: 30
+    acting: 29
+    connected: 16
   by_consequence:
-    read: 15
-    write: 30
+    write: 29
+    read: 16
   human_in_the_loop_required: 0
 operations:
+- path: /{container}/{blob}?comp=appendblock
+  method: put
+  operationId: appendBlock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}/{blob}?comp=appendblock&fromURL
+  method: put
+  operationId: appendBlockFromURL
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /
   method: get
   operationId: listContainers
@@ -24,220 +61,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /?restype=service&comp=properties
-  method: get
-  operationId: getBlobServiceProperties
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /?restype=service&comp=properties
-  method: put
-  operationId: setBlobServiceProperties
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /?restype=service&comp=stats
-  method: get
-  operationId: getBlobServiceStats
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /?restype=service&comp=userdelegationkey
-  method: post
-  operationId: getUserDelegationKey
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /?restype=service&comp=batch
-  method: post
-  operationId: submitBlobBatch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /?comp=blobs
-  method: get
-  operationId: findBlobsByTags
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /{container}
-  method: put
-  operationId: createContainer
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /{container}
-  method: get
-  operationId: getContainerProperties
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /{container}
-  method: delete
-  operationId: deleteContainer
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /{container}?restype=container&comp=list
-  method: get
-  operationId: listBlobs
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /{container}?restype=container&comp=metadata
-  method: get
-  operationId: getContainerMetadata
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /{container}?restype=container&comp=metadata
-  method: put
-  operationId: setContainerMetadata
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /{container}?restype=container&comp=acl
-  method: get
-  operationId: getContainerACL
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /{container}?restype=container&comp=acl
-  method: put
-  operationId: setContainerACL
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /{container}?restype=container&comp=lease
-  method: put
-  operationId: leaseContainer
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /{container}?restype=container&comp=undelete
-  method: put
-  operationId: restoreContainer
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /{container}/{blob}
   method: put
   operationId: putBlob
@@ -560,6 +383,152 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /?comp=blobs
+  method: get
+  operationId: findBlobsByTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{container}
+  method: put
+  operationId: createContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}
+  method: get
+  operationId: getContainerProperties
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{container}
+  method: delete
+  operationId: deleteContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}?restype=container&comp=list
+  method: get
+  operationId: listBlobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{container}?restype=container&comp=metadata
+  method: get
+  operationId: getContainerMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{container}?restype=container&comp=metadata
+  method: put
+  operationId: setContainerMetadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}?restype=container&comp=acl
+  method: get
+  operationId: getContainerACL
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{container}?restype=container&comp=acl
+  method: put
+  operationId: setContainerACL
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}?restype=container&comp=lease
+  method: put
+  operationId: leaseContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /{container}?restype=container&comp=undelete
+  method: put
+  operationId: restoreContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /{container}/{blob}?comp=page
   method: put
   operationId: putPage
@@ -612,9 +581,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /{container}/{blob}?comp=appendblock
-  method: put
-  operationId: appendBlock
+- path: /?restype=service&comp=batch
+  method: post
+  operationId: submitBlobBatch
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -628,9 +597,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /{container}/{blob}?comp=appendblock&fromURL
+- path: /?restype=service&comp=properties
+  method: get
+  operationId: getBlobServiceProperties
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?restype=service&comp=properties
   method: put
-  operationId: appendBlockFromURL
+  operationId: setBlobServiceProperties
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -644,3 +623,23 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /?restype=service&comp=stats
+  method: get
+  operationId: getBlobServiceStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /?restype=service&comp=userdelegationkey
+  method: post
+  operationId: getUserDelegationKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
