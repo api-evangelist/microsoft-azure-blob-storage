@@ -1,0 +1,12 @@
+fetched: '2026-10-13'
+method: fetched
+source: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
+page: https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction
+file: microsoft-azure-blob-storage-aws-s3-1.md
+bytes: 9748
+sha256: ad806a510d198912498119382f7b4b3792b442ba90934b37b03c39b363a671ca
+anchor: amazon-web-services
+shape: aws-s3
+classification: no-compatibility-statement
+quote: null
+note: text extracted from the provider's own page (tags stripped), saved for evidence
