@@ -1,0 +1,57 @@
+generated: '2026-10-14'
+edges:
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/azure-blob-storage/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - azure-blob-storage
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/azure-blob-destination
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - azure-blob-destination
+      status: released
+      sync_types:
+      - Any data set
+      sync_modes:
+      - all
+      - diff
+      - insert
+    source:
+      catalog_entries:
+      - azure-blob-source
+      status: released
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+method: searched
+checked:
+- https://docs.mparticle.com/integrations/azure-blob-storage/event/
+- https://hightouch.com/docs/destinations/azure-blob-destination
+source:
+- https://docs.mparticle.com/integrations/azure-blob-storage/event/
+- https://hightouch.com/docs/destinations/azure-blob-destination
