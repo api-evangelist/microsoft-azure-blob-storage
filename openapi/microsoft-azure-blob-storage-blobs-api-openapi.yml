@@ -474,6 +474,13 @@ paths:
           description: Legal hold set or cleared
 components:
   parameters:
+    BlobName:
+      name: blob
+      in: path
+      required: true
+      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
+      schema:
+        type: string
     ApiVersion:
       name: x-ms-version
       in: header
@@ -482,13 +489,6 @@ components:
       schema:
         type: string
         default: '2024-11-04'
-    BlobName:
-      name: blob
-      in: path
-      required: true
-      description: The blob name. Can contain any combination of characters and may include path separators (/) for organizing blobs in a virtual directory hierarchy.
-      schema:
-        type: string
     ContainerName:
       name: container
       in: path

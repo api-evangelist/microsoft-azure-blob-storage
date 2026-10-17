@@ -194,132 +194,7 @@ paths:
         '200':
           description: Blobs matching the tag filter expression returned
 components:
-  parameters:
-    ApiVersion:
-      name: x-ms-version
-      in: header
-      required: true
-      description: Specifies the version of the Azure Storage REST API to use for the request.
-      schema:
-        type: string
-        default: '2024-11-04'
   schemas:
-    CorsRule:
-      type: object
-      description: A CORS rule for the Blob service.
-      properties:
-        AllowedOrigins:
-          type: string
-          description: Comma-separated list of allowed origin domains, or * for all
-        AllowedMethods:
-          type: string
-          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
-        AllowedHeaders:
-          type: string
-          description: Comma-separated list of allowed request headers
-        ExposedHeaders:
-          type: string
-          description: Comma-separated list of response headers exposed to the client
-        MaxAgeInSeconds:
-          type: integer
-          description: Maximum number of seconds the browser should cache the preflight response
-    ContainerList:
-      type: object
-      description: The list of containers returned by the List Containers operation.
-      properties:
-        ServiceEndpoint:
-          type: string
-          description: The service endpoint URL
-        MaxResults:
-          type: integer
-          description: Maximum number of results requested
-        Prefix:
-          type: string
-          description: The prefix filter applied
-        Containers:
-          type: array
-          description: The list of containers
-          items:
-            $ref: '#/components/schemas/Container'
-        NextMarker:
-          type: string
-          description: Continuation token for the next page of results
-    StorageServiceProperties:
-      type: object
-      description: Properties of the Blob service.
-      properties:
-        Logging:
-          type: object
-          description: Azure Analytics logging settings
-          properties:
-            Version:
-              type: string
-              description: The version of analytics logging
-            Read:
-              type: boolean
-              description: Whether read requests are logged
-            Write:
-              type: boolean
-              description: Whether write requests are logged
-            Delete:
-              type: boolean
-              description: Whether delete requests are logged
-            RetentionPolicy:
-              $ref: '#/components/schemas/RetentionPolicy'
-        HourMetrics:
-          $ref: '#/components/schemas/Metrics'
-        MinuteMetrics:
-          $ref: '#/components/schemas/Metrics'
-        Cors:
-          type: array
-          description: CORS rules for the Blob service
-          items:
-            $ref: '#/components/schemas/CorsRule'
-        DefaultServiceVersion:
-          type: string
-          description: The default REST API version for requests without a version
-        DeleteRetentionPolicy:
-          $ref: '#/components/schemas/RetentionPolicy'
-        StaticWebsite:
-          type: object
-          description: Static website configuration
-          properties:
-            Enabled:
-              type: boolean
-              description: Whether static website hosting is enabled
-            IndexDocument:
-              type: string
-              description: The default index document path
-            ErrorDocument404Path:
-              type: string
-              description: The path to the 404 error document
-    Metrics:
-      type: object
-      description: Azure Analytics metrics settings.
-      properties:
-        Version:
-          type: string
-          description: The version of metrics
-        Enabled:
-          type: boolean
-          description: Whether metrics are enabled
-        IncludeAPIs:
-          type: boolean
-          description: Whether to include API-level metrics
-        RetentionPolicy:
-          $ref: '#/components/schemas/RetentionPolicy'
-    RetentionPolicy:
-      type: object
-      description: The retention policy configuration.
-      properties:
-        Enabled:
-          type: boolean
-          description: Whether the retention policy is enabled
-        Days:
-          type: integer
-          minimum: 1
-          maximum: 365
-          description: Number of days data is retained
     Container:
       type: object
       description: A blob container in Azure Storage.
@@ -385,6 +260,131 @@ components:
           description: User-defined key-value metadata pairs
           additionalProperties:
             type: string
+    CorsRule:
+      type: object
+      description: A CORS rule for the Blob service.
+      properties:
+        AllowedOrigins:
+          type: string
+          description: Comma-separated list of allowed origin domains, or * for all
+        AllowedMethods:
+          type: string
+          description: Comma-separated list of allowed HTTP methods (GET, PUT, etc.)
+        AllowedHeaders:
+          type: string
+          description: Comma-separated list of allowed request headers
+        ExposedHeaders:
+          type: string
+          description: Comma-separated list of response headers exposed to the client
+        MaxAgeInSeconds:
+          type: integer
+          description: Maximum number of seconds the browser should cache the preflight response
+    ContainerList:
+      type: object
+      description: The list of containers returned by the List Containers operation.
+      properties:
+        ServiceEndpoint:
+          type: string
+          description: The service endpoint URL
+        MaxResults:
+          type: integer
+          description: Maximum number of results requested
+        Prefix:
+          type: string
+          description: The prefix filter applied
+        Containers:
+          type: array
+          description: The list of containers
+          items:
+            $ref: '#/components/schemas/Container'
+        NextMarker:
+          type: string
+          description: Continuation token for the next page of results
+    RetentionPolicy:
+      type: object
+      description: The retention policy configuration.
+      properties:
+        Enabled:
+          type: boolean
+          description: Whether the retention policy is enabled
+        Days:
+          type: integer
+          minimum: 1
+          maximum: 365
+          description: Number of days data is retained
+    StorageServiceProperties:
+      type: object
+      description: Properties of the Blob service.
+      properties:
+        Logging:
+          type: object
+          description: Azure Analytics logging settings
+          properties:
+            Version:
+              type: string
+              description: The version of analytics logging
+            Read:
+              type: boolean
+              description: Whether read requests are logged
+            Write:
+              type: boolean
+              description: Whether write requests are logged
+            Delete:
+              type: boolean
+              description: Whether delete requests are logged
+            RetentionPolicy:
+              $ref: '#/components/schemas/RetentionPolicy'
+        HourMetrics:
+          $ref: '#/components/schemas/Metrics'
+        MinuteMetrics:
+          $ref: '#/components/schemas/Metrics'
+        Cors:
+          type: array
+          description: CORS rules for the Blob service
+          items:
+            $ref: '#/components/schemas/CorsRule'
+        DefaultServiceVersion:
+          type: string
+          description: The default REST API version for requests without a version
+        DeleteRetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+        StaticWebsite:
+          type: object
+          description: Static website configuration
+          properties:
+            Enabled:
+              type: boolean
+              description: Whether static website hosting is enabled
+            IndexDocument:
+              type: string
+              description: The default index document path
+            ErrorDocument404Path:
+              type: string
+              description: The path to the 404 error document
+    Metrics:
+      type: object
+      description: Azure Analytics metrics settings.
+      properties:
+        Version:
+          type: string
+          description: The version of metrics
+        Enabled:
+          type: boolean
+          description: Whether metrics are enabled
+        IncludeAPIs:
+          type: boolean
+          description: Whether to include API-level metrics
+        RetentionPolicy:
+          $ref: '#/components/schemas/RetentionPolicy'
+  parameters:
+    ApiVersion:
+      name: x-ms-version
+      in: header
+      required: true
+      description: Specifies the version of the Azure Storage REST API to use for the request.
+      schema:
+        type: string
+        default: '2024-11-04'
   securitySchemes:
     sharedKey:
       type: apiKey
