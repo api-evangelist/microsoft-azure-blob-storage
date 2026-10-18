@@ -32,6 +32,13 @@ accessModel:
   method: derived
 image: https://azure.microsoft.com/svghandler/storage-blobs/
 tags:
+- Microsoft Azure
+- Blobs
+- Cloud Storage
+- Microsoft
+- Object Storage
+- Storage
+tags_raw:
 - Azure
 - Blobs
 - Cloud Storage
