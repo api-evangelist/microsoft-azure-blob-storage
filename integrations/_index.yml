@@ -66,7 +66,7 @@
       type: source
       lapsed: false
       cloud: true
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: microsoft-azure-blob-storage-fivetran
   label: Fivetran
@@ -92,7 +92,7 @@
     - connectors/files/azure-blob-storage
     vendor_link: https://azure.microsoft.com/en-us/products/storage/blobs/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: microsoft-azure-blob-storage-meltano
   label: Meltano
@@ -126,5 +126,5 @@
     - silver
     - unknown
     builder: 'community (Meltano Hub variant maintainers: allanw, olehegi, opencolleges, shrutikaponde-vc)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
