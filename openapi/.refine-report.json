@@ -1,38 +1,19 @@
 {
   "provider": "microsoft-azure-blob-storage",
   "sources": [
-    "_original/azure-blob-storage-rest-openapi.yml"
+    "_original/microsoft-azure-blob-storage-openapi.json"
   ],
   "outputs": [
-    "microsoft-azure-blob-storage-append-blobs-api-openapi.yml",
-    "microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml",
-    "microsoft-azure-blob-storage-blobs-api-openapi.yml",
-    "microsoft-azure-blob-storage-block-blobs-api-openapi.yml",
-    "microsoft-azure-blob-storage-containers-api-openapi.yml",
-    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml"
+    "microsoft-azure-blob-storage-webapps-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "azure-blob-storage-rest-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "azure-blob-storage-rest-openapi.yml: tagged paths GET / -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths GET /?restype=service&comp=properties -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths PUT /?restype=service&comp=properties -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths GET /?restype=service&comp=stats -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths POST /?restype=service&comp=userdelegationkey -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths POST /?restype=service&comp=batch -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: tagged paths GET /?comp=blobs -> Azure Blob Storage REST API",
-    "azure-blob-storage-rest-openapi.yml: declared missing tag: Azure Blob Storage REST API",
-    "apis.yml register: already-registered"
+    "microsoft-azure-blob-storage-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "microsoft-azure-blob-storage-openapi.json: declared missing tag: WebApps",
+    "apis.yml register: written (+1 apis, 2 total)"
   ],
-  "skipped": [
-    "microsoft-azure-blob-storage-append-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-azure-blob-storage-rest-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-block-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-containers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "microsoft-azure-blob-storage-page-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
