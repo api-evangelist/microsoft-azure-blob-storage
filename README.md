@@ -1,0 +1,191 @@
+# Azure Blob Storage (azure-blob-storage)
+
+<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
+> ### About this repository
+>
+> **This is not our API.** This repository is an independent, third-party profile of a company's
+> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
+> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
+> affiliated with or endorsed by the company unless stated on the profile.
+>
+> **Where the information came from.** Everything here is assembled from material a member of the
+> public can reach with a browser and no credentials — the company's own website, developer portal
+> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
+> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
+> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
+> using credentials of any kind.**
+>
+> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
+> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
+> against a published rubric. They are not certifications, endorsements, security assessments, or
+> audits, and they score published artifacts — not the quality, safety, or security of the software.
+>
+> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
+> required, and you do not need to justify the request.
+>
+> - **Something wrong?** Open an issue on this repository, or email
+>   [info@apievangelist.com](mailto:info@apievangelist.com).
+> - **Published something new?** Ask for a re-score and we will re-run the rating.
+> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
+>   company name, a factual description, and a link to your own site, and the company is recorded as
+>   **unrated** — never scored zero for having asked.
+>
+> **Response times.** Acknowledgement within **one business day**; removal or restriction within
+> **two business days**; corrections and re-scores within **five business days**.
+>
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
+> **On a security or compliance team?** Email
+> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
+> you will get a person, not a form. We will tell you exactly which public URLs this profile was
+> built from so your team can see the same surface we did, and we will take the listing down on
+> request while you work through it.
+>
+> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
+<!-- API-EVANGELIST-PROVENANCE:END -->
+
+Microsoft Azure Blob Storage is a service for storing large amounts of unstructured object data, such as text or binary data, that can be accessed from anywhere in the world via HTTP or HTTPS.
+
+**APIs.json:** [https://azure.microsoft.com/en-us/services/storage/blobs/](https://azure.microsoft.com/en-us/services/storage/blobs/)
+
+## Tags
+
+- Azure
+- Blobs
+- Cloud Storage
+- Microsoft
+- Object Storage
+- Storage
+
+## Timestamps
+
+- **Created:** 2024
+- **Modified:** 2026-05-19
+
+## APIs
+
+### Azure Blob Storage REST API
+
+The REST API for Azure Blob Storage provides operations for working with blobs and containers, including create, read, update, and delete operations.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
+- **Base URL:** `https://{accountName}.blob.core.windows.net`
+
+#### Tags
+
+- Blobs
+- Containers
+- REST API
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
+- [OpenAPI](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/data-plane/Microsoft.BlobStorage/stable/2021-12-02/blob.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
+- [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
+- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries)
+- [Quickstart](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+- [Tutorials](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview)
+- [Code  Samples](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli)
+- [Reference](https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs)
+- [Changelog](https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services)
+- [Quotas](https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets)
+- [GitHub Repository](https://github.com/Azure/azure-rest-api-specs)
+- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Azure Data Lake Storage Gen2 REST API
+
+The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file system interface. They enable creation and management of file systems, directories, and files on storage accounts with hierarchical namespace enabled, supporting big data analytics workloads.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2](https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2)
+- **Base URL:** `https://{accountName}.dfs.core.windows.net`
+
+#### Tags
+
+- Big Data
+- Data Lake
+- File System
+- Hierarchical Namespace
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2)
+- [Reference](https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem)
+- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
+- [Getting Started](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction)
+- [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
+- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries)
+- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Azure Storage Resource Provider REST API
+
+The Azure Storage Resource Provider REST API enables programmatic management of storage accounts and related resources through Azure Resource Manager. It supports operations such as creating, updating, listing, and deleting storage accounts, managing access keys, and configuring storage account properties.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storagerp/](https://learn.microsoft.com/en-us/rest/api/storagerp/)
+- **Base URL:** `https://management.azure.com`
+
+#### Tags
+
+- Administration
+- Management
+- Resource Provider
+- Storage Accounts
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/rest/api/storagerp/)
+- [Reference](https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts)
+- [Authentication](https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider)
+- [OpenAPI](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/resource-manager/Microsoft.Storage/stable/2023-05-01/storage.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [Portal](https://portal.azure.com/)
+- [Status Page](https://status.azure.com/)
+- [Support](https://azure.microsoft.com/en-us/support/options/)
+- [Blog](https://azure.microsoft.com/en-us/blog/topics/storage/)
+- [Terms of Service](https://azure.microsoft.com/en-us/support/legal/)
+- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [Getting Started](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
+- [Changelog](https://learn.microsoft.com/en-us/rest/api/storageservices/previous-azure-storage-service-versions)
+- [Documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
+- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
+- [Quotas](https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets)
+- [Website](https://azure.microsoft.com/en-us/products/storage/blobs/)
+- [Sign Up](https://azure.microsoft.com/en-us/free/)
+- [Console](https://portal.azure.com/)
+- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/common/storage-srp-overview)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-blob-storage)
+- [GitHub Organization](https://github.com/Azure)
+- [Developer  Tools](https://azure.microsoft.com/en-us/products/storage/storage-explorer)
+- [Security](https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/storage-security-baseline)
+- [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
