@@ -1,4 +1,4 @@
-# Azure Blob Storage (azure-blob-storage)
+# Azure Blob Storage
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,126 +66,184 @@
 
 Microsoft Azure Blob Storage is a service for storing large amounts of unstructured object data, such as text or binary data, that can be accessed from anywhere in the world via HTTP or HTTPS.
 
-**APIs.json:** [https://azure.microsoft.com/en-us/services/storage/blobs/](https://azure.microsoft.com/en-us/services/storage/blobs/)
+**Areas:** Microsoft Azure · Blobs · Cloud Storage · Microsoft · Object Storage · Storage
 
-## Tags
+## Azure Blob Storage on APIs.io
 
-- Azure
-- Blobs
-- Cloud Storage
-- Microsoft
-- Object Storage
-- Storage
+Everything profiled for Azure Blob Storage is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-azure-blob-storage/](https://apis.io/providers/microsoft-azure-blob-storage/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2024
-- **Modified:** 2026-05-19
+- [Azure Data Lake Storage Gen2 REST API](https://apis.io/apis/microsoft-azure-blob-storage/azure-data-lake-storage-gen2-rest-api/) — The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file system interface. They enable creation and management of…
+- [Azure Blob Storage Append Blobs API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-append-blobs-api/) — Operations specific to append blobs including append block
+- [Azure Blob Storage Azure Blob Storage REST API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-azure-blob-storage-rest-api-api/) — The Azure Blob Storage REST API API from Azure Blob Storage — 1 operation(s) for azure blob storage rest api.
+- [Azure Blob Storage Blobs API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-blobs-api/) — Operations on blobs including get, put, delete, and metadata
+- [Azure Blob Storage Block Blobs API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-block-blobs-api/) — Operations specific to block blobs including put block and put block list
+- [Azure Blob Storage Containers API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-containers-api/) — Operations on blob containers
+- [Azure Blob Storage Page Blobs API](https://apis.io/apis/microsoft-azure-blob-storage/microsoft-azure-blob-storage-page-blobs-api/) — Operations specific to page blobs including put page and get page ranges
 
-## APIs
+### Published properties
 
-### Azure Blob Storage REST API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The REST API for Azure Blob Storage provides operations for working with blobs and containers, including create, read, update, and delete operations.
+#### Agentic access (1)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
-- **Base URL:** `https://{accountName}.blob.core.windows.net`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Microsoft Azure Blob Storage Agentic Access](https://apis.io/agentic-access/microsoft-azure-blob-storage/microsoft-azure-blob-storage-agentic-access/)
 
-- Blobs
-- Containers
-- REST API
+#### JSON Schema (8)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
-- [OpenAPI](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/data-plane/Microsoft.BlobStorage/stable/2021-12-02/blob.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
-- [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
-- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries)
-- [Quickstart](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
-- [Tutorials](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview)
-- [Code  Samples](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-samples-blobs-cli)
-- [Reference](https://learn.microsoft.com/en-us/rest/api/storageservices/operations-on-blobs)
-- [Changelog](https://learn.microsoft.com/en-us/rest/api/storageservices/versioning-for-the-azure-storage-services)
-- [Quotas](https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets)
-- [GitHub Repository](https://github.com/Azure/azure-rest-api-specs)
-- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Blob](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-blob/)
+- [BlobList](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-bloblist/)
+- [Container](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-container/)
+- [ContainerList](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-containerlist/)
+- [CorsRule](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-corsrule/)
+- [Metrics](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-metrics/)
+- [RetentionPolicy](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-retentionpolicy/)
+- [StorageServiceProperties](https://apis.io/schemas/microsoft-azure-blob-storage/azure-blob-storage-storageserviceproperties/)
 
-### Azure Data Lake Storage Gen2 REST API
+#### JSON Structure (1)
 
-The Azure Data Lake Storage Gen2 REST APIs allow interaction with Azure Blob Storage through a file system interface. They enable creation and management of file systems, directories, and files on storage accounts with hierarchical namespace enabled, supporting big data analytics workloads.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2](https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2)
-- **Base URL:** `https://{accountName}.dfs.core.windows.net`
+- [Azure Blob Storage Structure](https://apis.io/json-structure/microsoft-azure-blob-storage/azure-blob-storage-structure/)
 
-#### Tags
+#### Vocabulary (1)
 
-- Big Data
-- Data Lake
-- File System
-- Hierarchical Namespace
+The provider's domain terms, defined.
 
-#### Properties
+- [Azure Blob Storage Domain Vocabulary](https://apis.io/vocabularies/microsoft-azure-blob-storage/azure-blob-storage-vocabulary/)
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/storageservices/data-lake-storage-gen2)
-- [Reference](https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/filesystem)
-- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
-- [Getting Started](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction)
-- [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
-- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#client-libraries)
-- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (23)
 
-### Azure Storage Resource Provider REST API
+Postman and Open Collection request collections.
 
-The Azure Storage Resource Provider REST API enables programmatic management of storage accounts and related resources through Azure Resource Manager. It supports operations such as creating, updating, listing, and deleting storage accounts, managing access keys, and configuring storage account properties.
+- [Azure Blob Storage REST API](https://apis.io/collections/microsoft-azure-blob-storage/open-azure-blob-storage-rest/)
+- [Azure Blob Storage REST Append Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-append-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Azure Blob Storage REST API API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-azure-blob-storage-rest-api-api/)
+- [Azure Blob Storage REST Append Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Block Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-block-blobs-api/)
+- [Azure Blob Storage REST Append Blobs ?comp=blobs API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-comp-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Containers API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-containers-api/)
+- [Azure Blob Storage REST Append Blobs Page Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-page-blobs-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=batch API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-restype-service-comp-batch-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=properties API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-restype-service-comp-properties-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=stats API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-restype-service-comp-stats-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=userdelegationkey API](https://apis.io/collections/microsoft-azure-blob-storage/open-microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api/)
+- [Azure Blob Storage REST Append Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-append-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Azure Blob Storage REST API API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-azure-blob-storage-rest-api-api/)
+- [Azure Blob Storage REST Append Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Block Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-block-blobs-api/)
+- [Azure Blob Storage REST Append Blobs ?comp=blobs API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-comp-blobs-api/)
+- [Azure Blob Storage REST Append Blobs Containers API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-containers-api/)
+- [Azure Blob Storage REST Append Blobs Page Blobs API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-page-blobs-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=batch API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-restype-service-comp-batch-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=properties API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-restype-service-comp-properties-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=stats API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-restype-service-comp-stats-api/)
+- [Azure Blob Storage REST Append Blobs ?restype=service&comp=userdelegationkey API](https://apis.io/collections/microsoft-azure-blob-storage/postman-microsoft-azure-blob-storage-restype-service-comp-userdelegationkey-api/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/rest/api/storagerp/](https://learn.microsoft.com/en-us/rest/api/storagerp/)
-- **Base URL:** `https://management.azure.com`
+#### Governance rules (1)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Administration
-- Management
-- Resource Provider
-- Storage Accounts
+- [Azure Blob Storage — jsonschema rules](https://apis.io/rules/microsoft-azure-blob-storage/microsoft-azure-blob-storage-jsonschema-spectral-rules/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://learn.microsoft.com/en-us/rest/api/storagerp/)
-- [Reference](https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts)
-- [Authentication](https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider)
-- [OpenAPI](https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/storage/resource-manager/Microsoft.Storage/stable/2023-05-01/storage.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/azure-blob-storage-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/azure-blob-storage-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Microsoft Azure Blob Storage Authentication](https://apis.io/security/microsoft-azure-blob-storage/microsoft-azure-blob-storage-authentication/)
+- [Microsoft Azure Blob Storage Domain Security](https://apis.io/security/microsoft-azure-blob-storage/microsoft-azure-blob-storage-domain-security/)
 
-- [Portal](https://portal.azure.com/)
-- [Status Page](https://status.azure.com/)
-- [Support](https://azure.microsoft.com/en-us/support/options/)
-- [Blog](https://azure.microsoft.com/en-us/blog/topics/storage/)
-- [Terms of Service](https://azure.microsoft.com/en-us/support/legal/)
-- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
-- [Getting Started](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
-- [Changelog](https://learn.microsoft.com/en-us/rest/api/storageservices/previous-azure-storage-service-versions)
-- [Documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
-- [Authentication](https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-requests-to-azure-storage)
-- [Quotas](https://learn.microsoft.com/en-us/azure/storage/blobs/scalability-targets)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Microsoft Azure Blob Storage Plans Pricing](https://apis.io/plans/microsoft-azure-blob-storage/microsoft-azure-blob-storage-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Microsoft Azure Blob Storage Rate Limits](https://apis.io/rate-limits/microsoft-azure-blob-storage/microsoft-azure-blob-storage-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Microsoft Azure Blob Storage Finops](https://apis.io/finops/microsoft-azure-blob-storage/microsoft-azure-blob-storage-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://azure.microsoft.com/en-us/products/storage/blobs/)
-- [Sign Up](https://azure.microsoft.com/en-us/free/)
-- [Console](https://portal.azure.com/)
-- [S D Ks](https://learn.microsoft.com/en-us/azure/storage/common/storage-srp-overview)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-blob-storage)
-- [GitHub Organization](https://github.com/Azure)
-- [Developer  Tools](https://azure.microsoft.com/en-us/products/storage/storage-explorer)
-- [Security](https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/storage-security-baseline)
+- [Documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
+- [Getting started](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
 - [Pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
+- [Support](https://azure.microsoft.com/en-us/support/options/)
+- [Changelog](https://learn.microsoft.com/en-us/rest/api/storageservices/previous-azure-storage-service-versions)
+- [Blog](https://azure.microsoft.com/en-us/blog/topics/storage/)
+- [Security](https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/storage-security-baseline)
+- [Terms of service](https://azure.microsoft.com/en-us/support/legal/)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [GitHub](https://github.com/Azure)
+- [Status](https://status.azure.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 56.9** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 50.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 72.6 |
+| Access clarity | 52.6 |
+
+**Agent readiness 26.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-azure-blob-storage/](https://apis.io/providers/microsoft-azure-blob-storage/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Azure Blob Storage: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-azure-blob-storage/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
